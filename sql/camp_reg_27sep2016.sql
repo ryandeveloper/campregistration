@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.5.1
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 13, 2016 at 07:11 AM
--- Server version: 5.7.11
--- PHP Version: 5.6.19
+-- Generation Time: Sep 27, 2016 at 04:23 PM
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,167 +23,23 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `accounts`
+-- Table structure for table `cabins`
 --
 
-CREATE TABLE `accounts` (
-  `AccountID` int(21) NOT NULL,
-  `CaseFileID` int(21) NOT NULL,
-  `UserID` int(21) NOT NULL,
-  `BankAccountID` int(21) NOT NULL,
-  `ReferrerUserID` int(21) NOT NULL,
-  `AccountType` varchar(128) NOT NULL,
-  `AccountTitle` varchar(128) NOT NULL,
-  `DepositedAmount` float NOT NULL,
-  `CompanyName` varchar(128) NOT NULL,
-  `CompanyDocument` text NOT NULL,
-  `PhotoId` text NOT NULL,
-  `Agreement` text NOT NULL,
-  `BankAccountProof` text NOT NULL,
-  `RegistrationNo` varchar(64) NOT NULL,
-  `RegistrationAddress` varchar(256) NOT NULL,
-  `RegistrationCountry` varchar(64) NOT NULL,
-  `RegistrationTelephone` varchar(32) NOT NULL,
-  `BusinessAddress` varchar(256) NOT NULL,
-  `BusinessCountry` varchar(128) NOT NULL,
-  `ApplicationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `AccountStatus` varchar(32) NOT NULL DEFAULT 'Pending',
-  `Active` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `cabins` (
+  `CabinID` int(11) NOT NULL,
+  `Name` varchar(256) NOT NULL,
+  `Notes` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `accounts`
+-- Dumping data for table `cabins`
 --
 
-INSERT INTO `accounts` (`AccountID`, `CaseFileID`, `UserID`, `BankAccountID`, `ReferrerUserID`, `AccountType`, `AccountTitle`, `DepositedAmount`, `CompanyName`, `CompanyDocument`, `PhotoId`, `Agreement`, `BankAccountProof`, `RegistrationNo`, `RegistrationAddress`, `RegistrationCountry`, `RegistrationTelephone`, `BusinessAddress`, `BusinessCountry`, `ApplicationDate`, `AccountStatus`, `Active`) VALUES
-(10022, 10013, 100049, 30, 100033, 'Individual', '', 0, '', '', '', '', '', '', '', 'China', '', '', 'China', '2016-09-05 19:26:25', 'Pending', 1),
-(10023, 10014, 100050, 31, 0, 'Corporate', '', 0, 'sadf', '', '', '', '', 'asdf', 'sadf', 'China', 'asdf', 'sdf', 'China', '2016-09-06 05:47:27', 'Pending', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `bankaccounts`
---
-
-CREATE TABLE `bankaccounts` (
-  `BankAccountID` int(21) NOT NULL,
-  `UserID` int(21) NOT NULL,
-  `Address` varchar(128) NOT NULL,
-  `SwiftCode` varchar(64) NOT NULL,
-  `DateAdded` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `Name` varchar(64) NOT NULL,
-  `AccountNumber` varchar(32) NOT NULL,
-  `AccountName` varchar(64) NOT NULL,
-  `TrustAccount` varchar(3) NOT NULL DEFAULT 'N'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `bankaccounts`
---
-
-INSERT INTO `bankaccounts` (`BankAccountID`, `UserID`, `Address`, `SwiftCode`, `DateAdded`, `Name`, `AccountNumber`, `AccountName`, `TrustAccount`) VALUES
-(9, 100024, 'SM Dasma', '987', '2016-07-11 05:23:15', 'BPI', '1692536417785', 'Motul Limpao', 'N'),
-(17, 100033, 'Carmona', '3641', '2016-07-12 09:02:49', 'Metrobank', '3125469857', 'Fred Simpson', 'N'),
-(20, 100037, 'GMA', '467', '2016-07-29 08:23:48', 'Bank of the Philippine Islands', '9865325689784512', 'Levy Powel', 'N'),
-(21, 100039, 'Ortigas', '458', '2016-07-29 08:26:54', 'Asia United Bank', '963852741852852', 'Mark Goloyugo', 'N'),
-(22, 100040, 'Wanderlei', '3125', '2016-08-02 09:09:14', 'China Bank', '800005274196374', 'Momo Kamo', 'N'),
-(25, 100043, 'Saba Malaysia', '124', '2016-08-03 22:30:58', 'Bank of Malaysia', '65200021123456789', 'Atarma Mutarwi', 'N'),
-(26, 100044, 'asdf', 'sadf', '2016-08-12 09:24:50', 'asdf', 'sadf', 'sadf', 'N'),
-(27, 100045, 'adsf', 'sdaf', '2016-09-05 18:13:06', 'asdf', 'sadf', 'sdf', 'N'),
-(28, 100047, 'hgfd', '123', '2016-09-05 18:27:11', 'Bank of the Philippine Islands', '9865325689784512', 'Fred Simpson', 'N'),
-(30, 100049, 'sadf', 'sdaf', '2016-09-05 19:26:25', 'sadf', 'sdaf', 'sdaf', 'N'),
-(31, 100050, 'asdfsadf', 'sadf', '2016-09-06 05:47:27', 'asdf', 'asdfasdf', 'asdf', 'N');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `casefiles`
---
-
-CREATE TABLE `casefiles` (
-  `CaseFileID` int(21) NOT NULL,
-  `UserID` int(21) NOT NULL,
-  `HasNominatedBeneficiaries` varchar(8) NOT NULL,
-  `UBOName` varchar(64) NOT NULL,
-  `UBOAddress` varchar(128) NOT NULL,
-  `UBOEmploymentIncome` int(21) NOT NULL,
-  `UBOCommission` int(21) NOT NULL,
-  `UBOBusiness` int(21) NOT NULL,
-  `UBOInheritance` int(21) NOT NULL,
-  `UBOGift` int(21) NOT NULL,
-  `UBOSales` int(21) NOT NULL,
-  `UBOOther` int(21) NOT NULL,
-  `PrimaryTaxResidency` varchar(128) NOT NULL,
-  `TaxIdNumber` varchar(128) NOT NULL,
-  `NeedCoolingOff` varchar(16) NOT NULL,
-  `BeneficiariesForm` int(21) NOT NULL,
-  `IAPhotoid` int(21) NOT NULL,
-  `IAProofresidency` int(21) NOT NULL,
-  `IABankstatement` int(21) NOT NULL,
-  `IASpecimensign` int(21) NOT NULL,
-  `IAProofOfPayment` int(21) NOT NULL,
-  `CACertincorporation` int(21) NOT NULL,
-  `CANamechange` int(21) NOT NULL,
-  `CAGoodstand` int(21) NOT NULL,
-  `CARegdirector` int(21) NOT NULL,
-  `CAProofbusadd` int(21) NOT NULL,
-  `CAMemorandumaa` int(21) NOT NULL,
-  `CARecentfinancialstatement` int(21) NOT NULL,
-  `CADirectorsid` int(21) NOT NULL,
-  `CACompanysign` int(21) NOT NULL,
-  `CAShareholders` int(21) NOT NULL,
-  `CADirectorsproof` int(21) NOT NULL,
-  `CACompanysignproof` int(21) NOT NULL,
-  `CAShareholdersproof` int(21) NOT NULL,
-  `CAAuthorizedone` int(21) NOT NULL,
-  `CAAuthorizedonename` varchar(64) NOT NULL,
-  `CAAuthorizedonetitle` varchar(64) NOT NULL,
-  `CAAuthorizedtwo` int(21) NOT NULL,
-  `CAAuthorizedtwoname` varchar(64) NOT NULL,
-  `CAAuthorizedtwotitle` varchar(64) NOT NULL,
-  `CAAuthorizedthree` int(21) NOT NULL,
-  `CAAuthorizedthreename` varchar(64) NOT NULL,
-  `CAAuthorizedthreetitle` varchar(64) NOT NULL,
-  `CAAuthorizedfour` int(21) NOT NULL,
-  `CAAuthorizedfourname` varchar(64) NOT NULL,
-  `CAAuthorizedfourtitle` varchar(64) NOT NULL,
-  `CAProofOfPayment` int(21) NOT NULL,
-  `POADate` date NOT NULL,
-  `POAFirstName` varchar(128) NOT NULL,
-  `POALastName` varchar(128) NOT NULL,
-  `POACompanyName` varchar(256) NOT NULL,
-  `POACompanyNumber` varchar(64) NOT NULL,
-  `POACompanyCountry` varchar(64) NOT NULL,
-  `POACompanyAddress` varchar(256) NOT NULL,
-  `POACompanyCity` varchar(64) NOT NULL,
-  `POACompanyState` varchar(64) NOT NULL,
-  `POAAppointor` varchar(256) NOT NULL,
-  `POAAppointorIdNumber` varchar(64) NOT NULL,
-  `POACorporateSeal` int(21) NOT NULL,
-  `POADirectorName` varchar(128) NOT NULL,
-  `POADirectorSign` int(21) NOT NULL,
-  `POASecretaryName` varchar(128) NOT NULL,
-  `POASecretarySign` int(21) NOT NULL,
-  `ProductID` int(11) NOT NULL,
-  `ProductItemID` int(11) NOT NULL,
-  `DepositedAmount` int(21) NOT NULL,
-  `ReceivedAmount` int(21) NOT NULL,
-  `CommencementDate` date NOT NULL,
-  `MaturityDate` date NOT NULL,
-  `ApprovedBy` varchar(128) NOT NULL,
-  `ApprovedDate` date NOT NULL,
-  `TransactionDate` date NOT NULL,
-  `PaymentReceived` date NOT NULL,
-  `DateFiled` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `casefiles`
---
-
-INSERT INTO `casefiles` (`CaseFileID`, `UserID`, `HasNominatedBeneficiaries`, `UBOName`, `UBOAddress`, `UBOEmploymentIncome`, `UBOCommission`, `UBOBusiness`, `UBOInheritance`, `UBOGift`, `UBOSales`, `UBOOther`, `PrimaryTaxResidency`, `TaxIdNumber`, `NeedCoolingOff`, `BeneficiariesForm`, `IAPhotoid`, `IAProofresidency`, `IABankstatement`, `IASpecimensign`, `IAProofOfPayment`, `CACertincorporation`, `CANamechange`, `CAGoodstand`, `CARegdirector`, `CAProofbusadd`, `CAMemorandumaa`, `CARecentfinancialstatement`, `CADirectorsid`, `CACompanysign`, `CAShareholders`, `CADirectorsproof`, `CACompanysignproof`, `CAShareholdersproof`, `CAAuthorizedone`, `CAAuthorizedonename`, `CAAuthorizedonetitle`, `CAAuthorizedtwo`, `CAAuthorizedtwoname`, `CAAuthorizedtwotitle`, `CAAuthorizedthree`, `CAAuthorizedthreename`, `CAAuthorizedthreetitle`, `CAAuthorizedfour`, `CAAuthorizedfourname`, `CAAuthorizedfourtitle`, `CAProofOfPayment`, `POADate`, `POAFirstName`, `POALastName`, `POACompanyName`, `POACompanyNumber`, `POACompanyCountry`, `POACompanyAddress`, `POACompanyCity`, `POACompanyState`, `POAAppointor`, `POAAppointorIdNumber`, `POACorporateSeal`, `POADirectorName`, `POADirectorSign`, `POASecretaryName`, `POASecretarySign`, `ProductID`, `ProductItemID`, `DepositedAmount`, `ReceivedAmount`, `CommencementDate`, `MaturityDate`, `ApprovedBy`, `ApprovedDate`, `TransactionDate`, `PaymentReceived`, `DateFiled`) VALUES
-(10013, 100049, '', 'Besperat', 'Watakak', 233, 0, 0, 0, 0, 0, 0, 'asdf', 'asdf', 'Y', 0, 696, 241, 242, 732, 304, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', 0, '', '', 0, '', '', 0, '', '', 0, '2016-05-09', '', '', '', '', 'China', '', '', '', '', '', 0, '', 0, '', 0, 1, 3, 0, 201, '2016-06-09', '2016-06-09', 'ataker', '2016-09-05', '0000-00-00', '2016-06-09', '2016-06-08 16:00:00'),
-(10014, 100050, '', 'asdfsadf', 'sadfasdf', 0, 0, 0, 328, 0, 0, 0, 'sadf', 'asdf', 'Y', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', 0, '', '', 0, '', '', 0, '', '', 0, '2016-05-09', 'asdf', 'sadf', 'sdaf', 'sdf', 'China', 'sadf', 'sadf', 'sdf', 'sdf', 'sdaf', 322, '', 323, '', 324, 0, 0, 0, 0, '0000-00-00', '0000-00-00', 'asdfsadf', '2016-09-05', '0000-00-00', '0000-00-00', '2016-09-06 05:47:27');
+INSERT INTO `cabins` (`CabinID`, `Name`, `Notes`) VALUES
+(21, 'Issachar', 'Antipolo'),
+(22, 'Gad', 'Cagayan Valley'),
+(28, '12312', '3123123');
 
 -- --------------------------------------------------------
 
@@ -192,9 +48,27 @@ INSERT INTO `casefiles` (`CaseFileID`, `UserID`, `HasNominatedBeneficiaries`, `U
 --
 
 CREATE TABLE `churches` (
-  `churchID` int(11) NOT NULL,
-  `churchName` varchar(255) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `ChurchID` int(11) NOT NULL,
+  `Name` varchar(512) NOT NULL,
+  `City` varchar(128) DEFAULT NULL,
+  `Title` varchar(256) DEFAULT NULL,
+  `Pastor` varchar(512) NOT NULL,
+  `Notes` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `churches`
+--
+
+INSERT INTO `churches` (`ChurchID`, `Name`, `City`, `Title`, `Pastor`, `Notes`) VALUES
+(1, 'Antipolo', 'Antipolo', 'Life Harvest Church', '', ''),
+(7, 'Del Gallego', 'Quezon', NULL, '', ''),
+(8, 'Cagayan Valley', 'Cagayan Valley', NULL, '', ''),
+(9, 'San Pedro', 'Laguna', 'God''s Tabernacle Fellowship', '', ''),
+(10, 'Banisilan', 'Pangasinan', 'Finishing Touch MInistry', '', ''),
+(11, 'Camiguin', 'Camiguin', NULL, '', ''),
+(12, 'Tambongan', 'Samar', 'Church of the Firstborn', '', ''),
+(13, 'Masbate', 'Bicol', NULL, '', '');
 
 -- --------------------------------------------------------
 
@@ -269,7 +143,24 @@ INSERT INTO `files` (`FileID`, `UserID`, `DateAdded`) VALUES
 (328, 100050, '2016-09-05 22:47:27'),
 (696, 100049, '2016-09-06 10:48:17'),
 (732, 100049, '2016-09-06 11:00:35'),
-(751, 100000, '2016-09-13 01:05:11');
+(733, 0, '2016-09-14 04:11:08'),
+(734, 0, '2016-09-14 04:12:20'),
+(735, 0, '2016-09-14 04:12:49'),
+(736, 0, '2016-09-14 04:17:38'),
+(737, 0, '2016-09-14 04:17:43'),
+(738, 0, '2016-09-14 04:18:37'),
+(739, 0, '2016-09-14 04:21:07'),
+(740, 0, '2016-09-14 04:38:23'),
+(741, 0, '2016-09-14 04:38:40'),
+(742, 0, '2016-09-14 04:38:47'),
+(743, 0, '2016-09-14 04:40:32'),
+(745, 0, '2016-09-14 04:48:23'),
+(746, 0, '2016-09-14 04:54:56'),
+(748, 0, '2016-09-14 04:55:35'),
+(750, 100000, '2016-09-16 18:14:13'),
+(751, 100046, '2016-09-20 04:40:01'),
+(752, 100051, '2016-09-26 12:39:15'),
+(753, 100052, '2016-09-26 12:45:16');
 
 -- --------------------------------------------------------
 
@@ -296,7 +187,6 @@ INSERT INTO `file_items` (`FileItemID`, `UserID`, `FileID`, `FileDescription`, `
 (15, 100000, 11, 'Avatar', '656ea727_trio.jpg', 'C:\\Bitnami\\wamp\\apache2\\htdocs\\odeonco\\app\\views\\default\\assets\\files\\2016\\09\\02\\656ea727_trio.jpg', '/2016/09/02/656ea727_trio.jpg', 1),
 (16, 100000, 12, 'Avatar', '3ddab30d_web.jpg', 'C:\\Bitnami\\wamp\\apache2\\htdocs\\odeonco\\app\\views\\default\\assets\\files\\2016\\09\\02\\3ddab30d_web.jpg', '/2016/09/02/3ddab30d_web.jpg', 1),
 (17, 100000, 13, 'Avatar', 'cd5601a2_portrait.jpg', 'C:\\Bitnami\\wamp\\apache2\\htdocs\\odeonco\\app\\views\\default\\assets\\files\\2016\\09\\02\\cd5601a2_portrait.jpg', '/2016/09/02/cd5601a2_portrait.jpg', 1),
-(19, 100000, 15, 'Avatar', '89fb1c13_charcoal.jpg', 'C:\\Bitnami\\wamp\\apache2\\htdocs\\odeonco\\app\\views\\default\\assets\\files\\2016\\09\\02\\89fb1c13_charcoal.jpg', '/2016/09/02/89fb1c13_charcoal.jpg', 1),
 (20, 100040, 17, 'UBOEmploymentIncome', '642a9306_test.jpg', 'C:\\Bitnami\\wamp\\apache2\\htdocs\\odeonco\\app\\views\\default\\assets\\files\\2016\\09\\04\\642a9306_test.jpg', '/2016/09/04/642a9306_test.jpg', 1),
 (21, 100040, 25, 'IAPhotoid', 'd0fa7b70_test.jpg', 'C:\\Bitnami\\wamp\\apache2\\htdocs\\odeonco\\app\\views\\default\\assets\\files\\2016\\09\\04\\d0fa7b70_test.jpg', '/2016/09/04/d0fa7b70_test.jpg', 1),
 (22, 100040, 26, 'IAProofresidency', '1b87d1ee_test.jpg', 'C:\\Bitnami\\wamp\\apache2\\htdocs\\odeonco\\app\\views\\default\\assets\\files\\2016\\09\\04\\1b87d1ee_test.jpg', '/2016/09/04/1b87d1ee_test.jpg', 1),
@@ -326,36 +216,94 @@ INSERT INTO `file_items` (`FileItemID`, `UserID`, `FileID`, `FileDescription`, `
 (48, 100050, 328, 'UBOInheritance', 'af8853f3_aliyah.jpg', 'C:\\Bitnami\\wamp\\apache2\\htdocs\\odeonco\\app\\views\\default\\assets\\files\\2016\\09\\05\\af8853f3_aliyah.jpg', '/2016/09/05/af8853f3_aliyah.jpg', 0),
 (49, 100049, 696, 'IAPhotoid', 'ed7431fa_sevices2.jpg', 'C:\\Bitnami\\wamp\\apache2\\htdocs\\odeonco\\app\\views\\default\\assets\\files\\2016\\09\\06\\ed7431fa_sevices2.jpg', '/2016/09/06/ed7431fa_sevices2.jpg', 0),
 (51, 100049, 732, 'IASpecimensign', '8ca659fb_aliyah.jpg', 'C:\\Bitnami\\wamp\\apache2\\htdocs\\odeonco\\app\\views\\default\\assets\\files\\2016\\09\\06\\8ca659fb_aliyah.jpg', '/2016/09/06/8ca659fb_aliyah.jpg', 0),
-(52, 100000, 751, 'Avatar', '3c9c1542_89fb1c13_charcoal.jpg', 'C:\\wamp\\www\\campregistration.loc\\app\\views\\default\\assets\\files\\2016\\09\\13\\3c9c1542_89fb1c13_charcoal.jpg', '/2016/09/13/3c9c1542_89fb1c13_charcoal.jpg', 0);
+(52, 0, 733, 'Favicon', 'c91e5c7a_Philippine-1000-Peso.jpeg', 'C:\\xampp\\htdocs\\odeonco.loc\\app\\views\\default\\assets\\files\\2016\\09\\14\\c91e5c7a_Philippine-1000-Peso.jpeg', '/2016/09/14/c91e5c7a_Philippine-1000-Peso.jpeg', 0),
+(53, 0, 734, 'Favicon', '129a204d_Philippine-1000-Peso.jpeg', 'C:\\xampp\\htdocs\\odeonco.loc\\app\\views\\default\\assets\\files\\2016\\09\\14\\129a204d_Philippine-1000-Peso.jpeg', '/2016/09/14/129a204d_Philippine-1000-Peso.jpeg', 0),
+(54, 0, 735, 'Favicon', '4432c70d_Philippine-1000-Peso.jpeg', 'C:\\xampp\\htdocs\\odeonco.loc\\app\\views\\default\\assets\\files\\2016\\09\\14\\4432c70d_Philippine-1000-Peso.jpeg', '/2016/09/14/4432c70d_Philippine-1000-Peso.jpeg', 0),
+(55, 0, 736, 'Favicon', '2c6e81a8_Philippine-1000-Peso.jpeg', 'C:\\xampp\\htdocs\\odeonco.loc\\app\\views\\default\\assets\\files\\2016\\09\\14\\2c6e81a8_Philippine-1000-Peso.jpeg', '/2016/09/14/2c6e81a8_Philippine-1000-Peso.jpeg', 0),
+(56, 0, 737, 'Favicon', '9bd71b4a_Philippine-1000-Peso.jpeg', 'C:\\xampp\\htdocs\\odeonco.loc\\app\\views\\default\\assets\\files\\2016\\09\\14\\9bd71b4a_Philippine-1000-Peso.jpeg', '/2016/09/14/9bd71b4a_Philippine-1000-Peso.jpeg', 0),
+(57, 0, 738, 'Favicon', '6e86a0a0_Philippine-1000-Peso.jpeg', 'C:\\xampp\\htdocs\\odeonco.loc\\app\\views\\default\\assets\\files\\2016\\09\\14\\6e86a0a0_Philippine-1000-Peso.jpeg', '/2016/09/14/6e86a0a0_Philippine-1000-Peso.jpeg', 0),
+(58, 0, 739, 'Favicon', 'ff1f9c42_Philippine-1000-Peso.jpeg', 'C:\\xampp\\htdocs\\odeonco.loc\\app\\views\\default\\assets\\files\\2016\\09\\14\\ff1f9c42_Philippine-1000-Peso.jpeg', '/2016/09/14/ff1f9c42_Philippine-1000-Peso.jpeg', 0),
+(59, 0, 740, 'Favicon', '5b0d2332_Philippine-1000-Peso.jpeg', 'C:\\xampp\\htdocs\\odeonco.loc\\app\\views\\default\\assets\\files\\2016\\09\\14\\5b0d2332_Philippine-1000-Peso.jpeg', '/2016/09/14/5b0d2332_Philippine-1000-Peso.jpeg', 0),
+(60, 0, 741, 'Favicon', 'c2361de2_Philippine-1000-Peso.jpeg', 'C:\\xampp\\htdocs\\odeonco.loc\\app\\views\\default\\assets\\files\\2016\\09\\14\\c2361de2_Philippine-1000-Peso.jpeg', '/2016/09/14/c2361de2_Philippine-1000-Peso.jpeg', 0),
+(61, 0, 742, 'Favicon', '7dc731b0_Philippine-1000-Peso.jpeg', 'C:\\xampp\\htdocs\\odeonco.loc\\app\\views\\default\\assets\\files\\2016\\09\\14\\7dc731b0_Philippine-1000-Peso.jpeg', '/2016/09/14/7dc731b0_Philippine-1000-Peso.jpeg', 0),
+(62, 0, 743, 'Favicon', '9e57a901_Philippine-1000-Peso.jpeg', 'C:\\xampp\\htdocs\\odeonco.loc\\app\\views\\default\\assets\\files\\2016\\09\\14\\9e57a901_Philippine-1000-Peso.jpeg', '/2016/09/14/9e57a901_Philippine-1000-Peso.jpeg', 0),
+(63, 0, 745, 'Favicon', '85f35600_13175.jpeg', 'C:\\xampp\\htdocs\\odeonco.loc\\app\\views\\default\\assets\\files\\2016\\09\\14\\85f35600_13175.jpeg', '/2016/09/14/85f35600_13175.jpeg', 0),
+(64, 0, 746, 'Logo', 'b7844924_Philippine-1000-Peso.jpeg', 'C:\\xampp\\htdocs\\odeonco.loc\\app\\views\\default\\assets\\files\\2016\\09\\14\\b7844924_Philippine-1000-Peso.jpeg', '/2016/09/14/b7844924_Philippine-1000-Peso.jpeg', 0),
+(65, 0, 748, 'Logo', '02f6c70e_Philippine-1000-Peso.jpeg', 'C:\\xampp\\htdocs\\odeonco.loc\\app\\views\\default\\assets\\files\\2016\\09\\14\\02f6c70e_Philippine-1000-Peso.jpeg', '/2016/09/14/02f6c70e_Philippine-1000-Peso.jpeg', 0),
+(67, 100000, 750, 'Avatar', '7010834c_cd5601a2_portrait.jpg', 'C:\\wamp\\www\\odeonco.loc\\app\\views\\default\\assets\\files\\2016\\09\\16\\7010834c_cd5601a2_portrait.jpg', '/2016/09/16/7010834c_cd5601a2_portrait.jpg', 0),
+(68, 100046, 751, 'Avatar', '3ea11412_ryan.jpg', 'C:\\xampp\\htdocs\\campregistration.loc\\app\\views\\default\\assets\\files\\2016\\09\\20\\3ea11412_ryan.jpg', '/2016/09/20/3ea11412_ryan.jpg', 0),
+(69, 100051, 752, 'Avatar', '36d5b6a3_d0fa7b70_test.jpg', 'C:\\xampp\\htdocs\\campregistration.loc\\app\\views\\default\\assets\\files\\2016\\09\\26\\36d5b6a3_d0fa7b70_test.jpg', '/2016/09/26/36d5b6a3_d0fa7b70_test.jpg', 0),
+(70, 100052, 753, 'Avatar', '0aee1dc9_ryan.jpg', 'C:\\xampp\\htdocs\\campregistration.loc\\app\\views\\default\\assets\\files\\2016\\09\\26\\0aee1dc9_ryan.jpg', '/2016/09/26/0aee1dc9_ryan.jpg', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Table structure for table `finances`
 --
 
-CREATE TABLE `products` (
-  `ProductID` int(21) NOT NULL,
-  `ProductName` varchar(128) NOT NULL,
-  `ProductDescription` text NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+CREATE TABLE `finances` (
+  `FinanceID` int(11) NOT NULL,
+  `Type` int(1) NOT NULL DEFAULT '0',
+  `Description` text NOT NULL,
+  `Amount` float NOT NULL,
+  `Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Table structure for table `product_items`
+-- Dumping data for table `finances`
 --
 
-CREATE TABLE `product_items` (
-  `ProductItemID` int(21) NOT NULL,
-  `ProductID` int(21) NOT NULL,
-  `InvestmentAmount` float NOT NULL,
-  `StepUp` int(21) NOT NULL,
-  `DividendFrequency` int(11) NOT NULL,
-  `TenureMonths` int(21) NOT NULL,
-  `QuarterlyInterest` int(11) NOT NULL,
-  `AnnualInterest` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+INSERT INTO `finances` (`FinanceID`, `Type`, `Description`, `Amount`, `Date`) VALUES
+(19, 1, 'Antipolo: Payment', 60000, '2014-12-25 15:39:19'),
+(22, 1, 'Trece: Payment', 3225, '2014-12-25 15:41:17'),
+(23, 1, 'Lucena: Payment', 3000, '2014-12-25 15:41:37'),
+(24, 1, 'Offering - Dec 26 - Morning', 31069, '2014-12-25 15:42:54'),
+(25, 1, 'Lipa: Payment', 33835, '2014-12-25 15:46:55'),
+(26, 0, 'Jabez Venue Down Payment', 50000, '2014-12-25 15:51:17'),
+(27, 0, 'New Table', 600, '2014-12-25 15:52:18'),
+(28, 0, 'Tolda & Rope', 16000, '2014-12-25 15:52:57'),
+(29, 0, 'Office Supplies', 1000, '2014-12-25 15:53:14'),
+(30, 0, 'Kitchen Utencils', 10000, '2014-12-25 15:53:40'),
+(32, 0, 'Bulihan Equipment Service Deisel', 500, '2014-12-25 15:54:57'),
+(33, 0, 'Food - Dec 24 - Dinner', 4500, '2014-12-25 15:55:58'),
+(34, 0, 'Food - Dec 25 - Breakfast', 8000, '2014-12-25 15:56:34'),
+(35, 0, 'Food - Dec 25 - Lunch', 20000, '2014-12-25 15:56:57'),
+(36, 0, 'Food - Dec 25 - Dinner', 14000, '2014-12-25 15:57:30'),
+(38, 0, 'Food - Dec 26 - 3 meals', 35000, '2014-12-25 15:58:24'),
+(39, 0, 'Chairs: Rent Additional 100pcs', 2400, '2014-12-25 15:59:14'),
+(40, 0, 'Electrical Materials', 1200, '2014-12-25 15:59:38'),
+(41, 1, 'Cabadbaran: Share', 5000, '2014-12-25 20:01:31'),
+(43, 1, 'San Pedro: Payment', 83352, '2014-12-25 20:36:35'),
+(44, 0, 'Food - Dec 27 - 3 meals', 20000, '2014-12-25 20:48:44'),
+(45, 1, 'Offering - Dec 26 - Noon', 19543.2, '2014-12-25 20:59:57'),
+(46, 0, 'Food - Dec 27 - Dinner', 20000, '2014-12-26 13:07:58'),
+(47, 0, 'Food - Dec 28 - Breakfast / Lunch', 20000, '2014-12-26 13:08:22'),
+(48, 1, 'Candelaria: Payment', 23945, '2014-12-26 13:09:10'),
+(49, 0, 'Food - Dec 26 - Dinner Addtnl', 5000, '2014-12-26 13:10:50'),
+(50, 0, 'Mineral Water', 3500, '2014-12-26 13:11:13'),
+(52, 1, 'Pangasinan: Payment', 10000, '2014-12-26 13:13:50'),
+(56, 1, 'Offering - Dec 27 - Morning', 19831, '2014-12-26 13:48:19'),
+(57, 1, 'Bulihan: Payment', 90639, '2014-12-26 14:03:14'),
+(58, 1, 'Nabua: Payment', 7200, '2014-12-26 15:25:26'),
+(59, 1, 'San Pedro: Payment', 6615, '2014-12-26 21:39:06'),
+(60, 1, 'Bulihan: Payment', 1550, '2014-12-26 21:43:10'),
+(61, 1, 'Offering - Dec 27 - Noon', 55336, '2014-12-26 22:06:27'),
+(62, 0, 'Food - Dec 28 - Lunch', 12000, '2014-12-26 22:09:28'),
+(63, 1, 'Bulihan: Payment', 1600, '2014-12-26 22:11:59'),
+(64, 1, 'Bulihan: Payment', 4183, '2014-12-27 11:23:48'),
+(71, 0, 'Jabez Venue Full Payment', 260055, '2015-01-07 22:08:09'),
+(74, 1, 'Offering - Dec 28 - Noon', 38319, '2015-01-07 22:20:27'),
+(75, 0, 'Instrument - Gas - Snacks', 2000, '2015-01-07 22:23:17'),
+(76, 0, 'Accommodation - Registration - Snacks', 3000, '2015-01-07 22:23:40'),
+(77, 0, 'Love Offering: Ptr. Robert', 5000, '2015-01-07 22:24:41'),
+(78, 0, 'Love Offering: Ptr. Lito', 5000, '2015-01-07 22:24:56'),
+(79, 0, 'Love Offering: Ptr. Joel', 6000, '2015-01-07 22:25:16'),
+(80, 0, 'Love Offering: Ptr. Nick', 2000, '2015-01-07 22:25:38'),
+(81, 0, 'Love Offering: Ptr. Michael', 2000, '2015-01-07 22:26:02'),
+(82, 0, 'Love Offering: Ptr. Elie', 13000, '2015-01-07 22:26:23'),
+(83, 0, 'Love Offering: Ptr. Nelson', 5000, '2015-01-07 22:26:42'),
+(85, 1, 'Offering - Dec 28 - Morning', 54073.8, '2015-01-07 22:33:47'),
+(87, 1, 'asdf frgh', 120, '2015-12-24 16:00:00');
 
 -- --------------------------------------------------------
 
@@ -371,15 +319,56 @@ CREATE TABLE `settings` (
   `NewUserRole` int(21) NOT NULL,
   `TimeZone` varchar(128) NOT NULL,
   `SiteLanguage` varchar(128) NOT NULL,
-  `Redirects` text NOT NULL
+  `Redirects` text NOT NULL,
+  `Favicon` int(21) NOT NULL,
+  `Logo` int(21) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `settings`
 --
 
-INSERT INTO `settings` (`SettingsID`, `SiteTitle`, `TagLine`, `SiteUrl`, `NewUserRole`, `TimeZone`, `SiteLanguage`, `Redirects`) VALUES
-(1, 'Odeon & Co', 'odeonco', 'http://odeonco.loc/', 5, 'Asia/Singapore', 'en', 'YTo1OntpOjE7czoxOToiaHR0cDovL29kZW9uY28ubG9jLyI7aToyO3M6Mjg6Imh0dHA6Ly9vZGVvbmNvLmxvYy9jYXNlZmlsZXMiO2k6MztzOjI4OiJodHRwOi8vb2Rlb25jby5sb2MvY2FzZWZpbGVzIjtpOjQ7czoyODoiaHR0cDovL29kZW9uY28ubG9jL2Nhc2VmaWxlcyI7aTo1O3M6Mjg6Imh0dHA6Ly9vZGVvbmNvLmxvYy9jYXNlZmlsZXMiO30=');
+INSERT INTO `settings` (`SettingsID`, `SiteTitle`, `TagLine`, `SiteUrl`, `NewUserRole`, `TimeZone`, `SiteLanguage`, `Redirects`, `Favicon`, `Logo`) VALUES
+(1, 'Odeon & Co', 'odeonco', 'http://odeonco.loc/', 5, 'Asia/Singapore', 'en', 'YTo4OntpOjE7czoxOToiaHR0cDovL29kZW9uY28ubG9jLyI7aToyO3M6Mjg6Imh0dHA6Ly9vZGVvbmNvLmxvYy9jYXNlZmlsZXMiO2k6MztzOjI4OiJodHRwOi8vb2Rlb25jby5sb2MvY2FzZWZpbGVzIjtpOjQ7czoyODoiaHR0cDovL29kZW9uY28ubG9jL2Nhc2VmaWxlcyI7aTo1O3M6Mjg6Imh0dHA6Ly9vZGVvbmNvLmxvYy9jYXNlZmlsZXMiO2k6NjtzOjI4OiJodHRwOi8vb2Rlb25jby5sb2MvY2FzZWZpbGVzIjtpOjc7czoyODoiaHR0cDovL29kZW9uY28ubG9jL2Nhc2VmaWxlcyI7aTo4O3M6Mjg6Imh0dHA6Ly9vZGVvbmNvLmxvYy9jYXNlZmlsZXMiO30=', 745, 748);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tents`
+--
+
+CREATE TABLE `tents` (
+  `TentID` int(11) NOT NULL,
+  `Name` varchar(256) NOT NULL,
+  `Notes` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tents`
+--
+
+INSERT INTO `tents` (`TentID`, `Name`, `Notes`) VALUES
+(1, 'Acts', ''),
+(2, 'Romans', ''),
+(3, 'Corinthians', ''),
+(4, 'Galatians', ''),
+(5, 'Ephesians', ''),
+(6, 'Philippians', ''),
+(7, 'Colossians', ''),
+(8, 'Thessalonians', ''),
+(9, 'Timothy', ''),
+(10, 'Titus', ''),
+(11, 'Philemon', ''),
+(12, 'Hebrews', ''),
+(13, 'James', ''),
+(14, 'Revelation', ''),
+(15, 'Paul', ''),
+(16, 'Irenaeus', ''),
+(17, 'Martin', ''),
+(18, 'Columba', ''),
+(19, 'Luther', ''),
+(20, 'Wesley', ''),
+(21, 'Branham', '');
 
 -- --------------------------------------------------------
 
@@ -441,11 +430,9 @@ CREATE TABLE `userlevels` (
 --
 
 INSERT INTO `userlevels` (`UserLevelID`, `Name`, `Description`) VALUES
-(1, 'Administrator', 'Super Admin &amp; Backend Manager'),
+(1, 'Administrator', 'Super Admin & Backend Manager'),
 (2, 'Manager', 'State administrator, manage city representative and agents'),
-(3, 'Agency', 'City representative manage agents'),
-(4, 'Agent', 'Agents'),
-(5, 'Client', 'Clients ');
+(3, 'Agency', 'City representative manage agents');
 
 -- --------------------------------------------------------
 
@@ -471,14 +458,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`UserID`, `Email`, `Password`, `Level`, `Capability`, `SendEmail`, `HashKey`, `Active`, `DateAdded`) VALUES
 (100000, 'moisesg@cutearts.org', 'SbGkKvx6LA5AgxaFQX0/sPYWpAdI4+sGnq5qAaVObUc=', 1, 1, 1, '44131823d5de90da3523fab70d081d7b', 1, '2016-07-18 11:16:31'),
-(100001, 'chris@odeonco.com', 'u0PmVUI20/wfXjEv5nqHdVUwryUwKGCev/A4514m+pc=', 2, 1, 1, '', 1, '2016-06-01 02:04:08'),
-(100033, 'fred@simpson.com', '3nUOV/lSSg33AKg5cr81UFQzBEDkjqrk50URPZXDMRY=', 4, 0, 0, '0c5884668180982891480d6332b7fdd6', 1, '2016-07-12 01:27:38'),
-(100035, 'golfiedretyuio@freemail.com', 'J4Hv5bh/JvEMn+7cn9nH93KjxnnhiNTpAErhNkHr0oM=', 3, 0, 0, '691b62d0f48055bd8dbed21bbc5118c6', 1, '2016-07-25 09:37:23'),
-(100036, 'artemyo.molave@gmail.com', 'esl4ntzuV3BaMVDCTv/CHc8HD6pfdJFnh+yblN/6Rg4=', 3, 0, 0, 'a8c5c2f9324a84161c0b00a473f93477', 1, '2016-07-28 08:45:45'),
-(100037, 'warthog.levy@odeonco.com', 'vC+yP9onGO32Ojv1qa6ibPhFXSa2sOsyXdSmjWQQIiE=', 4, 0, 0, '72f83a0c121ece205c55d0072d5d3e52', 1, '2016-07-28 09:33:33'),
-(100046, 'wasadfer@adfdfdfsdfs.com', 'qJVO+HKGC4MMmviUigYjW3jgw3o4Nrfuff6T8aHBj4s=', 1, 0, 0, '526b1381917cd7ff06ea412bc3cf4477', 1, '2016-09-05 11:18:00'),
-(100049, 'besperat@gmail.com', 'v+sYlWhbSWxNiRVkbSg2/gYZ8YA2sHpTHnfdbJiTmPA=', 5, 0, 0, '0518986b6a61a65c0991ebfb9444a6d3', 1, '2016-09-05 12:26:25'),
-(100050, 'wasadfasdfsadfsadfer@adfdfdfsdfs.com', 'MWWDHdY1Zfihk3IpJmYm5ASyrKejejF3tEgzcA3u07c=', 5, 0, 0, '91e16199de4d8f1144e4527635db4586', 1, '2016-09-05 22:47:27');
+(100051, 'nante@gmail.com', '6+nhvOocvZin9u1cMn5NxXpZvKJdw8ZTbpxdkozLHS8=', 2, 0, 0, '6d66484e5d7fc62e01b1253f11cd7043', 1, '2016-09-26 12:39:15'),
+(100052, 'ryandumajil@gmail.com', 'WjeuYxI9uv8m4NDTYZY5ThM3JZOtafd8j0SHj11++6o=', 1, 0, 0, '886035b3cf68d86288c042a5b65a809f', 1, '2016-09-26 12:45:16');
 
 -- --------------------------------------------------------
 
@@ -519,7 +500,7 @@ CREATE TABLE `user_meta` (
 --
 
 INSERT INTO `user_meta` (`UserMetaID`, `UserID`, `Language`, `Avatar`, `Salutation`, `FirstName`, `LastName`, `NickName`, `DateOfBirth`, `Gender`, `CivilStatus`, `Phone`, `Mobile`, `JobTitle`, `Occupation`, `Address`, `Address2`, `Address3`, `Address4`, `City`, `State`, `Country`, `PostalCode`, `Bio`, `IdNumber`) VALUES
-(1, 100000, '', 751, '', 'Moises', 'Goloyugo', 'Mom', '1986-12-25', 'M', '', '09278585028', '', '', '', 'Bulihan', '', '', '', 'Silang', 'Cavite', 'Philippines', '4118', 'Whatever', ''),
+(1, 100000, '', 750, '', 'Moises', 'Goloyugo', 'Mom', '1986-12-25', 'M', '', '09278585028', '', '', '', 'Bulihan', '', '', '', 'Silang', 'Cavite', 'Philippines', '4118', 'Whatever', ''),
 (2, 100001, '', 0, '', 'Chris', 'Chua', 'C', '0000-00-00', 'M', '', '0936258469', '', '', '', 'Zhenzhen', '', '', '', 'Shangrila', 'Zhaozhao', 'Singapore', '', 'Handsome boy we', ''),
 (3, 100021, 'en', 0, '', 'Mark', 'Anthony', '', '0000-00-00', 'M', '', '5129002', '', '', '', 'Bulihan', '', '', '', 'Silang', 'Cavite', 'Philippines', '4118', 'Im Good hehe', '134685258-RSM'),
 (5, 100033, 'en', 0, '', 'Fred', 'Simpson', '', '0000-00-00', 'M', '', '5129002', '', '', '', 'Winan', '', '', '', 'Ever', 'Fragiz', 'Åland Islands', '3214695', 'Samoa', '134685258-XYZ1'),
@@ -532,44 +513,30 @@ INSERT INTO `user_meta` (`UserMetaID`, `UserID`, `Language`, `Avatar`, `Salutati
 (15, 100043, 'en', 0, 'Dato', 'Atarma', 'Mutarwi', '', '1990-02-14', 'M', '', '', '09996636956', 'Dato', 'Royal Governor', 'Saba Malaysia', 'Saba', '', '', '', '', 'Malaysia', '', '', '3124569858585'),
 (16, 100044, 'en', 0, 'Mr', 'asdfsadf', 'sadfsdaf', '', '1990-01-11', 'M', '', '', 'sdf', 'fsadf', 'asdfsad', 'sadfasfdfasdf', 'sadf', '8765asdfsadf', 'sadf', '', '', 'China', '', '', 'sdaf'),
 (17, 100045, 'en', 0, 'Mr', 'asdf', 'sdaf', '', '1992-04-05', 'M', '', '', 'asdf', 'sdf', 'asdfsadsdf', 'asdf', '', 'sdaf', 'sadf', '', '', 'China', '', '', 'aS'),
-(18, 100046, '', 167, '', 'asdfsadfsadf', 'asdfsdfa', 'sdafsadf', '0000-00-00', 'M', '', '3698525896', '', '', '', 'sadfsadfsadf', '', '', '', 'asdfasdf', 'sfd', 'Philippines', '1234', 'asdfsdaf', ''),
+(18, 100046, '', 751, '', 'Ryan', 'Dumajil', 'Ryan', '0000-00-00', 'M', '', '09238133222', '', '', '', '', '', '', '', '', '', 'Philippines', '', '', ''),
 (19, 100047, 'en', 0, 'Mr', 'iuytre', 'trewq', '', '1988-02-08', 'M', '', '', '12341241', 'tre', 'trwq', 'tyurturty', 'rety erty ', 'm erwty erty ', 'erty rety ', '', '', 'China', '', '', 'ytrewq'),
 (21, 100049, 'en', 0, 'Mr', 'Besperat', 'Shuna', '', '1989-04-02', 'M', '', '', '09996636956', 'Power Forward', 'Basketball Player', 'sadf', 'Timoto matayone', 'Washum miming', 'Tomam', '', '', 'China', '', '', 'R3265FEG12'),
-(22, 100050, 'en', 0, 'Mr', 'sadf', 'sdf', '', '1973-02-04', 'M', '', '', 'sadf', 'sadf', 'sadf', 'sadfasfdfasdfasdf', 'sdf', '8765asdfsadfs', 'sdaf', '', '', 'China', '', '', 'sadf');
+(22, 100050, 'en', 0, 'Mr', 'sadf', 'sdf', '', '1973-02-04', 'M', '', '', 'sadf', 'sadf', 'sadf', 'sadfasfdfasdfasdf', 'sdf', '8765asdfsadfs', 'sdaf', '', '', 'China', '', '', 'sadf'),
+(23, 100051, '', 752, '', 'Reynante', 'Dolontap', 'Pogi', '0000-00-00', 'M', '', '123456', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(24, 100052, '', 753, '', 'Ryan', 'Dumajil', 'ryan', '0000-00-00', 'M', '', '09238133222', '', '', '', '', '', '', '', 'Gma', 'Cavite', 'Philippines', '', 'My Bio', '');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `accounts`
+-- Indexes for table `cabins`
 --
-ALTER TABLE `accounts`
-  ADD PRIMARY KEY (`AccountID`),
-  ADD KEY `CaseFileID` (`AccountID`),
-  ADD KEY `CaseFileID_2` (`AccountID`);
-
---
--- Indexes for table `bankaccounts`
---
-ALTER TABLE `bankaccounts`
-  ADD PRIMARY KEY (`BankAccountID`),
-  ADD KEY `BankAccountID` (`BankAccountID`),
-  ADD KEY `BankAccountID_2` (`BankAccountID`);
-
---
--- Indexes for table `casefiles`
---
-ALTER TABLE `casefiles`
-  ADD PRIMARY KEY (`CaseFileID`),
-  ADD KEY `CaseFileID` (`CaseFileID`),
-  ADD KEY `CaseFileID_2` (`CaseFileID`);
+ALTER TABLE `cabins`
+  ADD PRIMARY KEY (`CabinID`),
+  ADD KEY `CabinID` (`CabinID`);
 
 --
 -- Indexes for table `churches`
 --
 ALTER TABLE `churches`
-  ADD PRIMARY KEY (`churchID`);
+  ADD PRIMARY KEY (`ChurchID`),
+  ADD KEY `ID` (`ChurchID`);
 
 --
 -- Indexes for table `files`
@@ -587,22 +554,23 @@ ALTER TABLE `file_items`
   ADD KEY `DocumentID` (`FileID`);
 
 --
--- Indexes for table `products`
+-- Indexes for table `finances`
 --
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`ProductID`);
-
---
--- Indexes for table `product_items`
---
-ALTER TABLE `product_items`
-  ADD PRIMARY KEY (`ProductItemID`);
+ALTER TABLE `finances`
+  ADD PRIMARY KEY (`FinanceID`);
 
 --
 -- Indexes for table `settings`
 --
 ALTER TABLE `settings`
   ADD PRIMARY KEY (`SettingsID`);
+
+--
+-- Indexes for table `tents`
+--
+ALTER TABLE `tents`
+  ADD PRIMARY KEY (`TentID`),
+  ADD KEY `CabinID` (`TentID`);
 
 --
 -- Indexes for table `usercapabilities`
@@ -635,50 +603,40 @@ ALTER TABLE `user_meta`
 --
 
 --
--- AUTO_INCREMENT for table `accounts`
+-- AUTO_INCREMENT for table `cabins`
 --
-ALTER TABLE `accounts`
-  MODIFY `AccountID` int(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10024;
---
--- AUTO_INCREMENT for table `bankaccounts`
---
-ALTER TABLE `bankaccounts`
-  MODIFY `BankAccountID` int(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
---
--- AUTO_INCREMENT for table `casefiles`
---
-ALTER TABLE `casefiles`
-  MODIFY `CaseFileID` int(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10015;
+ALTER TABLE `cabins`
+  MODIFY `CabinID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT for table `churches`
 --
 ALTER TABLE `churches`
-  MODIFY `churchID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ChurchID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `files`
 --
 ALTER TABLE `files`
-  MODIFY `FileID` int(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=752;
+  MODIFY `FileID` int(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=754;
 --
 -- AUTO_INCREMENT for table `file_items`
 --
 ALTER TABLE `file_items`
-  MODIFY `FileItemID` int(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `FileItemID` int(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 --
--- AUTO_INCREMENT for table `products`
+-- AUTO_INCREMENT for table `finances`
 --
-ALTER TABLE `products`
-  MODIFY `ProductID` int(21) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `product_items`
---
-ALTER TABLE `product_items`
-  MODIFY `ProductItemID` int(21) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `finances`
+  MODIFY `FinanceID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 --
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
   MODIFY `SettingsID` int(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `tents`
+--
+ALTER TABLE `tents`
+  MODIFY `TentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `usercapabilities`
 --
@@ -688,17 +646,17 @@ ALTER TABLE `usercapabilities`
 -- AUTO_INCREMENT for table `userlevels`
 --
 ALTER TABLE `userlevels`
-  MODIFY `UserLevelID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `UserLevelID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100051;
+  MODIFY `UserID` int(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100053;
 --
 -- AUTO_INCREMENT for table `user_meta`
 --
 ALTER TABLE `user_meta`
-  MODIFY `UserMetaID` int(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `UserMetaID` int(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
