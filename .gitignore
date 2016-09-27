@@ -1,0 +1,7 @@
+*.log
+logs
+nbproject
+/.htaccess
+/README.txt
+/sitemap.xml
+/index.php
