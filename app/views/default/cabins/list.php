@@ -75,7 +75,7 @@ View::header();
 
             <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Modal Content is Responsive</h4>
+                    <h4 class="modal-title">Add Cabin</h4>
             </div>
  
             <form class="form-horizontal" enctype="multipart/form-data" method="post">

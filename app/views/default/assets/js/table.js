@@ -7,7 +7,7 @@ $(document).ready(function() {
 
     /*$('#datatable-responsive').DataTable();	*/
 		
-	$('#datatable-responsive').DataTable( {
+    $('#datatable-responsive').DataTable( {
         initComplete: function () {
 			
             this.api().columns('.select-filter').every( function () {
@@ -31,6 +31,15 @@ $(document).ready(function() {
         }
 		
     } );
+    
+    $("#test").dataTable().yadcf([
+        {column_number : 0, filter_type: 'text'},
+        {column_number : 1, filter_type: 'text'},
+        {column_number : 2, filter_type: 'text'},
+        {column_number : 3},
+    ]);
+    
+    
 
     $('#datatable-scroller').DataTable({
         ajax: "js/datatables/json/scroller-demo.json",
