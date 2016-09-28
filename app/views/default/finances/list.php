@@ -52,7 +52,8 @@ View::header();
                                         ?>
                                     </td>
                                     <td><?php echo $finance->Description; ?></td>
-                                    <td><?php echo number_format($finance->Amount, 2, ".","," ); ?></td>
+                                    <!--<td><?php echo number_format($finance->Amount, 2, ".","," ); ?></td>-->
+                                    <td><?php echo number_format($finance->Amount); ?></td>
                                     <td><small><?php echo date('d-M-Y', strtotime($finance->Date)); ?> <br><?php echo date('h:i:a', strtotime($finance->Date)); ?> </small></td>
                                     <td style="text-align:center;">
                                         <a href="<?php echo View::url('finances/edit/'.$finance->FinanceID); ?>" title="Edit" class="btn btn-warning btn-sm"><span class="fa fa-pencil-square-o"></span></a>
