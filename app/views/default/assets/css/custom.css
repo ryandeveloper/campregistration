@@ -5,7 +5,7 @@
 */
 
 body {
-    font-size: 14px;
+    font-size: 13px;
 }
 
 a { }
@@ -41,3 +41,7 @@ a { }
 .font-28 { font-size: 28px; }
 .font-29 { font-size: 29px; }
 .font-30 { font-size: 30px; }
+
+.sidebar-menu {
+    width: 250px;
+}
