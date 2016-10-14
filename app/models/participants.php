@@ -27,17 +27,31 @@ class Participants_model extends Model
     }
 
 
-    function getCabin($ID)
+    function getParticipant($ID)
     {
-        $sql = "SELECT * FROM cabins WHERE CabinID = ".$ID." LIMIT 1";
+         $sql = "SELECT p.*, pi.*, cc.Name as churchName, cab.Name as cabinName, t.Name as tentName, prod.Name as productName, prod.Description as productDesciption, um.FirstName as encoderFirstName, um.LastName as encoderlastName FROM participants p 
+        LEFT JOIN participant_items pi ON p.PPID = pi.PPID 
+        LEFT JOIN churches cc ON p.ChurchID = cc.ChurchID 
+        LEFT JOIN cabins cab ON p.CabinID = cab.CabinID 
+        LEFT JOIN tents t ON p.TentID = t.TentID 
+        LEFT JOIN products prod ON p.ProductID = prod.ProductID 
+        LEFT JOIN users u ON p.UserID = u.UserID 
+        LEFT JOIN user_meta um ON p.UserID = um.UserID 
+        WHERE PPID = ".$ID." LIMIT 1";
         $userdata = $this->db->get_row($sql);
 
         return $userdata;
     }
 
-    function getCabins($inactive = '')
+    function getParticipants($inactive = '')
     {
-        $sql = "SELECT * FROM cabins";
+        $sql = "SELECT p.*, pi.*, cc.Name as churchName, cab.Name as cabinName, t.Name as tentName, prod.Name as productName, prod.Description as productDesciption, um.FirstName as encoderFirstName, um.LastName as encoderlastName FROM participants p 
+        LEFT JOIN participant_items pi ON p.PPID = pi.PPID 
+        LEFT JOIN churches cc ON p.ChurchID = cc.ChurchID 
+        LEFT JOIN cabins cab ON p.CabinID = cab.CabinID 
+        LEFT JOIN tents t ON p.TentID = t.TentID 
+        LEFT JOIN products prod ON p.ProductID = prod.ProductID 
+        LEFT JOIN user_meta um ON p.UserID = um.UserID";
 //        $where = " WHERE Active = 1";
 //        if($inactive == 'yes') {
 //            $where = " WHERE Active != 1";
@@ -55,33 +69,100 @@ class Participants_model extends Model
         return $data;
     }
 
+    function getChurches()
+    {
+        $sql = "SELECT ChurchID,Name,City FROM churches";
+        $query = &$this->db->prepare($sql);
+        $query->execute();
+        $data = array();
+        while ($row = $query->fetch(PDO::FETCH_CLASS)){
+            $data[$row->UserLevelID] = $row->Name;          
+        }
+        unset($query);
+        
+        return $data;
+    }
+
+    function getCabins()
+    {
+        $sql = "SELECT CabinID,Name FROM cabins";
+        $query = &$this->db->prepare($sql);
+        $query->execute();
+        $data = array();
+        while ($row = $query->fetch(PDO::FETCH_CLASS)){
+            $data[$row->UserLevelID] = $row->Name;          
+        }
+        unset($query);
+        
+        return $data;
+    }
+
+    function getTents()
+    {
+        $sql = "SELECT TentID,Name FROM tents";
+        $query = &$this->db->prepare($sql);
+        $query->execute();
+        $data = array();
+        while ($row = $query->fetch(PDO::FETCH_CLASS)){
+            $data[$row->UserLevelID] = $row->Name;          
+        }
+        unset($query);
+        
+        return $data;
+    }
+
+    function getProducts()
+    {
+        $sql = "SELECT ProductID,Name,Description FROM products";
+        $query = &$this->db->prepare($sql);
+        $query->execute();
+        $data = array();
+        while ($row = $query->fetch(PDO::FETCH_CLASS)){
+            $data[$row->UserLevelID] = $row->Name;          
+        }
+        unset($query);
+        
+        return $data;
+    }
+
     function doSave()
     {
         if($this->post) {
             if(isset($this->post['action'])) {
                 switch($this->post['action']) {
-                    case "updatecabin": {
-                        $cid = $this->post['cid'];
-                        $data = $this->post;
+                    case "updateparticipant": {
+
+                        $data = $this->post; 
+                        $pid = $this->post['pid'];
+                        $ptps = $this->post['ptps'];                    
+                        $pitems = $this->post['pitem'];
+
                         unset($data['action']);
-                        unset($data['cid']);
+                        unset($data['pid']);
 
                         $this->setSession('error', false);
-                        $this->setSession('message',"Cabin has been updated!");
+                        $this->setSession('message',"Participant has been updated!");
 
-                        $cabinID = $this->db->update("cabins", $data, array('CabinID' => $cid));
+                        $participantID   = $this->db->update("participants", $data, array('PPID' => $pid));
+                        $participantItem = $this->db->update("participant_items", $data, array('PPID' => $pid));
 
                     } break;
-                    case "addcabin": {
+                    case "addparticipant": {
 
-                        $data = $this->post;
+                        $data = $this->post; 
+                        $ptps = $this->post['ptps'];                    
+                        $pitems = $this->post['pitem'];
+                        
                         unset($data['action']);
 
-                        $cabinID = $this->db->insert("cabins", $data);
+                        $participantID = $this->db->insert("participants", $ptps);
 
-                        if($cabinID) {
+                        if($participantID) {
                             $this->setSession('error', false);
-                            $this->setSession('message',"New cabin has been added!");
+                            $this->setSession('message',"New participant has been added!");
+
+                            $pitems['PPID'] = $participantID;
+                            $pitemID = $this->db->insert("participant_items", $pitems);
                         }
 
                         //View::redirect('agency');

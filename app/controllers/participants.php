@@ -20,7 +20,7 @@ class Participants extends Controller
         if($this->model->doSave()){
             View::redirect('participants');
         };
-        $cabins = $this->model->getCabins();
+        $participants = $this->model->getParticipants();
         View::page('participants/list', get_defined_vars());
     }
     
