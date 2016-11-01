@@ -16,11 +16,11 @@ View::header();
                 <div class="panel-heading">
                     <h3 class="panel-title"><?php echo View::$title; ?></h3>
 
-                    <a class="btn btn-success pull-right" href="javascript:;" onclick="jQuery('#modalCabin').modal('show', {backdrop: 'static'});">Add Participant</a>
+                    <a class="btn btn-success pull-right" href="javascript:;" onclick="jQuery('#modalParticipant').modal('show', {backdrop: 'static'});">Add Participant</a>
                 </div>
-                <!-- <pre>
+                <pre>
                 <?php print_r($participants); ?>
-                </pre> -->
+                </pre>
                 <div class="panel-body">
                     <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive bulk_action nowrap" cellspacing="0" width="100%">
                         <thead>
@@ -92,8 +92,8 @@ View::header();
 <?php View::footer(); ?>
 
 <!-- Popup Add Form Modal -->
-<div class="modal fade" id="modalCabin">
-    <div class="modal-dialog">
+<div class="modal fade" id="modalParticipant">
+    <div class="modal-dialog participant-dialog">
         <div class="modal-content">
 
             <div class="modal-header">

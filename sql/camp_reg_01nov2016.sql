@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2016 at 04:35 PM
+-- Generation Time: Nov 01, 2016 at 04:55 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -37,11 +37,28 @@ CREATE TABLE `cabins` (
 --
 
 INSERT INTO `cabins` (`CabinID`, `Name`, `Notes`) VALUES
+(1, 'Peter', ''),
+(2, 'James', ''),
+(3, 'Andrew', ''),
+(4, 'Bartholomew', ''),
+(5, 'Philip', ''),
+(6, 'Thomas', ''),
+(7, 'Matthew', ''),
+(8, 'Thaddaeus', ''),
+(9, 'Simeon', ''),
+(10, 'Judah', ''),
+(11, 'Reuben', ''),
+(12, 'Manasseh', ''),
+(13, 'Ephraim', ''),
+(14, 'Levi', ''),
+(15, 'Joseph', ''),
+(16, 'Benjamin', ''),
+(17, 'Naphtali', 'Candelaria'),
+(18, 'Asher', 'Nabua'),
+(19, 'Dan', 'Cagayan Valley'),
+(20, 'Zebulun', 'Antipolo'),
 (21, 'Issachar', 'Antipolo'),
-(22, 'Gad', 'Cagayan Valley'),
-(28, '12312', '3123123'),
-(29, 'qweqweq', 'eqweq'),
-(30, 'Philip', '');
+(22, 'Gad', 'Cagayan Valley');
 
 -- --------------------------------------------------------
 
@@ -332,10 +349,10 @@ CREATE TABLE `participants` (
 --
 
 INSERT INTO `participants` (`PPID`, `Gender`, `FirstName`, `LastName`, `Age`, `ChurchID`, `CabinID`, `TentID`, `StatusID`, `UserID`) VALUES
-(14, 'Brother', 'Reynante', 'Loredo', 52, 9, 30, 0, 2, 100000),
-(15, 'Brother', 'Lester', 'Loredo', 56, 1, 0, 3, 3, 100000),
-(16, 'Sister', 'Maricel', 'Bajar', 25, 14, 0, 0, 4, 100052),
-(17, 'Brother', 'John', 'Doe', 32, 8, 30, 0, 1, 100000);
+(18, 'Brother', 'Lester', 'Loredo', 23, 14, 3, 0, 2, 100000),
+(19, 'Sister', 'Maricel', 'Bajar', 25, 14, 4, 0, 1, 100000),
+(20, 'Brother', 'Reynante', 'Loredo', 25, 10, 0, 7, 3, 100000),
+(21, 'Brother', 'Niel', 'Maning', 30, 11, 0, 0, 4, 100000);
 
 -- --------------------------------------------------------
 
@@ -380,10 +397,10 @@ CREATE TABLE `participant_items` (
 --
 
 INSERT INTO `participant_items` (`ProductItemID`, `PPID`, `Entrance1`, `Entrance2`, `Entrance3`, `Entrance4`, `TentOwned`, `Tent1`, `Tent2`, `Tent3`, `Cabin1`, `Cabin2`, `Cabin3`, `Meal1`, `Meal2`, `Meal3`, `Meal4`, `Meal5`, `Meal6`, `Meal7`, `Meal8`, `Meal9`, `TotalAmount`, `PaidAmount`, `Balance`, `Excess`, `Notes`, `Cleard`, `DateAdded`) VALUES
-(15, 14, 0, 0, 0, 0, 0, 0, 0, 0, 180, 180, 180, 50, 50, 50, 50, 50, 50, 50, 50, 50, 990, 990, 0, 0, '', 1, '2016-11-01 15:22:22'),
-(16, 15, 0, 0, 0, 0, 1, 85, 85, 85, 0, 0, 0, 50, 50, 50, 50, 50, 50, 50, 50, 50, 705, 500, 205, 0, '', 0, '2016-11-01 15:23:59'),
-(17, 16, 25, 25, 25, 25, 0, 0, 0, 0, 0, 0, 0, 50, 50, 50, 50, 50, 50, 50, 50, 50, 550, 450, 100, 0, '', 0, '2016-11-01 15:27:37'),
-(18, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1200, 1200, 0, 0, '', 1, '2016-11-01 15:34:18');
+(19, 18, 0, 0, 0, 0, 0, 0, 0, 0, 180, 180, 180, 50, 50, 50, 50, 50, 50, 50, 50, 50, 990, 500, 490, 0, '', 0, '2016-11-01 15:44:37'),
+(20, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1200, 1200, 0, 0, '', 1, '2016-11-01 15:45:03'),
+(21, 20, 0, 0, 0, 0, 1, 85, 85, 85, 0, 0, 0, 50, 50, 50, 50, 50, 50, 50, 50, 50, 705, 600, 105, 0, '', 0, '2016-11-01 15:45:37'),
+(22, 21, 25, 25, 25, 25, 0, 0, 0, 0, 0, 0, 0, 50, 50, 50, 50, 50, 50, 50, 50, 50, 550, 550, 0, 0, '', 1, '2016-11-01 15:46:12');
 
 -- --------------------------------------------------------
 
@@ -760,7 +777,7 @@ ALTER TABLE `user_meta`
 -- AUTO_INCREMENT for table `cabins`
 --
 ALTER TABLE `cabins`
-  MODIFY `CabinID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `CabinID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `churches`
 --
@@ -785,12 +802,12 @@ ALTER TABLE `finances`
 -- AUTO_INCREMENT for table `participants`
 --
 ALTER TABLE `participants`
-  MODIFY `PPID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `PPID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `participant_items`
 --
 ALTER TABLE `participant_items`
-  MODIFY `ProductItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `ProductItemID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `products`
 --

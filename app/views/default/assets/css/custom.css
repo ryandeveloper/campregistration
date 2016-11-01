@@ -69,3 +69,12 @@ a { }
     cursor: pointer;
 }
 /**==== END Participants CSS ====**/
+
+
+
+
+@media (min-width: 768px){
+    .participant-dialog {
+        width: 800px;
+    }
+}
