@@ -8,6 +8,7 @@ class Participants extends Controller
         // Protected yes
 
         $auth = $this->load->model('auth', true);
+        $this->load->model('products',false,true);
         if(!$auth->isLoggedIn() && $this->segment[0] != 'assets') {
             View::redirect('users/login');
         }
@@ -21,6 +22,11 @@ class Participants extends Controller
             View::redirect('participants');
         };
         $participants = $this->model->getParticipants();
+        $churches = $this->model->getChurches();
+        $statuses = $this->model->getStatus();
+        $cabins = $this->model->getCabins();
+        $tents = $this->model->getTents();
+        $products = $this->products_model->getProducts();
         View::page('participants/list', get_defined_vars());
     }
     
@@ -30,6 +36,11 @@ class Participants extends Controller
             View::redirect('participants');
         };
         $this->model->indexAssets();
+        $churches = $this->model->getChurches();
+        $statuses = $this->model->getStatus();
+        $cabins = $this->model->getCabins();
+        $tents = $this->model->getTents();
+        $products = $this->products_model->getProducts();
         View::page('participants/add', get_defined_vars());
     }
     
@@ -43,7 +54,7 @@ class Participants extends Controller
     
     public function delete()
     {
-        $cabins = $this->model->doDelete($this->segment[2]);
+        $participants = $this->model->doDelete($this->segment[2]);
         View::redirect('participants');
     }
     

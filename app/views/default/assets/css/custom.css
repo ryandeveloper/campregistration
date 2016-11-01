@@ -45,3 +45,27 @@ a { }
 .sidebar-menu {
     width: 250px;
 }
+
+
+/**====== Participants CSS ======**/
+.status1, .status2, .status3, .status4, .status5, .status6 {
+    display: none;
+}
+
+.regcheckbox {
+    content: "";  
+    display: inline-block;  
+    width: 15px;  
+    height: 15px;  
+    vertical-align:middle;
+    margin-right: 8px;  
+    background-color: #aaa;  
+    box-shadow: inset 0px 2px 2px rgba(0, 0, 0, .3);
+    -webkit-box-shadow: inset 0px 2px 2px rgba(0, 0, 0, .3);
+    -moz-box-shadow: inset 0px 2px 2px rgba(0, 0, 0, .3);
+    -o-box-shadow: inset 0px 2px 2px rgba(0, 0, 0, .3);
+    -ms-box-shadow: inset 0px 2px 2px rgba(0, 0, 0, .3);
+    border-radius: 4px;  
+    cursor: pointer;
+}
+/**==== END Participants CSS ====**/
