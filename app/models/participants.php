@@ -29,13 +29,12 @@ class Participants_model extends Model
 
     function getParticipant($ID)
     {
-         $sql = "SELECT p.*, pi.*, cc.Name as churchName, cab.Name as cabinName, t.Name as tentName, prod.Name as productName, prod.Description as productDesciption, um.FirstName as encoderFirstName, um.LastName as encoderlastName FROM participants p 
+        $sql = "SELECT p.*, pi.*, cc.Name as churchName, cab.Name as cabinName, t.Name as tentName, stats.Name as statsName, stats.Notes as statsNotes, um.FirstName as encoderFirstName, um.LastName as encoderlastName FROM participants p 
         LEFT JOIN participant_items pi ON p.PPID = pi.PPID 
         LEFT JOIN churches cc ON p.ChurchID = cc.ChurchID 
         LEFT JOIN cabins cab ON p.CabinID = cab.CabinID 
         LEFT JOIN tents t ON p.TentID = t.TentID 
-        LEFT JOIN products prod ON p.ProductID = prod.ProductID 
-        LEFT JOIN users u ON p.UserID = u.UserID 
+        LEFT JOIN statuses stats ON p.StatusID = stats.StatusID 
         LEFT JOIN user_meta um ON p.UserID = um.UserID 
         WHERE PPID = ".$ID." LIMIT 1";
         $userdata = $this->db->get_row($sql);
@@ -45,12 +44,12 @@ class Participants_model extends Model
 
     function getParticipants($inactive = '')
     {
-        $sql = "SELECT p.*, pi.*, cc.Name as churchName, cab.Name as cabinName, t.Name as tentName, prod.Name as productName, prod.Description as productDesciption, um.FirstName as encoderFirstName, um.LastName as encoderlastName FROM participants p 
+        $sql = "SELECT p.*, pi.*, cc.Name as churchName, cab.Name as cabinName, t.Name as tentName, stats.Name as statsName, stats.Notes as statsNotes, um.FirstName as encoderFirstName, um.LastName as encoderlastName FROM participants p 
         LEFT JOIN participant_items pi ON p.PPID = pi.PPID 
         LEFT JOIN churches cc ON p.ChurchID = cc.ChurchID 
         LEFT JOIN cabins cab ON p.CabinID = cab.CabinID 
         LEFT JOIN tents t ON p.TentID = t.TentID 
-        LEFT JOIN products prod ON p.ProductID = prod.ProductID 
+        LEFT JOIN statuses stats ON p.StatusID = stats.StatusID 
         LEFT JOIN user_meta um ON p.UserID = um.UserID";
 //        $where = " WHERE Active = 1";
 //        if($inactive == 'yes') {
@@ -71,12 +70,12 @@ class Participants_model extends Model
 
     function getChurches()
     {
-        $sql = "SELECT ChurchID,Name,City FROM churches";
+        $sql = "SELECT ChurchID,Name,City FROM churches ORDER BY Name";
         $query = &$this->db->prepare($sql);
         $query->execute();
         $data = array();
         while ($row = $query->fetch(PDO::FETCH_CLASS)){
-            $data[$row->UserLevelID] = $row->Name;          
+            $data[] = $row;          
         }
         unset($query);
         
@@ -90,7 +89,7 @@ class Participants_model extends Model
         $query->execute();
         $data = array();
         while ($row = $query->fetch(PDO::FETCH_CLASS)){
-            $data[$row->UserLevelID] = $row->Name;          
+            $data[] = $row;         
         }
         unset($query);
         
@@ -104,21 +103,21 @@ class Participants_model extends Model
         $query->execute();
         $data = array();
         while ($row = $query->fetch(PDO::FETCH_CLASS)){
-            $data[$row->UserLevelID] = $row->Name;          
+            $data[] = $row;        
         }
         unset($query);
         
         return $data;
     }
 
-    function getProducts()
+    function getStatus()
     {
-        $sql = "SELECT ProductID,Name,Description FROM products";
+        $sql = "SELECT StatusID,Name,Notes FROM statuses";
         $query = &$this->db->prepare($sql);
         $query->execute();
         $data = array();
         while ($row = $query->fetch(PDO::FETCH_CLASS)){
-            $data[$row->UserLevelID] = $row->Name;          
+            $data[] = $row;          
         }
         unset($query);
         
@@ -150,19 +149,19 @@ class Participants_model extends Model
                     case "addparticipant": {
 
                         $data = $this->post; 
-                        $ptps = $this->post['ptps'];                    
-                        $pitems = $this->post['pitem'];
+                        $pp = $this->post['pp'];                    
+                        $ppmeta = $this->post['ppmeta'];
                         
                         unset($data['action']);
 
-                        $participantID = $this->db->insert("participants", $ptps);
+                        $participantID = $this->db->insert("participants", $pp);
 
                         if($participantID) {
                             $this->setSession('error', false);
                             $this->setSession('message',"New participant has been added!");
 
-                            $pitems['PPID'] = $participantID;
-                            $pitemID = $this->db->insert("participant_items", $pitems);
+                            $ppmeta['PPID'] = $participantID;
+                            $pitemID = $this->db->insert("participant_items", $ppmeta);
                         }
 
                         //View::redirect('agency');
@@ -177,9 +176,10 @@ class Participants_model extends Model
 
     function doDelete($ID)
     {
-        $where = array('CabinID' => $ID);
-        $this->setSession('message',"Cabin has been deleted!");
-        $rowCount = $this->db->delete("cabins", $where);
+        $where = array('PPID' => $ID);
+        $this->setSession('message',"Participant has been deleted!");
+        $rowCount = $this->db->delete("participants", $where);
+        $rowCounts = $this->db->delete("participant_items", $where);
     }
 
     public function indexAssets()

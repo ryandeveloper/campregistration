@@ -38,11 +38,6 @@ class Products_model extends Model
     function getProducts($inactive = '')
     {
         $sql = "SELECT * FROM products";
-//        $where = " WHERE Active = 1";
-//        if($inactive == 'yes') {
-//            $where = " WHERE Active != 1";
-//        }
-//        $sql .= $where;
 
         $query = &$this->db->prepare($sql);
         $query->execute();

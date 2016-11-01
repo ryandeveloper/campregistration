@@ -64,3 +64,4 @@ $(document).ready(function() {
     $('.no-sorting').removeClass('sorting'); 
     //$('.no-sorting').removeClass('sorting_asc').removeClass('sorting_desc');
 });
+
