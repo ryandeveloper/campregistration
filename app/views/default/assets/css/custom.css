@@ -10,6 +10,13 @@ body {
 
 a { }
 
+.logo a {
+    font-size: 26px;
+    color: #fff;
+    letter-spacing: 6px;
+    font-family: "Arimo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 .login-container {
     max-width: 420px;
 }
@@ -69,7 +76,6 @@ a { }
     cursor: pointer;
 }
 /**==== END Participants CSS ====**/
-
 
 
 

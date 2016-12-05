@@ -12,7 +12,8 @@
           <!-- logo -->
           <div class="logo">
             <a href="dashboard-1.html" class="logo-expanded">
-              <img src="<?php echo View::url('app/views/default/assets/images/logo@2x.png'); ?>" width="80" alt="" />
+              <!-- <img src="<?php echo View::url('app/views/default/assets/images/logo@2x.png'); ?>" width="80" alt="" /> -->
+              COTF
             </a>
             
             <a href="dashboard-1.html" class="logo-collapsed">
