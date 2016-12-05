@@ -48,7 +48,12 @@ class Participants extends Controller
     {
         $this->model->doSave();
         $this->model->indexAssets();
-        $cabin = $this->model->getCabin($this->segment[2]);
+        $churches = $this->model->getChurches();
+        $statuses = $this->model->getStatus();
+        $cabins = $this->model->getCabins();
+        $tents = $this->model->getTents();
+        $products = $this->products_model->getProducts();
+        $user = $this->model->getParticipant($this->segment[2]);
         View::page('participants/edit', get_defined_vars());  
     }
     

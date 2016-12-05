@@ -29,14 +29,10 @@ class Participants_model extends Model
 
     function getParticipant($ID)
     {
-        $sql = "SELECT p.*, pi.*, cc.Name as churchName, cab.Name as cabinName, t.Name as tentName, stats.Name as statsName, stats.Notes as statsNotes, um.FirstName as encoderFirstName, um.LastName as encoderlastName FROM participants p 
-        LEFT JOIN participant_items pi ON p.PPID = pi.PPID 
-        LEFT JOIN churches cc ON p.ChurchID = cc.ChurchID 
-        LEFT JOIN cabins cab ON p.CabinID = cab.CabinID 
-        LEFT JOIN tents t ON p.TentID = t.TentID 
-        LEFT JOIN statuses stats ON p.StatusID = stats.StatusID 
+        $sql = "SELECT p.*, pi.*, um.FirstName as encoderFirstName, um.LastName as encoderlastName FROM participants p 
+        LEFT JOIN participant_items pi ON p.PPID = pi.PPID
         LEFT JOIN user_meta um ON p.UserID = um.UserID 
-        WHERE PPID = ".$ID." LIMIT 1";
+        WHERE p.PPID = ".$ID." LIMIT 1";
         $userdata = $this->db->get_row($sql);
 
         return $userdata;
@@ -51,11 +47,6 @@ class Participants_model extends Model
         LEFT JOIN tents t ON p.TentID = t.TentID 
         LEFT JOIN statuses stats ON p.StatusID = stats.StatusID 
         LEFT JOIN user_meta um ON p.UserID = um.UserID";
-//        $where = " WHERE Active = 1";
-//        if($inactive == 'yes') {
-//            $where = " WHERE Active != 1";
-//        }
-//        $sql .= $where;
 
         $query = &$this->db->prepare($sql);
         $query->execute();
@@ -130,11 +121,139 @@ class Participants_model extends Model
             if(isset($this->post['action'])) {
                 switch($this->post['action']) {
                     case "updateparticipant": {
-
                         $data = $this->post; 
                         $pid = $this->post['pid'];
-                        $ptps = $this->post['ptps'];                    
-                        $pitems = $this->post['pitem'];
+                        $pp = $this->post['pp'];                    
+                        $ppmeta = $this->post['ppmeta'];
+
+                        // Package
+                        if($pp['StatusID'] == 1){
+                            $pp['TentID'] = 0; 
+                            $ppmeta['TentOwned'] = 0;
+                            $ppmeta['Tent1'] = 0;
+                            $ppmeta['Tent2'] = 0;
+                            $ppmeta['Tent3'] = 0;
+                            $ppmeta['Cabin1'] = 0;
+                            $ppmeta['Cabin2'] = 0;
+                            $ppmeta['Cabin3'] = 0;
+
+                            $ppmeta['Meal1'] = 0;
+                            $ppmeta['Meal2'] = 0;
+                            $ppmeta['Meal3'] = 0;
+                            $ppmeta['Meal4'] = 0;
+                            $ppmeta['Meal5'] = 0;
+                            $ppmeta['Meal6'] = 0;
+                            $ppmeta['Meal7'] = 0;
+                            $ppmeta['Meal8'] = 0;
+                            $ppmeta['Meal9'] = 0;
+                            $ppmeta['Entrance1'] = 0;
+                            $ppmeta['Entrance2'] = 0;
+                            $ppmeta['Entrance3'] = 0;
+                            $ppmeta['Entrance4'] = 0;   
+                        }
+
+                        // Cabin
+                        if($pp['StatusID'] == 2){
+                            $ppmeta['Package'] = 0;
+                            $pp['TentID'] = 0; 
+                            $ppmeta['TentOwned'] = 0;
+                            $ppmeta['Tent1'] = 0;
+                            $ppmeta['Tent2'] = 0;
+                            $ppmeta['Tent3'] = 0;
+                            if(isset($ppmeta['Entrance1'])){
+                                $ppmeta['Entrance1'] = $ppmeta['Entrance1'];
+                            }else{
+                                $ppmeta['Entrance1'] = 0; 
+                            }
+
+                            if(isset($ppmeta['Entrance2'])){
+                                $ppmeta['Entrance2'] = $ppmeta['Entrance2']; 
+                            }else{
+                                $ppmeta['Entrance2'] = 0; 
+                            }
+
+                            if(isset($ppmeta['Entrance3'])){
+                                $ppmeta['Entrance3'] = $ppmeta['Entrance3']; 
+                            }else{
+                                $ppmeta['Entrance3'] = 0; 
+                            }
+
+                            if(isset($ppmeta['Entrance4'])){
+                                $ppmeta['Entrance4'] = $ppmeta['Entrance4']; 
+                            }else{
+                                $ppmeta['Entrance4'] = 0; 
+                            }
+                        }
+
+                        // Tent
+                        if($pp['StatusID'] == 3){
+                            $ppmeta['Package'] = 0;
+                            $pp['CabinID'] = 0;
+                            $ppmeta['Cabin1'] = 0;
+                            $ppmeta['Cabin2'] = 0;
+                            $ppmeta['Cabin3'] = 0;
+                            if(isset($ppmeta['TentOwned'])){
+                                $ppmeta['TentOwned'] = 1;
+                            }else{
+                                $ppmeta['TentOwned'] = 0;   
+                            }
+
+                            if(isset($ppmeta['Entrance1'])){
+                                $ppmeta['Entrance1'] = $ppmeta['Entrance1'];
+                            }elseif(isset($ppmeta['Entrance2'])){
+                                $ppmeta['Entrance2'] = $ppmeta['Entrance2']; 
+                            }elseif(isset($ppmeta['Entrance3'])){
+                                $ppmeta['Entrance3'] = $ppmeta['Entrance3']; 
+                            }elseif(isset($ppmeta['Entrance4'])){
+                                $ppmeta['Entrance4'] = $ppmeta['Entrance4']; 
+                            }else{
+                                $ppmeta['Entrance4'] = 0; 
+                            }
+                        }
+
+                        // Walk In 
+                        if($pp['StatusID'] == 4){
+                            $ppmeta['Package'] = 0;
+                            $pp['TentID'] = 0; 
+                            $ppmeta['TentOwned'] = 0;
+                            $ppmeta['Tent1'] = 0;
+                            $ppmeta['Tent2'] = 0;
+                            $ppmeta['Tent3'] = 0;
+
+                            $pp['CabinID'] = 0;
+                            $ppmeta['Cabin1'] = 0;
+                            $ppmeta['Cabin2'] = 0;
+                            $ppmeta['Cabin3'] = 0;
+                        }
+
+                        // Infant
+                        if($pp['StatusID'] == 5){
+                            $ppmeta['Package'] = 0;
+                            $pp['TentID'] = 0; 
+                            $ppmeta['TentOwned'] = 0;
+                            $ppmeta['Tent1'] = 0;
+                            $ppmeta['Tent2'] = 0;
+                            $ppmeta['Tent3'] = 0;
+
+                            $pp['CabinID'] = 0;
+                            $ppmeta['Cabin1'] = 0;
+                            $ppmeta['Cabin2'] = 0;
+                            $ppmeta['Cabin3'] = 0;
+
+                            $ppmeta['Meal1'] = 0;
+                            $ppmeta['Meal2'] = 0;
+                            $ppmeta['Meal3'] = 0;
+                            $ppmeta['Meal4'] = 0;
+                            $ppmeta['Meal5'] = 0;
+                            $ppmeta['Meal6'] = 0;
+                            $ppmeta['Meal7'] = 0;
+                            $ppmeta['Meal8'] = 0;
+                            $ppmeta['Meal9'] = 0;
+                            $ppmeta['Entrance1'] = 0;
+                            $ppmeta['Entrance2'] = 0;
+                            $ppmeta['Entrance3'] = 0;
+                            $ppmeta['Entrance4'] = 0;
+                        }
 
                         unset($data['action']);
                         unset($data['pid']);
@@ -142,14 +261,14 @@ class Participants_model extends Model
                         $this->setSession('error', false);
                         $this->setSession('message',"Participant has been updated!");
 
-                        $participantID   = $this->db->update("participants", $data, array('PPID' => $pid));
-                        $participantItem = $this->db->update("participant_items", $data, array('PPID' => $pid));
+                        $participantID   = $this->db->update("participants", $pp, array('PPID' => $pid));
+                        $participantItem = $this->db->update("participant_items", $ppmeta, array('PPID' => $pid));
 
                     } break;
                     case "addparticipant": {
 
-                        $data = $this->post; 
-                        $pp = $this->post['pp'];                    
+                        $data = $this->post;
+                        $pp = $this->post['pp'];
                         $ppmeta = $this->post['ppmeta'];
                         
                         unset($data['action']);
@@ -197,6 +316,7 @@ class Participants_model extends Model
         View::$footerscripts[] = "vendor/datatables.net-responsive-bs/js/responsive.bootstrap.js";
         View::$footerscripts[] = "vendor/datatables/yadcf/jquery.dataTables.yadcf.js";
         View::$footerscripts[] = "vendor/datatables/tabletools/dataTables.tableTools.min.js";
+        View::$footerscripts[] = "vendor/jquery-validate/jquery.validate.min.js";
 
         // Custom JS
         View::$footerscripts[] = 'assets/js/custom.js';

@@ -18,9 +18,9 @@ View::header();
 
                     <a class="btn btn-success pull-right" href="javascript:;" onclick="jQuery('#modalParticipant').modal('show', {backdrop: 'static'});">Add Participant</a>
                 </div>
-                <pre>
+                <!-- <pre>
                 <?php print_r($participants); ?>
-                </pre>
+                </pre> -->
                 <div class="panel-body">
                     <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive bulk_action nowrap" cellspacing="0" width="100%">
                         <thead>
@@ -101,7 +101,7 @@ View::header();
                 <h4 class="modal-title">Add Participant</h4>
             </div>
  
-            <form class="form-horizontal" enctype="multipart/form-data" method="post">
+            <form class="form-horizontal validate" enctype="multipart/form-data" method="post">
 
                 <div class="modal-body">
                     <input class="" type="hidden" name="action" value="addparticipant" />
@@ -118,8 +118,8 @@ View::header();
                     <div class="form-group">
                         <div class="col-sm-6">
                             <label class="control-label">Gender</label><br>
-                            <select class="form-control" name="pp[Gender]" required="">
-                                <option>Select Gender</option>
+                            <select class="form-control" name="pp[Gender]" required="" data-validate="required">
+                                <option value="">Select Gender</option>
                                 <option>Brother</option>
                                 <option>Sister</option>
                                 <option>Pastor</option>
@@ -137,11 +137,11 @@ View::header();
                     <div class="form-group">
                         <div class="col-sm-6">
                             <label class="control-label">First Name</label><br>
-                            <input type="text" class="form-control" value="" name="pp[FirstName]" placeholder="" required="">
+                            <input type="text" class="form-control" value="" name="pp[FirstName]" data-validate="required" placeholder="" required="">
                         </div>
                         <div class="col-sm-6">
                             <label class="control-label">Last Name</label><br>
-                            <input type="text" class="form-control" value="" name="pp[LastName]" placeholder="" required="">
+                            <input type="text" class="form-control" value="" name="pp[LastName]" data-validate="required" placeholder="" required="">
                         </div>
                     </div>
                     
@@ -182,8 +182,8 @@ View::header();
                             
                             <div class="statuses form-group status3">
                                 <label class="control-label">Cabin</label><br>
-                                <select class="form-control" name="pp[CabinID]" id="cabins">
-                                    <option>Select</option>
+                                <select class="form-control" name="pp[CabinID]" id="cabins" data-validate="required">
+                                    <option value="">Select</option>
                                     <?php
                                     foreach($cabins as $cabins){
                                     ?>
@@ -194,8 +194,8 @@ View::header();
                             
                             <div class="statuses form-group status5">
                                 <label class="control-label">Tent</label><br>
-                                <select class="form-control" name="pp[TentID]" id="tents">
-                                    <option>Select</option>
+                                <select class="form-control" name="pp[TentID]" id="tents" data-validate="required">
+                                    <option value="">Select</option>
                                     <?php
                                     foreach($tents as $tent){
                                     ?>
@@ -209,10 +209,10 @@ View::header();
                                     <tbody>
                                         <thead>
                                             <th>Meal:</th>
+                                            <th>22</th>
+                                            <th>23</th>
                                             <th>24</th>
                                             <th>25</th>
-                                            <th>26</th>
-                                            <th>27</th>
                                         </thead>
                                         <tr>
                                             <td><label>Breakfast:</label></td>
@@ -251,10 +251,10 @@ View::header();
                                     <tbody>
                                         <thead>
                                             <th>Entrance:</th>
+                                            <th>22</th>
+                                            <th>23</th>
                                             <th>24</th>
                                             <th>25</th>
-                                            <th>26</th>
-                                            <th>27</th>
                                         </thead>
                                         <tr>
                                             <td><label>-</label></td>
@@ -275,10 +275,10 @@ View::header();
                                     <tbody>
                                         <thead>
                                             <th>Cabin:</th>
+                                            <th>22</th>
+                                            <th>23</th>
                                             <th>24</th>
                                             <th>25</th>
-                                            <th>26</th>
-                                            <th>27</th>
                                         </thead>
                                         <tr>
                                             <td><label>-</label></td>
@@ -299,10 +299,10 @@ View::header();
                                     <tbody>
                                         <thead>
                                             <th>Tent:</th>
+                                            <th>22</th>
+                                            <th>23</th>
                                             <th>24</th>
                                             <th>25</th>
-                                            <th>26</th>
-                                            <th>27</th>
                                         </thead>
                                         <tr>
                                             <td><label><input type="checkbox" name="ppmeta[TentOwned]" value="1" rel="tent-yes" class="regcheckbox owntent"> Own Tent?</label></td>

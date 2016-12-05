@@ -35,7 +35,7 @@ View::header();
                 <div class="panel-body" style="width:800px;">
 
                     <?php echo View::getMessage();  ?> 
-                    <form enctype="multipart/form-data" class="form-horizontal" method="post">
+                    <form enctype="multipart/form-data" class="form-horizontal validate" method="post">
                         <input class="" type="hidden" name="action" value="addparticipant" />
 
                         <input type="hidden" id="cabinPrice" value="<?php echo isset($products[0]->Price) ? $products[0]->Price : ''; ?>">
@@ -50,11 +50,11 @@ View::header();
                         <div class="form-group">
                             <div class="col-sm-6">
                                 <label class="control-label">Gender</label><br>
-                                <select class="form-control" name="pp[Gender]" required="">
-                                    <option>Select Gender</option>
-                                    <option>Brother</option>
-                                    <option>Sister</option>
-                                    <option>Pastor</option>
+                                <select class="form-control" name="pp[Gender]" required="" data-validate="required">
+                                    <option value="">Select Gender</option>
+                                    <option value="Brother">Brother</option>
+                                    <option value="Sister">Sister</option>
+                                    <option value="Pastor">Pastor</option>
                                 </select>
                             </div>
                             <div class="col-sm-6">
@@ -114,8 +114,8 @@ View::header();
                                 
                                 <div class="statuses form-group status3">
                                 	<label class="control-label">Cabin</label><br>
-                                    <select class="form-control" name="pp[CabinID]" id="cabins">
-                                        <option>Select</option>
+                                    <select class="form-control" name="pp[CabinID]" id="cabins" data-validate="required">
+                                        <option value="">Select</option>
                                         <?php
                                         foreach($cabins as $cabins){
                                         ?>
@@ -126,8 +126,8 @@ View::header();
                                 
                                 <div class="statuses form-group status5">
                                 	<label class="control-label">Tent</label><br>
-                                    <select class="form-control" name="pp[TentID]" id="tents">
-                                        <option>Select</option>
+                                    <select class="form-control" name="pp[TentID]" id="tents" data-validate="required">
+                                        <option value="">Select</option>
                                         <?php
                                         foreach($tents as $tent){
                                         ?>
