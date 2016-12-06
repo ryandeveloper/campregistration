@@ -22,7 +22,7 @@ View::header();
                 <?php print_r($participants); ?>
                 </pre> -->
                 <div class="panel-body">
-                    <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive bulk_action nowrap" cellspacing="0" width="100%">
+                    <table id="participants" class="table table-striped table-bordered dt-responsive bulk_action nowrap" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th width="50" class="no-sorting">Status</th> 

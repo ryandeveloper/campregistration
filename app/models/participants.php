@@ -311,10 +311,10 @@ class Participants_model extends Model
         View::$footerscripts[] = "vendor/toastr/toastr.min.js";
 
         // Imported scripts on this page // REFER ON VENDORS SCRIPTS
+        View::$footerscripts[] = "vendor/datatables/yadcf/jquery.dataTables.yadcf.js";
         View::$footerscripts[] = "vendor/datatables/js/jquery.dataTables.min.js";
         View::$footerscripts[] = "vendor/datatables/dataTables.bootstrap.js";
         View::$footerscripts[] = "vendor/datatables.net-responsive-bs/js/responsive.bootstrap.js";
-        View::$footerscripts[] = "vendor/datatables/yadcf/jquery.dataTables.yadcf.js";
         View::$footerscripts[] = "vendor/datatables/tabletools/dataTables.tableTools.min.js";
         View::$footerscripts[] = "vendor/jquery-validate/jquery.validate.min.js";
 
