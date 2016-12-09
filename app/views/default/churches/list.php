@@ -41,11 +41,11 @@ View::header();
                             ?>
                                 <tr class="<?php echo ($cntr % 2) == 0 ? 'even' : 'odd'; ?> pointer">
                                     <td>CI-<?php echo $church->ChurchID; ?></td>
-                                    <td><?php echo $church->Name; ?></td>
-                                    <td><?php echo $church->City; ?></td>
-                                    <td><?php echo $church->Title; ?></td>
-                                    <td>Ptr. <?php echo $church->Pastor; ?></td>
-                                    <td><?php echo $church->Notes; ?></td>
+                                    <td><?php echo ucwords($church->Name); ?></td>
+                                    <td><?php echo ucwords($church->City); ?></td>
+                                    <td><?php echo ucwords($church->Title); ?></td>
+                                    <td>Ptr. <?php echo ucwords($church->Pastor); ?></td>
+                                    <td><?php echo ucwords($church->Notes); ?></td>
                                     <td style="text-align:center;">
                                         <a href="<?php echo View::url('churches/edit/'.$church->ChurchID); ?>" title="Edit" class="btn btn-warning btn-sm"><span class="fa fa-pencil-square-o"></span></a>
                                         <?php if($userinfo->Level == 1) { ?>
