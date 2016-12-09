@@ -113,245 +113,246 @@ View::header();
                     <input type="hidden" id="owntentPrice" value="<?php echo isset($products[4]->Price) ? $products[4]->Price : ''; ?>">
                     <input type="hidden" id="entrancePrice" value="<?php echo isset($products[5]->Price) ? $products[5]->Price : ''; ?>">
                     <input type="hidden" id="cleared" name="ppmeta[Cleard]" value="0">
-                    <input type="checkbox" id="packfull" class="amt" value="<?php echo isset($products[3]->Price) ? $products[3]->Price : ''; ?>" style="display: none;">
+                    <input type="checkbox" name="ppmeta[Package]" id="packfull" class="amt" value="<?php echo isset($products[3]->Price) ? $products[3]->Price : ''; ?>" style="display: none;">
 
                     <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="control-label">Gender</label><br>
-                            <select class="form-control" name="pp[Gender]" required="" data-validate="required">
-                                <option value="">Select Gender</option>
-                                <option>Brother</option>
-                                <option>Sister</option>
-                                <option>Pastor</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="control-label">Encoder</label><br>
-                            <input type="text" class="form-control" value="<?php echo isset($userinfo->FirstName) ? $userinfo->FirstName : ''; ?>" readonly>
-                            <input type="hidden" name="pp[UserID]" value="<?php echo isset($userinfo->UserID) ? $userinfo->UserID : ''; ?>">
+                            <div class="col-sm-6">
+                                <label class="control-label">Gender</label><br>
+                                <select class="form-control" name="pp[Gender]" data-validate="required" required="">
+                                    <option value="">Select Gender</option>
+                                    <option value="Brother">Brother</option>
+                                    <option value="Sister">Sister</option>
+                                    <option value="Pastor">Pastor</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="control-label">Encoder</label><br>
+                                <input type="text" class="form-control" value="<?php echo $userinfo->FirstName; ?> <?php echo $userinfo->LastName; ?>" readonly>
+                                <input type="hidden" name="pp[UserID]" value="<?php echo $userinfo->UserID; ?>">
 
+                            </div>
                         </div>
-                    </div>
-                    <div class="clearfix"></div>
+                        <div class="clearfix"></div>
 
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="control-label">First Name</label><br>
-                            <input type="text" class="form-control" value="" name="pp[FirstName]" data-validate="required" placeholder="" required="">
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <label class="control-label">First Name</label><br>
+                                <input type="text" class="form-control" value="" name="pp[FirstName]" data-validate="required" placeholder="" required="">
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="control-label">Last Name</label><br>
+                                <input type="text" class="form-control" value="" name="pp[LastName]" placeholder="" required="">
+                            </div>
                         </div>
-                        <div class="col-sm-6">
-                            <label class="control-label">Last Name</label><br>
-                            <input type="text" class="form-control" value="" name="pp[LastName]" data-validate="required" placeholder="" required="">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <div class="col-sm-6">
-                            <label class="control-label">Age</label><br>
-                            <input type="number" class="form-control" value="" name="pp[Age]" placeholder="">
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="control-label">Church</label><br>
-                            <select class="form-control" name="pp[ChurchID]">
-                                <option>Select Church</option>
-                                <?php
-                                foreach($churches as $church){
-                                ?>
-                                    <option value="<?php echo $church->ChurchID; ?>"><?php echo $church->Name; ?> <small><?php echo strlen($church->City) > 0 ? "(".$church->City.")" : ""; ?></small></option>
-                                <?php }; ?>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group-separator"></div>
-                    
-                    <div class="sections">
-                        <div class="col-md-6 col-sm-6 col-xs-12">
                         
-                            <div class="statuses form-group">
-                                <label class="control-label">Registration Options</label>
-                                <select id="package-status" class="form-control" name="pp[StatusID]" required="">
-                                    <option>Select Status</option>
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <label class="control-label">Age</label><br>
+                                <input type="number" class="form-control" value="" name="pp[Age]" placeholder="">
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="control-label">Church</label><br>
+                                <select class="form-control" name="pp[ChurchID]">
+                                    <option>Select Church</option>
                                     <?php
-                                    foreach($statuses as $status){
+                                    foreach($churches as $church){
                                     ?>
-                                        <option value="<?php echo $status->StatusID; ?>"><?php echo $status->Name; ?> <small><?php echo strlen($status->Notes) > 0 ? "(".$status->Notes.")" : ""; ?></small></option>
+                                        <option value="<?php echo $church->ChurchID; ?>"><?php echo $church->Name; ?> <small><?php echo strlen($church->City) > 0 ? "(".$church->City.")" : ""; ?></small></option>
                                     <?php }; ?>
                                 </select>
                             </div>
-                            
-                            <div class="statuses form-group status3">
-                                <label class="control-label">Cabin</label><br>
-                                <select class="form-control" name="pp[CabinID]" id="cabins" data-validate="required">
-                                    <option value="">Select</option>
-                                    <?php
-                                    foreach($cabins as $cabins){
-                                    ?>
-                                        <option value="<?php echo $cabins->CabinID; ?>"><?php echo $cabins->Name; ?></option>
-                                    <?php }; ?>
-                                </select>
-                            </div>
-                            
-                            <div class="statuses form-group status5">
-                                <label class="control-label">Tent</label><br>
-                                <select class="form-control" name="pp[TentID]" id="tents" data-validate="required">
-                                    <option value="">Select</option>
-                                    <?php
-                                    foreach($tents as $tent){
-                                    ?>
-                                        <option value="<?php echo $tent->TentID; ?>"><?php echo $tent->Name; ?></option>
-                                    <?php }; ?>
-                                </select>
-                            </div>
-                            
-                            <div class="statuses status2">
-                                <table class="table meal-table">
-                                    <tbody>
-                                        <thead>
-                                            <th>Meal:</th>
-                                            <th>22</th>
-                                            <th>23</th>
-                                            <th>24</th>
-                                            <th>25</th>
-                                        </thead>
-                                        <tr>
-                                            <td><label>Breakfast:</label></td>
-                                            <td>-</td>
-                                            <td><label><input type="checkbox" name="ppmeta[Meal1]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : ''; ?>" class="amt regcheckbox meal-yes"></label></td>
-                                            <td><label><input type="checkbox" name="ppmeta[Meal2]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : ''; ?>" class="amt regcheckbox meal-yes"></label></td>
-                                            <td><label><input type="checkbox" name="ppmeta[Meal3]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : ''; ?>" class="amt regcheckbox meal-yes"></label></td>                        
-                                        </tr>
-                                        <tr>
-                                            <td><label>Lunch:</label></td>
-                                            <td>-</td>
-                                            <td><label><input type="checkbox" name="ppmeta[Meal4]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : ''; ?>" class="amt regcheckbox meal-yes"></label></td>
-                                            <td><label><input type="checkbox" name="ppmeta[Meal5]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : ''; ?>" class="amt regcheckbox meal-yes"></label></td>
-                                            <td><label><input type="checkbox" name="ppmeta[Meal6]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : ''; ?>" class="amt regcheckbox meal-yes"></label></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>Dinner:</label></td>
-                                            <td><label><input type="checkbox" name="ppmeta[Meal7]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : ''; ?>" class="amt regcheckbox meal-yes"></label></td>
-                                            <td><label><input type="checkbox" name="ppmeta[Meal8]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : ''; ?>" class="amt regcheckbox meal-yes"></label></td>
-                                            <td><label><input type="checkbox" name="ppmeta[Meal9]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : ''; ?>" class="amt regcheckbox meal-yes"></label></td>
-                                            <td>-</td>                        
-                                        </tr>
-                                        <tr>
-                                            <td colspan="5"><label><input type="checkbox" id="selectallMeals" class="regcheckbox selectall" name=""> Select All</label></td>                        
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            
                         </div>
                         
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="form-group-separator"></div>
                         
-                            <div class="statuses status1">
-                                <table class="table entrance-table">
-                                    <tbody>
-                                        <thead>
-                                            <th>Entrance:</th>
-                                            <th>22</th>
-                                            <th>23</th>
-                                            <th>24</th>
-                                            <th>25</th>
-                                        </thead>
-                                        <tr>
-                                            <td><label>-</label></td>
-                                            <td><label><input type="checkbox" name="ppmeta[Entrance1]" value="<?php echo isset($products[5]->Price) ? $products[5]->Price : ''; ?>" class="amt regcheckbox entrance-yes"></label></td>
-                                            <td><label><input type="checkbox" name="ppmeta[Entrance2]" value="<?php echo isset($products[5]->Price) ? $products[5]->Price : ''; ?>" class="amt regcheckbox entrance-yes"></label></td>
-                                            <td><label><input type="checkbox" name="ppmeta[Entrance3]" value="<?php echo isset($products[5]->Price) ? $products[5]->Price : ''; ?>" class="amt regcheckbox entrance-yes"></label></td>
-                                            <td><label><input type="checkbox" name="ppmeta[Entrance4]" value="<?php echo isset($products[5]->Price) ? $products[5]->Price : ''; ?>" class="amt regcheckbox entrance-yes"></label></td>                        
-                                        </tr>
-                                        <tr>
-                                            <td colspan="5"><label><input type="checkbox" id="selectallEntrance" name="" class="regcheckbox selectall" rel="entrance-yes"> Select All</label></td>                        
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        <div class="sections">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            
+                                <div class="statuses form-group">
+                                    <label class="control-label">Registration Options</label>
+                                    <select id="package-status" class="form-control" name="pp[StatusID]" required="">
+                                        <option>Select Status</option>
+                                        <?php
+                                        
+                                        foreach($statuses as $status){
+                                        ?>
+                                            <option value="<?php echo $status->StatusID; ?>"><?php echo $status->Name; ?> <small><?php echo strlen($status->Notes) > 0 ? "(".$status->Notes.")" : ""; ?></small></option>
+                                        <?php }; ?>
+                                    </select>
+                                </div>
+                                
+                                <div class="statuses form-group status3">
+                                    <label class="control-label">Cabin</label><br>
+                                    <select class="form-control" name="pp[CabinID]" id="cabins" data-validate="required">
+                                        <option value="">Select</option>
+                                        <?php
+                                        foreach($cabins as $cabins){
+                                        ?>
+                                            <option value="<?php echo $cabins->CabinID; ?>"><?php echo $cabins->Name; ?></option>
+                                        <?php }; ?>
+                                    </select>
+                                </div>
+                                
+                                <div class="statuses form-group status5">
+                                    <label class="control-label">Tent</label><br>
+                                    <select class="form-control" name="pp[TentID]" id="tents" data-validate="required">
+                                        <option value="">Select</option>
+                                        <?php
+                                        foreach($tents as $tent){
+                                        ?>
+                                            <option value="<?php echo $tent->TentID; ?>"><?php echo $tent->Name; ?></option>
+                                        <?php }; ?>
+                                    </select>
+                                </div>
+                                
+                                <div class="statuses status2">
+                                    <table class="table meal-table">
+                                        <tbody>
+                                            <thead>
+                                                <th>Meal:</th>
+                                                <th>22</th>
+                                                <th>23</th>
+                                                <th>24</th>
+                                                <th>25</th>
+                                            </thead>
+                                            <tr>
+                                                <td><label>Breakfast:</label></td>
+                                                <td>-</td>
+                                                <td><label><input type="checkbox" name="ppmeta[Meal1]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes"></label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Meal2]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes"></label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Meal3]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes"></label></td>                        
+                                            </tr>
+                                            <tr>
+                                                <td><label>Lunch:</label></td>
+                                                <td>-</td>
+                                                <td><label><input type="checkbox" name="ppmeta[Meal4]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes"></label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Meal5]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes"></label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Meal6]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes"></label></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label>Dinner:</label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Meal7]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes"></label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Meal8]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes"></label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Meal9]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes"></label></td>
+                                                <td>-</td>                        
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5"><label><input type="checkbox" id="selectallMeals" class="regcheckbox selectall" name=""> Select All</label></td>                        
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
                             </div>
                             
-                            <div class="statuses status4">
-                                <table class="table cabin-table">
-                                    <tbody>
-                                        <thead>
-                                            <th>Cabin:</th>
-                                            <th>22</th>
-                                            <th>23</th>
-                                            <th>24</th>
-                                            <th>25</th>
-                                        </thead>
-                                        <tr>
-                                            <td><label>-</label></td>
-                                            <td><label><input type="checkbox" name="ppmeta[Cabin1]" value="<?php echo isset($products[0]->Price) ? $products[0]->Price : ''; ?>" class="amt regcheckbox cabin-yes"></label></td>
-                                            <td><label><input type="checkbox" name="ppmeta[Cabin2]" value="<?php echo isset($products[0]->Price) ? $products[0]->Price : ''; ?>" class="amt regcheckbox cabin-yes"</label></td>
-                                            <td><label><input type="checkbox" name="ppmeta[Cabin3]" value="<?php echo isset($products[0]->Price) ? $products[0]->Price : ''; ?>" class="amt regcheckbox cabin-yes"></label></td>
-                                            <td></td>                        
-                                        </tr>
-                                        <tr>
-                                            <td colspan="5"><label><input type="checkbox" id="selectallCabins" name="" class="regcheckbox selectall" rel="cabin-yes"> Select All</label></td>                        
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
                             
-                            <div class="statuses status6">
-                                <table class="table tent-table">
-                                    <tbody>
-                                        <thead>
-                                            <th>Tent:</th>
-                                            <th>22</th>
-                                            <th>23</th>
-                                            <th>24</th>
-                                            <th>25</th>
-                                        </thead>
-                                        <tr>
-                                            <td><label><input type="checkbox" name="ppmeta[TentOwned]" value="1" rel="tent-yes" class="regcheckbox owntent"> Own Tent?</label></td>
-                                            <td><label><input type="checkbox" name="ppmeta[Tent1]" value="<?php echo isset($products[1]->Price) ? $products[1]->Price : ''; ?>" class="amt regcheckbox tent-yes"></label></td>
-                                            <td><label><input type="checkbox" name="ppmeta[Tent2]" value="<?php echo isset($products[1]->Price) ? $products[1]->Price : ''; ?>" class="amt regcheckbox tent-yes"></label></td>
-                                            <td><label><input type="checkbox" name="ppmeta[Tent3]" value="<?php echo isset($products[1]->Price) ? $products[1]->Price : ''; ?>" class="amt regcheckbox tent-yes"></label></td>
-                                            <td></td>                        
-                                        </tr>
-                                        <tr>
-                                            <td colspan="5"><label><input type="checkbox" id="selectallTents" name="" class="regcheckbox selectall" rel="tent-yes"> Select All</label></td>                        
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <div class="statuses status1">
+                                    <table class="table entrance-table">
+                                        <tbody>
+                                            <thead>
+                                                <th>Entrance:</th>
+                                                <th>22</th>
+                                                <th>23</th>
+                                                <th>24</th>
+                                                <th>25</th>
+                                            </thead>
+                                            <tr>
+                                                <td><label>-</label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Entrance1]" value="<?php echo isset($products[5]->Price) ? $products[5]->Price : '0'; ?>" class="amt regcheckbox entrance-yes"></label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Entrance2]" value="<?php echo isset($products[5]->Price) ? $products[5]->Price : '0'; ?>" class="amt regcheckbox entrance-yes"></label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Entrance3]" value="<?php echo isset($products[5]->Price) ? $products[5]->Price : '0'; ?>" class="amt regcheckbox entrance-yes"></label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Entrance4]" value="<?php echo isset($products[5]->Price) ? $products[5]->Price : '0'; ?>" class="amt regcheckbox entrance-yes"></label></td>                        
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5"><label><input type="checkbox" id="selectallEntrance" name="" class="regcheckbox selectall" rel="entrance-yes"> Select All</label></td>                        
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <div class="statuses status4">
+                                    <table class="table cabin-table">
+                                        <tbody>
+                                            <thead>
+                                                <th>Cabin:</th>
+                                                <th>1st</th>
+                                                <th>2nd</th>
+                                                <th>3rd</th>
+                                                <th></th>
+                                            </thead>
+                                            <tr>
+                                                <td><label>-</label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Cabin1]" value="<?php echo isset($products[0]->Price) ? $products[0]->Price : '0'; ?>" class="amt regcheckbox cabin-yes"></label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Cabin2]" value="<?php echo isset($products[0]->Price) ? $products[0]->Price : '0'; ?>" class="amt regcheckbox cabin-yes"></label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Cabin3]" value="<?php echo isset($products[0]->Price) ? $products[0]->Price : '0'; ?>" class="amt regcheckbox cabin-yes"></label></td>
+                                                <td></td>                        
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5"><label><input type="checkbox" id="selectallCabins" name="" class="regcheckbox selectall" rel="cabin-yes"> Select All</label></td>                        
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <div class="statuses status6">
+                                    <table class="table tent-table">
+                                        <tbody>
+                                            <thead>
+                                                <th>Tent:</th>
+                                                <th>1st</th>
+                                                <th>2nd</th>
+                                                <th>3rd</th>
+                                                <th></th>
+                                            </thead>
+                                            <tr>
+                                                <td><label><input type="checkbox" name="ppmeta[TentOwned]" value="1" rel="tent-yes" class="regcheckbox owntent"> Own Tent?</label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Tent1]" value="<?php echo isset($products[1]->Price) ? $products[1]->Price : ''; ?>" class="amt regcheckbox tent-yes"></label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Tent2]" value="<?php echo isset($products[1]->Price) ? $products[1]->Price : ''; ?>" class="amt regcheckbox tent-yes"></label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Tent3]" value="<?php echo isset($products[1]->Price) ? $products[1]->Price : ''; ?>" class="amt regcheckbox tent-yes"></label></td>
+                                                <td></td>                        
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5"><label><input type="checkbox" id="selectallTents" name="" class="regcheckbox selectall" rel="tent-yes"> Select All</label></td>                        
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
                             </div>
-                            
                         </div>
-                    </div>
-                    
-                    <div class="clearfix"></div>
-                    
-                    <div class="section">
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label class="control-label">Amount</label><br>
-                                <input type="number" class="form-control" value="0" id="TotalAmount" name="ppmeta[TotalAmount]" readonly>
-                            </div>
+                        
+                        <div class="clearfix"></div>
+                        
+                        <div class="section">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Amount</label><br>
+                                    <input type="number" class="form-control" value="0" id="TotalAmount" name="ppmeta[TotalAmount]" readonly>
+                                </div>
 
-                            <div class="form-group">
-                                <label class="control-label">Paid</label><br>
-                                <input type="number" class="form-control" value="0" id="PaidAmount" name="ppmeta[PaidAmount]">
-                            </div>
+                                <div class="form-group">
+                                    <label class="control-label">Paid</label><br>
+                                    <input type="number" class="form-control" value="" id="PaidAmount" name="ppmeta[PaidAmount]">
+                                </div>
 
-                            <div class="form-group">
-                                <label class="control-label">Balance</label><br>
-                                <input type="number" class="form-control" value="0" id="Balance" name="ppmeta[Balance]" readonly>
-                            </div>
+                                <div class="form-group">
+                                    <label class="control-label">Balance</label><br>
+                                    <input type="number" class="form-control" value="0" id="Balance" name="ppmeta[Balance]" readonly>
+                                </div>
 
-                            <div class="form-group">
-                                <label class="control-label">Excess</label><br>
-                                <input type="number" class="form-control" value="0" id="Excess" name="ppmeta[Excess]" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Notes</label><br>
-                                <textarea class="form-control" name="ppmeta[Notes]" rows="4"></textarea>
+                                <div class="form-group">
+                                    <label class="control-label">Excess</label><br>
+                                    <input type="number" class="form-control" value="0" id="Excess" name="ppmeta[Excess]" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Notes</label><br>
+                                    <textarea class="form-control" name="ppmeta[Notes]" rows="4"></textarea>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="clearfix"></div>
+                        <div class="clearfix"></div>
 
                 </div>
 

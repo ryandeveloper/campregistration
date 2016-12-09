@@ -87,13 +87,12 @@ $(document).ready(function() {
 	}
 	
 	if ($(".amt, .owntent").is(':checked')){
-		
-	    totalAmtCalculator();
-
-	    $('.amt').change(function(){
-			totalAmtCalculator();
-		});
+	    totalAmtCalculator();	    
 	}
+	
+	$('.amt').change(function(){
+		totalAmtCalculator();
+	});
 
 	if ($(".owntent").is(':checked')){
 		var $cls = '.'+$('.owntent').attr('rel');
