@@ -75,6 +75,13 @@ a { }
     border-radius: 4px;  
     cursor: pointer;
 }
+
+.status-No:before, .status-Yes:before {
+    visibility: visible;
+    font-size: 18px;
+}
+
+
 /**==== END Participants CSS ====**/
 
 

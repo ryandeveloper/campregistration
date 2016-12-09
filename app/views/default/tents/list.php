@@ -37,8 +37,8 @@ View::header();
                             ?>
                                 <tr class="<?php echo ($cntr % 2) == 0 ? 'even' : 'odd'; ?> pointer">
                                     <td>TI-<?php echo $tent->TentID; ?></td>
-                                    <td><?php echo $tent->Name; ?></td>
-                                    <td><?php echo $tent->Notes; ?></td>
+                                    <td><?php echo ucwords($tent->Name); ?></td>
+                                    <td><?php echo ucwords($tent->Notes); ?></td>
                                     <td style="text-align:center;">
                                         <a href="<?php echo View::url('tents/edit/'.$tent->TentID); ?>" title="Edit" class="btn btn-warning btn-sm"><span class="fa fa-pencil-square-o"></span></a>
                                         <?php if($userinfo->Level == 1) { ?>

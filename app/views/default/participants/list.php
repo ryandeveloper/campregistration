@@ -22,22 +22,22 @@ View::header();
                 <?php print_r($participants); ?>
                 </pre> -->
                 <div class="panel-body">
-                    <table id="participants" class="table table-striped table-bordered dt-responsive bulk_action nowrap" cellspacing="0" width="100%">
+                    <table id="participants" class="table table-striped table-bordered dt-responsive display nowrap" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th width="50" class="no-sorting">Status</th> 
                                 <th class="no-sorting" width="50px">Gender</th>
-                                <th class="no-sorting">Name</th>
-                                <th class="no-sorting">Age</th>
-                                <th class="no-sorting">Type</th>
-                                <th class="no-sorting">Church</th>
-                                <th class="no-sorting">Cabin</th>
-                                <th class="no-sorting">Tent</th>
-                                <th class="no-sorting">Due</th>
-                                <th class="no-sorting">Paid</th>
-                                <th class="no-sorting">Balance</th>
-                                <th class="no-sorting">Encoder</th>
-                                <th width="150" class="no-sorting text-center">Action</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Type</th>
+                                <th>Church</th>
+                                <th>Cabin</th>
+                                <th>Tent</th>
+                                <th>Due</th>
+                                <th>Paid</th>
+                                <th>Balance</th>
+                                <th>Encoder</th>
+                                <th width="150" class="text-center">Action</th>
                             </tr>
                         </thead>
 
@@ -49,10 +49,10 @@ View::header();
                                 ?>
                                     <tr class="<?php echo ($cntr % 2) == 0 ? 'even' : 'odd'; ?> pointer">
                                         <td class="text-center">
-                                        <?php if($participant->Cleard == "0"){ ?>
-                                            <i class="fa fa-close" style="color: red; font-size: 18px;"></i>
+                                        <?php if($participant->Cleard == "1"){ ?>
+                                            <span class="fa fa-check status-Yes" style="color:#8dc63f;"></span>
                                         <?php } else { ?>
-                                            <i class="fa fa-check" style="color:#8dc63f; font-size: 18px;"></i>
+                                            <span class="fa fa-close status-No" style="color: red;"></span>
                                         <?php } ?>
                                         </td>
                                         <td><?php if($participant->Gender == "Brother"){echo "Bro";}elseif($participant->Gender == "Sister"){echo "Sis";}elseif ($participant->Gender == "Pastor") { echo "Ptr";} ?></td>

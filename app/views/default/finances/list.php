@@ -51,7 +51,7 @@ View::header();
                                         }
                                         ?>
                                     </td>
-                                    <td><?php echo $finance->Description; ?></td>
+                                    <td><?php echo ucwords($finance->Description); ?></td>
                                     <!--<td><?php echo number_format($finance->Amount, 2, ".","," ); ?></td>-->
                                     <td><?php echo number_format($finance->Amount); ?></td>
                                     <td><small><?php echo date('d-M-Y', strtotime($finance->Date)); ?> <br><?php echo date('h:i:a', strtotime($finance->Date)); ?> </small></td>

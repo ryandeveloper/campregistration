@@ -23,9 +23,9 @@ View::header();
                     <table id="datatable-responsive" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th width="120" class="select-filter">Cabin ID</th>
-                                <th class="select-filter">Name</th>
-                                <th class="select-filter">Notes</th>
+                                <th width="120" class="select-filter no-sorting">Cabin ID</th>
+                                <th class="select-filter no-sorting">Name</th>
+                                <th class="select-filter no-sorting">Notes</th>
                                 <th width="200">Action</th>
                             </tr>
                         </thead>
@@ -38,8 +38,8 @@ View::header();
                             ?>
                                 <tr class="<?php echo ($cntr % 2) == 0 ? 'even' : 'odd'; ?> pointer">
                                     <td>CI-<?php echo $cabin->CabinID; ?></td>
-                                    <td><?php echo $cabin->Name; ?></td>
-                                    <td><?php echo $cabin->Notes; ?></td>
+                                    <td><?php echo ucwords($cabin->Name); ?></td>
+                                    <td><?php echo ucwords($cabin->Notes); ?></td>
                                     <td style="text-align:center;">
                                         <a href="<?php echo View::url('cabins/edit/'.$cabin->CabinID); ?>" title="Edit" class="btn btn-warning btn-sm"><span class="fa fa-pencil-square-o"></span></a>
                                         <?php if($userinfo->Level == 1) { ?>

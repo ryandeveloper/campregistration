@@ -5515,7 +5515,7 @@ blockquote small {
   width: 100%;
   margin: 0;
 }
-.dataTables_wrapper tr .yadcf-filter-wrapper .yadcf-filter[type="text"] {
+.dataTables_wrapper tr .yadcf-filter-wrapper .yadcf-filter[type="text"], .dataTables_wrapper tr .yadcf-filter-wrapper .yadcf-filter {
   background: #fff;
   border: 1px solid #e4e4e4;
   font-weight: normal;
