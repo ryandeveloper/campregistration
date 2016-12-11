@@ -71,7 +71,7 @@ View::header();
                         <div class="item form-group">
                             <label class="col-sm-2 control-label"></label>
                             <div class="col-sm-10">
-                                <a href="<?php echo view::url('churches'); ?>" class="btn btn-warning">Back</a>
+                                <a href="<?php echo $_SERVER['HTTP_REFERER']; ?>" class="btn btn-warning">Back</a>
                                 <button id="send" type="submit" class="btn btn-success">Save Changes</button>
                             </div>
                         </div>

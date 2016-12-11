@@ -20,7 +20,7 @@ View::header();
                 </div>
                 
                 <div class="panel-body">
-                    <table id="participants" class="table table-striped table-bordered dt-responsive display nowrap" cellspacing="0" width="100%">
+                    <table id="churchlist" class="table table-striped table-bordered dt-responsive display nowrap" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th width="50" class="no-sorting">Status</th> 
@@ -154,7 +154,7 @@ View::header();
                                     <?php
                                     foreach($churches as $church){
                                     ?>
-                                        <option value="<?php echo $church->ChurchID; ?>"><?php echo $church->Name; ?> <small><?php echo strlen($church->City) > 0 ? "(".$church->City.")" : ""; ?></small></option>
+                                        <option value="<?php echo $church->ChurchID; ?>" <?php echo $church->ChurchID == $segment ? "selected" : ""; ?>><?php echo $church->Name; ?> <small><?php echo strlen($church->City) > 0 ? "(".$church->City.")" : ""; ?></small></option>
                                     <?php }; ?>
                                 </select>
                             </div>

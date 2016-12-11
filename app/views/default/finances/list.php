@@ -20,7 +20,7 @@ View::header();
                 </div>
                 
                 <div class="panel-body">
-                    <table id="financeTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <table id="datatable-responsive" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th width="120" class="select-filter">Transaction Type</th>

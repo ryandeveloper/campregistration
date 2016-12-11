@@ -6,6 +6,8 @@ class Churches extends Controller
         parent::__construct();
 
         // Protected yes
+        $this->load->model('participants',false,true);
+        $this->load->model('products',false,true);
 
         $auth = $this->load->model('auth', true);
         if(!$auth->isLoggedIn() && $this->segment[0] != 'assets') {
@@ -31,6 +33,23 @@ class Churches extends Controller
         };
         $this->model->indexAssets();
         View::page('churches/add', get_defined_vars());
+    }
+
+    public function view()
+    { 
+        $this->model->indexAssets();
+
+        if($this->participants_model->doSave()){
+            View::redirect('churches/view/'.$this->segment[2]);
+        };
+        $segment = $this->segment[2];
+        $participants = $this->model->getChurchMembers($this->segment[2]);
+        $churches = $this->participants_model->getChurches();
+        $statuses = $this->participants_model->getStatus();
+        $cabins = $this->participants_model->getCabins();
+        $tents = $this->participants_model->getTents();
+        $products = $this->products_model->getProducts();
+        View::page('churches/churchlist', get_defined_vars());
     }
 
     public function edit()

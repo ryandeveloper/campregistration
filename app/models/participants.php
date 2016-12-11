@@ -126,6 +126,8 @@ class Participants_model extends Model
                         $pp = $this->post['pp'];                    
                         $ppmeta = $this->post['ppmeta'];
 
+                        if(isset($ppmeta['Cleard']) || $data['clearpaid'] == 1){ $ppmeta['Cleard'] = 1;  }else{ $ppmeta['Cleard'] = 0; }
+
                         // Package
                         if($pp['StatusID'] == 1){
                             $pp['TentID'] = 0; 
@@ -148,8 +150,7 @@ class Participants_model extends Model
                             $ppmeta['Meal9'] = 0;
                             $ppmeta['Entrance1'] = 0;
                             $ppmeta['Entrance2'] = 0;
-                            $ppmeta['Entrance3'] = 0;
-                            $ppmeta['Entrance4'] = 0;   
+                            $ppmeta['Entrance3'] = 0; 
                         }
 
                         // Cabin
@@ -160,29 +161,24 @@ class Participants_model extends Model
                             $ppmeta['Tent1'] = 0;
                             $ppmeta['Tent2'] = 0;
                             $ppmeta['Tent3'] = 0;
-                            if(isset($ppmeta['Entrance1'])){
-                                $ppmeta['Entrance1'] = $ppmeta['Entrance1'];
-                            }else{
-                                $ppmeta['Entrance1'] = 0; 
-                            }
 
-                            if(isset($ppmeta['Entrance2'])){
-                                $ppmeta['Entrance2'] = $ppmeta['Entrance2']; 
-                            }else{
-                                $ppmeta['Entrance2'] = 0; 
-                            }
+                            if(isset($ppmeta['Entrance1'])){ $ppmeta['Entrance1'] = $ppmeta['Entrance1'];  }else{ $ppmeta['Entrance1'] = 0; }
+                            if(isset($ppmeta['Entrance2'])){ $ppmeta['Entrance2'] = $ppmeta['Entrance2'];  }else{ $ppmeta['Entrance2'] = 0; }
+                            if(isset($ppmeta['Entrance3'])){ $ppmeta['Entrance3'] = $ppmeta['Entrance3'];  }else{ $ppmeta['Entrance3'] = 0; }
 
-                            if(isset($ppmeta['Entrance3'])){
-                                $ppmeta['Entrance3'] = $ppmeta['Entrance3']; 
-                            }else{
-                                $ppmeta['Entrance3'] = 0; 
-                            }
+                            if(isset($ppmeta['Cabin1'])){ $ppmeta['Cabin1'] = $ppmeta['Cabin1'];  }else{ $ppmeta['Cabin1'] = 0; }
+                            if(isset($ppmeta['Cabin2'])){ $ppmeta['Cabin2'] = $ppmeta['Cabin2'];  }else{ $ppmeta['Cabin2'] = 0; }
+                            if(isset($ppmeta['Cabin3'])){ $ppmeta['Cabin3'] = $ppmeta['Cabin3'];  }else{ $ppmeta['Cabin3'] = 0; }
 
-                            if(isset($ppmeta['Entrance4'])){
-                                $ppmeta['Entrance4'] = $ppmeta['Entrance4']; 
-                            }else{
-                                $ppmeta['Entrance4'] = 0; 
-                            }
+                            if(isset($ppmeta['Meal1'])){ $ppmeta['Meal1'] = $ppmeta['Meal1'];  }else{ $ppmeta['Meal1'] = 0; }
+                            if(isset($ppmeta['Meal2'])){ $ppmeta['Meal2'] = $ppmeta['Meal2'];  }else{ $ppmeta['Meal2'] = 0; }
+                            if(isset($ppmeta['Meal3'])){ $ppmeta['Meal3'] = $ppmeta['Meal3'];  }else{ $ppmeta['Meal3'] = 0; }
+                            if(isset($ppmeta['Meal4'])){ $ppmeta['Meal4'] = $ppmeta['Meal4'];  }else{ $ppmeta['Meal4'] = 0; }
+                            if(isset($ppmeta['Meal5'])){ $ppmeta['Meal5'] = $ppmeta['Meal5'];  }else{ $ppmeta['Meal5'] = 0; }
+                            if(isset($ppmeta['Meal6'])){ $ppmeta['Meal6'] = $ppmeta['Meal6'];  }else{ $ppmeta['Meal6'] = 0; }
+                            if(isset($ppmeta['Meal7'])){ $ppmeta['Meal7'] = $ppmeta['Meal7'];  }else{ $ppmeta['Meal7'] = 0; }
+                            if(isset($ppmeta['Meal8'])){ $ppmeta['Meal8'] = $ppmeta['Meal8'];  }else{ $ppmeta['Meal8'] = 0; }
+                            if(isset($ppmeta['Meal9'])){ $ppmeta['Meal9'] = $ppmeta['Meal9'];  }else{ $ppmeta['Meal9'] = 0; }
                         }
 
                         // Tent
@@ -192,23 +188,26 @@ class Participants_model extends Model
                             $ppmeta['Cabin1'] = 0;
                             $ppmeta['Cabin2'] = 0;
                             $ppmeta['Cabin3'] = 0;
-                            if(isset($ppmeta['TentOwned'])){
-                                $ppmeta['TentOwned'] = 1;
-                            }else{
-                                $ppmeta['TentOwned'] = 0;   
-                            }
 
-                            if(isset($ppmeta['Entrance1'])){
-                                $ppmeta['Entrance1'] = $ppmeta['Entrance1'];
-                            }elseif(isset($ppmeta['Entrance2'])){
-                                $ppmeta['Entrance2'] = $ppmeta['Entrance2']; 
-                            }elseif(isset($ppmeta['Entrance3'])){
-                                $ppmeta['Entrance3'] = $ppmeta['Entrance3']; 
-                            }elseif(isset($ppmeta['Entrance4'])){
-                                $ppmeta['Entrance4'] = $ppmeta['Entrance4']; 
-                            }else{
-                                $ppmeta['Entrance4'] = 0; 
-                            }
+                            if(isset($ppmeta['TentOwned'])){ $ppmeta['TentOwned'] = 1; }else{ $ppmeta['TentOwned'] = 0; }
+
+                            if(isset($ppmeta['Entrance1'])){ $ppmeta['Entrance1'] = $ppmeta['Entrance1'];  }else{ $ppmeta['Entrance1'] = 0; }
+                            if(isset($ppmeta['Entrance2'])){ $ppmeta['Entrance2'] = $ppmeta['Entrance2'];  }else{ $ppmeta['Entrance2'] = 0; }
+                            if(isset($ppmeta['Entrance3'])){ $ppmeta['Entrance3'] = $ppmeta['Entrance3'];  }else{ $ppmeta['Entrance3'] = 0; }
+
+                            if(isset($ppmeta['Tent1'])){ $ppmeta['Tent1'] = $ppmeta['Tent1'];  }else{ $ppmeta['Tent1'] = 0; }
+                            if(isset($ppmeta['Tent2'])){ $ppmeta['Tent2'] = $ppmeta['Tent2'];  }else{ $ppmeta['Tent2'] = 0; }
+                            if(isset($ppmeta['Tent3'])){ $ppmeta['Tent3'] = $ppmeta['Tent3'];  }else{ $ppmeta['Tent3'] = 0; }
+
+                            if(isset($ppmeta['Meal1'])){ $ppmeta['Meal1'] = $ppmeta['Meal1'];  }else{ $ppmeta['Meal1'] = 0; }
+                            if(isset($ppmeta['Meal2'])){ $ppmeta['Meal2'] = $ppmeta['Meal2'];  }else{ $ppmeta['Meal2'] = 0; }
+                            if(isset($ppmeta['Meal3'])){ $ppmeta['Meal3'] = $ppmeta['Meal3'];  }else{ $ppmeta['Meal3'] = 0; }
+                            if(isset($ppmeta['Meal4'])){ $ppmeta['Meal4'] = $ppmeta['Meal4'];  }else{ $ppmeta['Meal4'] = 0; }
+                            if(isset($ppmeta['Meal5'])){ $ppmeta['Meal5'] = $ppmeta['Meal5'];  }else{ $ppmeta['Meal5'] = 0; }
+                            if(isset($ppmeta['Meal6'])){ $ppmeta['Meal6'] = $ppmeta['Meal6'];  }else{ $ppmeta['Meal6'] = 0; }
+                            if(isset($ppmeta['Meal7'])){ $ppmeta['Meal7'] = $ppmeta['Meal7'];  }else{ $ppmeta['Meal7'] = 0; }
+                            if(isset($ppmeta['Meal8'])){ $ppmeta['Meal8'] = $ppmeta['Meal8'];  }else{ $ppmeta['Meal8'] = 0; }
+                            if(isset($ppmeta['Meal9'])){ $ppmeta['Meal9'] = $ppmeta['Meal9'];  }else{ $ppmeta['Meal9'] = 0; }
                         }
 
                         // Walk In 
@@ -224,6 +223,26 @@ class Participants_model extends Model
                             $ppmeta['Cabin1'] = 0;
                             $ppmeta['Cabin2'] = 0;
                             $ppmeta['Cabin3'] = 0;
+
+                            if(isset($ppmeta['Entrance1'])){ $ppmeta['Entrance1'] = $ppmeta['Entrance1'];  }else{ $ppmeta['Entrance1'] = 0; }
+                            if(isset($ppmeta['Entrance2'])){ $ppmeta['Entrance2'] = $ppmeta['Entrance2'];  }else{ $ppmeta['Entrance2'] = 0; }
+                            if(isset($ppmeta['Entrance3'])){ $ppmeta['Entrance3'] = $ppmeta['Entrance3'];  }else{ $ppmeta['Entrance3'] = 0; }
+
+                            if(isset($ppmeta['Tent1'])){ $ppmeta['Tent1'] = $ppmeta['Tent1'];  }else{ $ppmeta['Tent1'] = 0; }
+                            if(isset($ppmeta['Tent2'])){ $ppmeta['Tent2'] = $ppmeta['Tent2'];  }else{ $ppmeta['Tent2'] = 0; }
+                            if(isset($ppmeta['Tent3'])){ $ppmeta['Tent3'] = $ppmeta['Tent3'];  }else{ $ppmeta['Tent3'] = 0; }
+
+                            if(isset($ppmeta['Meal1'])){ $ppmeta['Meal1'] = $ppmeta['Meal1'];  }else{ $ppmeta['Meal1'] = 0; }
+                            if(isset($ppmeta['Meal2'])){ $ppmeta['Meal2'] = $ppmeta['Meal2'];  }else{ $ppmeta['Meal2'] = 0; }
+                            if(isset($ppmeta['Meal3'])){ $ppmeta['Meal3'] = $ppmeta['Meal3'];  }else{ $ppmeta['Meal3'] = 0; }
+                            if(isset($ppmeta['Meal4'])){ $ppmeta['Meal4'] = $ppmeta['Meal4'];  }else{ $ppmeta['Meal4'] = 0; }
+                            if(isset($ppmeta['Meal5'])){ $ppmeta['Meal5'] = $ppmeta['Meal5'];  }else{ $ppmeta['Meal5'] = 0; }
+                            if(isset($ppmeta['Meal6'])){ $ppmeta['Meal6'] = $ppmeta['Meal6'];  }else{ $ppmeta['Meal6'] = 0; }
+                            if(isset($ppmeta['Meal7'])){ $ppmeta['Meal7'] = $ppmeta['Meal7'];  }else{ $ppmeta['Meal7'] = 0; }
+                            if(isset($ppmeta['Meal8'])){ $ppmeta['Meal8'] = $ppmeta['Meal8'];  }else{ $ppmeta['Meal8'] = 0; }
+                            if(isset($ppmeta['Meal9'])){ $ppmeta['Meal9'] = $ppmeta['Meal9'];  }else{ $ppmeta['Meal9'] = 0; }
+
+
                         }
 
                         // Infant
@@ -252,11 +271,14 @@ class Participants_model extends Model
                             $ppmeta['Entrance1'] = 0;
                             $ppmeta['Entrance2'] = 0;
                             $ppmeta['Entrance3'] = 0;
-                            $ppmeta['Entrance4'] = 0;
-                        }
+                        } 
 
                         unset($data['action']);
                         unset($data['pid']);
+
+                        // echo "<pre>";
+                        // print_r($ppmeta);
+                        // echo "</pre>";
 
                         $this->setSession('error', false);
                         $this->setSession('message',"Participant has been updated!");
@@ -264,12 +286,15 @@ class Participants_model extends Model
                         $participantID   = $this->db->update("participants", $pp, array('PPID' => $pid));
                         $participantItem = $this->db->update("participant_items", $ppmeta, array('PPID' => $pid));
 
+
                     } break;
                     case "addparticipant": {
 
                         $data = $this->post;
                         $pp = $this->post['pp'];
                         $ppmeta = $this->post['ppmeta'];
+
+                        if(isset($ppmeta['Cleard']) || $data['clearpaid'] == 1){ $ppmeta['Cleard'] = 1;  }else{ $ppmeta['Cleard'] = 0; }
                         
                         unset($data['action']);
 

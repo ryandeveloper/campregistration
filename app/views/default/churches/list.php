@@ -23,7 +23,6 @@ View::header();
                     <table id="datatable-responsive" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th width="120">Church ID</th>
                                 <th>Name</th>
                                 <th>City</th>
                                 <th>Title</th>
@@ -40,13 +39,13 @@ View::header();
                             foreach($churches as $church) { $cntr++;
                             ?>
                                 <tr class="<?php echo ($cntr % 2) == 0 ? 'even' : 'odd'; ?> pointer">
-                                    <td>CI-<?php echo $church->ChurchID; ?></td>
                                     <td><?php echo ucwords($church->Name); ?></td>
                                     <td><?php echo ucwords($church->City); ?></td>
                                     <td><?php echo ucwords($church->Title); ?></td>
                                     <td>Ptr. <?php echo ucwords($church->Pastor); ?></td>
                                     <td><?php echo ucwords($church->Notes); ?></td>
                                     <td style="text-align:center;">
+                                        <a href="<?php echo View::url('churches/view/'.$church->ChurchID); ?>" title="Edit" class="btn btn-info btn-sm"><span class="fa fa-eye"></span></a>
                                         <a href="<?php echo View::url('churches/edit/'.$church->ChurchID); ?>" title="Edit" class="btn btn-warning btn-sm"><span class="fa fa-pencil-square-o"></span></a>
                                         <?php if($userinfo->Level == 1) { ?>
                                         <a href="<?php echo View::url('churches/delete/'.$church->ChurchID); ?>" title="Delete" onclick="return confirm('Are you sure you want to delete <?php echo $church->Name; ?>?');" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></a>
