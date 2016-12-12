@@ -11,9 +11,6 @@ View::header();
     }
     .show { display: block; }
 </style>
-<!-- <pre>
-<?php print_r($user); ?>
-</pre> -->
 <!-- Main Container -->
 <div class="main_container">
     <div class="row">
@@ -44,7 +41,6 @@ View::header();
                         <input type="hidden" id="packagePrice" value="<?php echo isset($products[3]->Price) ? $products[3]->Price : ''; ?>">
                         <input type="hidden" id="owntentPrice" value="<?php echo isset($products[4]->Price) ? $products[4]->Price : ''; ?>">
                         <input type="hidden" id="entrancePrice" value="<?php echo isset($products[5]->Price) ? $products[5]->Price : ''; ?>">
-                        <input type="hidden" id="cleared" name="ppmeta[Cleard]" value="<?php echo isset($user->Cleard) ? $user->Cleard : "0";?>">
                         <input type="checkbox" name="ppmeta[Package]" id="packfull" class="amt" value="<?php echo isset($products[3]->Price) ? $products[3]->Price : ''; ?>" style="display: none;" <?php echo strlen($user->Package) > 1 ? 'checked' : ""; ?>>
 
                         <div class="form-group">
@@ -102,8 +98,8 @@ View::header();
                             
                                 <div class="statuses form-group">
                                     <label class="control-label">Registration Options</label>
-                                    <select id="package-status" class="form-control" name="pp[StatusID]" required="">
-                                        <option>Select Status</option>
+                                    <select id="package-status" class="form-control" name="pp[StatusID]" data-validate="required">
+                                        <option value="">Select Status</option>
                                         <?php
                                         
                                         foreach($statuses as $status){
@@ -150,22 +146,22 @@ View::header();
                                             <tr>
                                                 <td><label>Breakfast:</label></td>
                                                 <td>-</td>
-                                                <td><label><input type="checkbox" name="ppmeta[Meal1]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes" <?php echo strlen($user->Meal2) > 1 ? 'checked' : ""; ?>></label></td>
-                                                <td><label><input type="checkbox" name="ppmeta[Meal2]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes" <?php echo strlen($user->Meal5) > 1 ? 'checked' : ""; ?>></label></td>
-                                                <td><label><input type="checkbox" name="ppmeta[Meal3]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes" <?php echo strlen($user->Meal8) > 1 ? 'checked' : ""; ?>></label></td>                        
+                                                <td><label><input type="checkbox" name="ppmeta[Meal2]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes" <?php echo strlen($user->Meal2) > 1 ? 'checked' : ""; ?>></label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Meal5]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes" <?php echo strlen($user->Meal5) > 1 ? 'checked' : ""; ?>></label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Meal8]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes" <?php echo strlen($user->Meal8) > 1 ? 'checked' : ""; ?>></label></td>                        
                                             </tr>
                                             <tr>
                                                 <td><label>Lunch:</label></td>
                                                 <td>-</td>
-                                                <td><label><input type="checkbox" name="ppmeta[Meal4]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes" <?php echo strlen($user->Meal3) > 1 ? 'checked' : ""; ?>></label></td>
-                                                <td><label><input type="checkbox" name="ppmeta[Meal5]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes" <?php echo strlen($user->Meal6) > 1 ? 'checked' : ""; ?>></label></td>
-                                                <td><label><input type="checkbox" name="ppmeta[Meal6]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes" <?php echo strlen($user->Meal9) > 1 ? 'checked' : ""; ?>></label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Meal3]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes" <?php echo strlen($user->Meal3) > 1 ? 'checked' : ""; ?>></label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Meal6]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes" <?php echo strlen($user->Meal6) > 1 ? 'checked' : ""; ?>></label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Meal9]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes" <?php echo strlen($user->Meal9) > 1 ? 'checked' : ""; ?>></label></td>
                                             </tr>
                                             <tr>
                                                 <td><label>Dinner:</label></td>
-                                                <td><label><input type="checkbox" name="ppmeta[Meal7]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes" <?php echo strlen($user->Meal1) > 1 ? 'checked' : ""; ?>></label></td>
-                                                <td><label><input type="checkbox" name="ppmeta[Meal8]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes" <?php echo strlen($user->Meal4) > 1 ? 'checked' : ""; ?>></label></td>
-                                                <td><label><input type="checkbox" name="ppmeta[Meal9]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes" <?php echo strlen($user->Meal7) > 1 ? 'checked' : ""; ?>></label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Meal1]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes" <?php echo strlen($user->Meal1) > 1 ? 'checked' : ""; ?>></label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Meal4]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes" <?php echo strlen($user->Meal4) > 1 ? 'checked' : ""; ?>></label></td>
+                                                <td><label><input type="checkbox" name="ppmeta[Meal7]" value="<?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?>" class="amt regcheckbox meal-yes" <?php echo strlen($user->Meal7) > 1 ? 'checked' : ""; ?>></label></td>
                                                 <td>-</td>                        
                                             </tr>
                                             <tr>
@@ -184,17 +180,15 @@ View::header();
                                         <tbody>
                                             <thead>
                                                 <th>Entrance:</th>
-                                                <th>22</th>
-                                                <th>23</th>
-                                                <th>24</th>
-                                                <th>25</th>
+                                                <th>1st</th>
+                                                <th>2nd</th>
+                                                <th>3rd</th>
                                             </thead>
                                             <tr>
                                                 <td><label>-</label></td>
                                                 <td><label><input type="checkbox" name="ppmeta[Entrance1]" value="<?php echo isset($products[5]->Price) ? $products[5]->Price : '0'; ?>" class="amt regcheckbox entrance-yes" <?php echo strlen($user->Entrance1) > 1 ? 'checked' : ""; ?>></label></td>
                                                 <td><label><input type="checkbox" name="ppmeta[Entrance2]" value="<?php echo isset($products[5]->Price) ? $products[5]->Price : '0'; ?>" class="amt regcheckbox entrance-yes" <?php echo strlen($user->Entrance2) > 1 ? 'checked' : ""; ?>></label></td>
-                                                <td><label><input type="checkbox" name="ppmeta[Entrance3]" value="<?php echo isset($products[5]->Price) ? $products[5]->Price : '0'; ?>" class="amt regcheckbox entrance-yes" <?php echo strlen($user->Entrance3) > 1 ? 'checked' : ""; ?>></label></td>
-                                                <td><label><input type="checkbox" name="ppmeta[Entrance4]" value="<?php echo isset($products[5]->Price) ? $products[5]->Price : '0'; ?>" class="amt regcheckbox entrance-yes" <?php echo strlen($user->Entrance4) > 1 ? 'checked' : ""; ?>></label></td>                        
+                                                <td><label><input type="checkbox" name="ppmeta[Entrance3]" value="<?php echo isset($products[5]->Price) ? $products[5]->Price : '0'; ?>" class="amt regcheckbox entrance-yes" <?php echo strlen($user->Entrance3) > 1 ? 'checked' : ""; ?>></label></td>                    
                                             </tr>
                                             <tr>
                                                 <td colspan="5"><label><input type="checkbox" id="selectallEntrance" name="" class="regcheckbox selectall" rel="entrance-yes"> Select All</label></td>                        
@@ -281,6 +275,10 @@ View::header();
                                     <label class="control-label">Notes</label><br>
                                     <textarea class="form-control" name="ppmeta[Notes]" rows="4"></textarea>
                                 </div>
+                                <div class="form-group checkbox">
+                                    <label><input type="checkbox"  class="regcheckbox" name="ppmeta[Cleard]" value="1" <?php echo $user->Cleard == 1 ? "checked" : "";?>> Cleard</label>
+                                    <input type="hidden" id="cleared" value="0" name="clearpaid">
+                                </div>
                             </div>
                         </div>
 
@@ -290,7 +288,7 @@ View::header();
                         <div class="item form-group">
                             <label class="col-sm-2 control-label"></label>
                             <div class="col-sm-10">
-                                <a href="<?php echo view::url('participants'); ?>" class="btn btn-warning">Back</a>
+                                <a href="<?php echo View::url('participants'); ?>" class="btn btn-warning">Back</a>
                                 <button type="submit" class="btn btn-success">Update Participant</button>
                             </div>
                         </div>

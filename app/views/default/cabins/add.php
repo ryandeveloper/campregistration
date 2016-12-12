@@ -50,7 +50,7 @@ View::header();
                         <div class="item form-group">
                             <label class="col-sm-2 control-label"></label>
                             <div class="col-sm-10">
-                                <a href="<?php echo view::url('cabins'); ?>" class="btn btn-warning">Cancel</a>
+                                <a href="<?php echo $_SERVER['HTTP_REFERER']; ?>" class="btn btn-warning">Cancel</a>
                                 <button id="send" type="submit" class="btn btn-success">Add Cabin</button>
                             </div>
                         </div>

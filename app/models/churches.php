@@ -55,6 +55,33 @@ class Churches_model extends Model
         return $data;
     }
 
+    function getChurchMembers($ID)
+    {
+        
+        $sql = "SELECT p.*, pi.*, cc.Name as churchName, cab.Name as cabinName, t.Name as tentName, stats.Name as statsName, stats.Notes as statsNotes, um.FirstName as encoderFirstName, um.LastName as encoderlastName FROM participants p 
+        LEFT JOIN participant_items pi ON p.PPID = pi.PPID 
+        LEFT JOIN churches cc ON p.ChurchID = cc.ChurchID 
+        LEFT JOIN cabins cab ON p.CabinID = cab.CabinID 
+        LEFT JOIN tents t ON p.TentID = t.TentID 
+        LEFT JOIN statuses stats ON p.StatusID = stats.StatusID 
+        LEFT JOIN user_meta um ON p.UserID = um.UserID";
+
+        if($ID != ""){
+            $where = " WHERE cc.ChurchID =".$ID;
+            $sql .= $where;
+        }
+
+        $query = &$this->db->prepare($sql);
+        $query->execute();
+        $data = array();
+        while ($row = $query->fetch(PDO::FETCH_CLASS)){
+            $data[] = $row;
+        }
+        unset($query);
+
+        return $data;
+    }
+
     function doSave()
     {
         if($this->post) {
@@ -107,12 +134,17 @@ class Churches_model extends Model
         View::$footerscripts[] = "assets/js/TweenMax.min.js";
         View::$footerscripts[] = "assets/js/resizeable.js";
         View::$footerscripts[] = "assets/js/joinable.js";
+        View::$footerscripts[] = "vendor/toastr/toastr.min.js";
 
         // Imported scripts on this page // REFER ON VENDORS SCRIPTS
+        
         View::$footerscripts[] = "vendor/datatables/js/jquery.dataTables.min.js";
         View::$footerscripts[] = "vendor/datatables/dataTables.bootstrap.js";
-        View::$footerscripts[] = "vendor/datatables/yadcf/jquery.dataTables.yadcf.js";
         View::$footerscripts[] = "vendor/datatables/tabletools/dataTables.tableTools.min.js";
+        View::$footerscripts[] = "vendor/datatables.net-responsive-bs/js/responsive.bootstrap.js";
+        View::$footerscripts[] = "vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js";
+        View::$footerscripts[] = "vendor/yadcf-master/jquery.dataTables.yadcf.js";
+        View::$footerscripts[] = "vendor/jquery-validate/jquery.validate.min.js";
 
         // Custom JS
         View::$footerscripts[] = 'assets/js/custom.js';
@@ -121,6 +153,8 @@ class Churches_model extends Model
         // Styles
         View::$styles[] = "assets/css/custom.css";
         View::$styles[] = "vendor/datatables/dataTables.bootstrap.css";
+        View::$styles[] = "vendor/datatables.net-responsive-bs/css/responsive.bootstrap.min.css";
+        View::$styles[] = "vendor/yadcf-master/jquery.dataTables.yadcf.css";
         View::$styles[] = 'assets/css/fileinput.css';
     }
 }
