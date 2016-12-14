@@ -176,21 +176,30 @@ class Main_model extends Model
 
     public function indexAssets()
     {
-        
         View::$footerscripts[] = "assets/js/xenon-widgets.js";
         View::$footerscripts[] = "assets/js/TweenMax.min.js";
         View::$footerscripts[] = "assets/js/resizeable.js";
         View::$footerscripts[] = "assets/js/joinable.js";
 
         // Imported scripts on this page // REFER ON VENDORS SCRIPTS
-        View::$footerscripts[] = "vendor/jvectormap/jquery-jvectormap-1.2.2.min.js";
-        View::$footerscripts[] = "vendor/jvectormap/regions/jquery-jvectormap-world-mill-en.js";
-        //View::$footerscripts[] = "vendor/inputmask/jquery.inputmask.bundle.js";
+        View::$footerscripts[] = "vendor/datatables/js/jquery.dataTables.min.js";
+        View::$footerscripts[] = "vendor/datatables/dataTables.bootstrap.js";
+        View::$footerscripts[] = "vendor/datatables/tabletools/dataTables.tableTools.min.js";
+        View::$footerscripts[] = "vendor/datatables.net-responsive-bs/js/responsive.bootstrap.js";
+        View::$footerscripts[] = "vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js";
+        View::$footerscripts[] = "vendor/yadcf-master/jquery.dataTables.yadcf.js";
+        View::$footerscripts[] = "vendor/jquery-validate/jquery.validate.min.js";
 
         // Custom JS
         View::$footerscripts[] = 'assets/js/custom.js';
+        View::$footerscripts[] = 'assets/js/table.js';
 
         // Custom CSS
         View::$styles[] = "assets/css/custom.css";
+        View::$styles[] = "vendor/datatables/dataTables.bootstrap.css";
+        View::$styles[] = "vendor/datatables.net-responsive-bs/css/responsive.bootstrap.min.css";
+        View::$styles[] = "vendor/yadcf-master/jquery.dataTables.yadcf.css";
+        View::$styles[] = 'assets/css/fileinput.css';
+     
     }
 }

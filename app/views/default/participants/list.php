@@ -8,10 +8,18 @@ View::header();
 <!-- Main Container -->
 <div class="main_container">
 <?php echo View::getMessage(); ?>
-    
+
     <div class="row">
         <div class="col-md-12">
-            
+            <!-- <div class="yadcf-filter-wrapper">
+                <select class="yadcf-filter">
+                    <option value="">Select Bulk</option>
+                    <option value="1">Mark As Cleard</option>
+                    <option value="0">Mark as Not Cleared</option>
+                    <option value="3">Delete</option>
+                </select>
+                <input type="submit" value="Go">
+            </div> -->
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title"><?php echo View::$title; ?></h3>
@@ -20,6 +28,7 @@ View::header();
                 </div>
                 
                 <div class="panel-body">
+
                     <table id="participants" class="table table-striped table-bordered dt-responsive display nowrap" cellspacing="0" width="100%">
                         <thead>
                             <tr>
@@ -45,7 +54,7 @@ View::header();
                             if(isset($participants)) {
                                 foreach($participants as $participant) { $cntr++;
                                 ?>
-                                    <tr class="<?php echo ($cntr % 2) == 0 ? 'even' : 'odd'; ?> pointer">
+                                    <tr class="<?php echo ($cntr % 2) == 0 ? 'even' : 'odd'; ?> pointer" rel="<?php echo $participant->PPID; ?>">
                                         <td class="text-center">
                                         <?php if($participant->Cleard == "1"){ ?>
                                             <span class="fa fa-check status-Yes" style="color:#8dc63f;"></span>
@@ -79,6 +88,38 @@ View::header();
                             <?php }; ?>
                         </tbody>
                     </table>
+
+                    <div class="table-responsive" data-pattern="priority-columns" data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true">
+                        <table cellspacing="0" class="table table-small-font table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th data-priority="1" class="text-center">Total Count</th>
+                                    <th data-priority="2" class="text-center">Package</th>
+                                    <th data-priority="3" class="text-center">Cabin</th>
+                                    <th data-priority="4" class="text-center">Tent</th>
+                                    <th data-priority="5" class="text-center">Walkin</th>
+                                    <th data-priority="6" class="text-center">Infant</th>
+                                    <th data-priority="7" class="text-center">Amount to Pay</th>
+                                    <th data-priority="8" class="text-center">Paid Amount</th>
+                                    <th data-priority="9" class="text-center">Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center"><?php echo isset($totals->TotalAllCount) ? $totals->TotalAllCount : "0"; ?></td>
+                                    <td class="text-center"><?php echo isset($totals->TotalPackage) ? $totals->TotalPackage : "0"; ?></td>
+                                    <td class="text-center"><?php echo isset($totals->TotalCabin) ? $totals->TotalCabin : "0"; ?></td>
+                                    <td class="text-center"><?php echo isset($totals->TotalTent) ? $totals->TotalTent : "0"; ?></td>
+                                    <td class="text-center"><?php echo isset($totals->TotalWalkin) ? $totals->TotalWalkin : "0"; ?></td>
+                                    <td class="text-center"><?php echo isset($totals->TotalInfant) ? $totals->TotalInfant : "0"; ?></td>
+                                    <td class="text-center"><?php echo isset($totals->TotalAmountToPay) ? number_format($totals->TotalAmountToPay) : "00.00" ?></td>
+                                    <td class="text-center"><?php echo isset($totals->TotalPaidAmount) ? number_format($totals->TotalPaidAmount) : "00.00" ?></td>
+                                    <td class="text-center"><?php echo isset($totals->TotalBalance) ? number_format($totals->TotalBalance) : "00.00" ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
             </div>
 

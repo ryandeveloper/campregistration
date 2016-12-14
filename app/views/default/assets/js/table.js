@@ -1,12 +1,14 @@
 // Participants Table
 $(document).ready(function() {
     var participants = $("#participants").DataTable({
+        responsive: true,
         "lengthMenu": [ [25, 50, 75, 100, -1], [25, 50, 75, 100, "All"] ],
         "pageLength": 25,
         columnDefs: [{
             targets: "_all",
             orderable: false
         }],
+
         
     });
 
@@ -57,6 +59,8 @@ $(document).ready(function($) {
 });
 
 $(document).ready(function() {
+
+    $("#datefiltercom").html('<div class="yadcf-filter-wrapper"></div>');  
     
     $('#datatable').dataTable();
     $('#datatable-keytable').DataTable({
@@ -65,11 +69,11 @@ $(document).ready(function() {
 
     // Participants Datatable
     // $('#participants').DataTable( {
-
     // } );
 
 
     $('#datatable-responsive').DataTable( {
+        responsive: true,
         "lengthMenu": [ [25, 50, 75, 100, -1], [25, 50, 75, 100, "All"] ],
         "pageLength": 25,
         columnDefs: [{
@@ -77,8 +81,6 @@ $(document).ready(function() {
             orderable: false
         }],
     });
-
-    
 
     $('#datatable-scroller').DataTable({
         ajax: "js/datatables/json/scroller-demo.json",

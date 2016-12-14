@@ -81,8 +81,26 @@ a { }
     font-size: 18px;
 }
 
+/**==== Dashboard CSS ====**/
 
-/**==== END Participants CSS ====**/
+.dashboard-table th, .dashboard-table thead th {
+    background: #8dc63f !important;
+    color: #fff !important;
+    border-color: #a0da52 !important;
+    padding: 8px 15px !important;
+}
+
+.dashboard-table thead th:after {
+    background-color: #a7d865 !important;
+}
+.dashboard-table h3 {
+    margin: 0;
+}
+
+.dashboard-table tr td {
+    padding: 10px 15px !important;
+    vertical-align: middle !important;
+}
 
 
 

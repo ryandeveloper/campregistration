@@ -47,15 +47,10 @@
         <ul id="main-menu" class="main-menu">
 
         <li class="">
-          <a href="#">
+          <a href="<?php echo View::url(); ?>">
             <i class="linecons-params"></i>
             <span class="title">Dashboard</span>
           </a>
-          <ul>
-            <li><a href="<?php echo View::url(); ?>"><span class="title">Dashboard 1</span></a></li>
-            <li><a href="<?php echo View::url(); ?>"><span class="title">Dashboard 2</span></a></li>
-            <li><a href="<?php echo View::url(); ?>"><span class="title">Dashboard 3</span></a></li>
-          </ul>
         </li>
         <li class="">
           <a href="<?php echo View::url('participants'); ?>">
