@@ -4,10 +4,7 @@ $(document).ready(function() {
         responsive: true,
         "lengthMenu": [ [25, 50, 75, 100, -1], [25, 50, 75, 100, "All"] ],
         "pageLength": 25,
-        columnDefs: [{
-            targets: "_all",
-            orderable: false
-        }],
+        "ordering": false
 
         
     });
@@ -34,10 +31,7 @@ $(document).ready(function($) {
     var churchlist = $("#churchlist").DataTable({
         "lengthMenu": [ [25, 50, 75, 100, -1], [25, 50, 75, 100, "All"] ],
         "pageLength": 25,
-        columnDefs: [{
-            targets: "_all",
-            orderable: false
-        }],
+        "ordering": false
         
     });
 
@@ -62,7 +56,11 @@ $(document).ready(function() {
 
     $("#datefiltercom").html('<div class="yadcf-filter-wrapper"></div>');  
     
-    $('#datatable').dataTable();
+    $('#datatable').dataTable({
+        "lengthMenu": [ [25, 50, 75, 100, -1], [25, 50, 75, 100, "All"] ],
+        "pageLength": 25,
+        "ordering": false
+    });
     $('#datatable-keytable').DataTable({
         keys: true
     });
@@ -76,10 +74,7 @@ $(document).ready(function() {
         responsive: true,
         "lengthMenu": [ [25, 50, 75, 100, -1], [25, 50, 75, 100, "All"] ],
         "pageLength": 25,
-        columnDefs: [{
-            targets: "_all",
-            orderable: false
-        }],
+        "ordering": false
     });
 
     $('#datatable-scroller').DataTable({
