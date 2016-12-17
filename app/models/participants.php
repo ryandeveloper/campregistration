@@ -26,6 +26,25 @@ class Participants_model extends Model
         View::$segments = $this->segment;
     }
 
+    function getTotals()
+    {
+        $sql = "SELECT p.*, pi.*, 
+        (SELECT SUM(pi1.Balance) FROM participant_items pi1) as TotalBalance, 
+        (SELECT SUM(pi2.PaidAmount) FROM participant_items pi2) as TotalPaidAmount, 
+        (SELECT SUM(pi3.TotalAmount) FROM participant_items pi3) as TotalAmountToPay, 
+        (SELECT COUNT(p4.StatusID) FROM participants p4 WHERE p4.StatusID = 1) as TotalPackage, 
+        (SELECT COUNT(p5.StatusID) FROM participants p5 WHERE p5.StatusID = 2) as TotalCabin, 
+        (SELECT COUNT(p6.StatusID) FROM participants p6 WHERE p6.StatusID = 3) as TotalTent, 
+        (SELECT COUNT(p7.StatusID) FROM participants p7 WHERE p7.StatusID = 4) as TotalWalkin, 
+        (SELECT COUNT(p8.StatusID) FROM participants p8 WHERE p8.StatusID = 5) as TotalInfant, 
+        (SELECT COUNT(*) FROM participants p9) as TotalAllCount
+        FROM participants p LEFT JOIN participant_items pi ON p.PPID = pi.PPID";
+
+        $data = $this->db->get_row($sql);
+
+        return $data;
+    }
+
 
     function getParticipant($ID)
     {
@@ -80,7 +99,7 @@ class Participants_model extends Model
         $query->execute();
         $data = array();
         while ($row = $query->fetch(PDO::FETCH_CLASS)){
-            $data[] = $row;         
+            $data[] = $row;
         }
         unset($query);
         
@@ -108,7 +127,7 @@ class Participants_model extends Model
         $query->execute();
         $data = array();
         while ($row = $query->fetch(PDO::FETCH_CLASS)){
-            $data[] = $row;          
+            $data[] = $row;
         }
         unset($query);
         

@@ -6,7 +6,6 @@ class Main extends Controller
         parent::__construct();
         
         // Protected yes
-
         $auth = $this->load->model('auth', true);
         if(!$auth->isLoggedIn() && $this->segment[0] != 'assets') {
             View::redirect('users/login');

@@ -28,7 +28,7 @@ class Users_model extends Model
     function doLogin()
     {
         if(isset($this->post['action']) && $this->post['action'] == 'login') {
-            $sql = "SELECT * FROM users u LEFT JOIN user_meta um ON um.UserID = u.UserID WHERE u.UserID = '".$this->post['usr']."' LIMIT 1";
+            $sql = "SELECT u.*, um.*, ul.Name FROM users u LEFT JOIN user_meta um ON um.UserID = u.UserID LEFT JOIN userlevels ul ON ul.UserLevelID = u.Level  WHERE u.UserID = '".$this->post['usr']."' LIMIT 1";
             $userdata = $this->db->get_row($sql);
             
             if($userdata) {

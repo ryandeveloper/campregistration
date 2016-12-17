@@ -21,6 +21,7 @@ class Participants extends Controller
         if($this->model->doSave()){
             View::redirect('participants');
         };
+        $totals = $this->model->getTotals();
         $participants = $this->model->getParticipants();
         $churches = $this->model->getChurches();
         $statuses = $this->model->getStatus();

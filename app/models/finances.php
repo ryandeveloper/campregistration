@@ -37,7 +37,7 @@ class Finances_model extends Model
 
     function getFinances($inactive = '')
     {
-        $sql = "SELECT * FROM finances";
+        $sql = "SELECT * FROM finances ORDER BY Date DESC";
 //        $where = " WHERE Active = 1";
 //        if($inactive == 'yes') {
 //            $where = " WHERE Active != 1";
