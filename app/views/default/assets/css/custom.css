@@ -76,14 +76,15 @@ a { }
     cursor: pointer;
 }
 
+#participants_wrapper {
+    overflow: auto !important;
+}
+
 .status-No:before, .status-Yes:before {
     visibility: visible;
     font-size: 18px;
 }
 
-#participants {
-    min-width: 1200px !important;
-}
 
 /**==== Dashboard CSS ====**/
 
