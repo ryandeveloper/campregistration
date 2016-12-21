@@ -95,12 +95,12 @@
           </a>
         </li>
 
-        <li class="">
+        <!-- <li class="">
           <a href="<?php echo View::url('role/'); ?>">
             <i class="linecons-globe"></i>
             <span class="title">Roles</span>
           </a>
-        </li>
+        </li> -->
 
         <li class="">
           <a href="#">
@@ -114,12 +114,12 @@
           </ul>
         </li>
 
-        <li>
+        <!-- <li>
           <a href="<?php echo View::url(); ?>">
             <i class="linecons-star"></i>
             <span class="title">Widgets</span>
           </a>
-        </li>
+        </li> -->
         <?php }; ?>
         </ul>
             

@@ -18,8 +18,8 @@
 class Routes
 {	
     // Absolute Path without trailing slash
-    static $production      = 'http://portal.campregistration.com';
-    static $staging         = 'http://staging.campregistration.com';
+    static $production      = 'http://churchofthefirstborn.info';
+    static $staging         = 'http://staging.churchofthefirstborn.info';
     static $development     = 'http://campregistration.loc';
     
     // Default controller

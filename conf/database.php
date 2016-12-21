@@ -24,9 +24,9 @@ class Database
     static $production  = array(
         'driver' 	=> 'mysql',
         'host' 		=> 'localhost',
-        'user' 		=> 'camp_reg',
-        'pass' 		=> 'cotfQWE!@#4',
-        'database' 	=> 'camp_reg',
+        'user' 		=> 'u3v8n3b4_camp',
+        'pass' 		=> 'camp2016',
+        'database' 	=> 'u3v8n3b4_camp',
         'prefix' 	=> '',
         'encoding' 	=> 'utf8'
     );

@@ -12,8 +12,9 @@ View::header('users');
         <input type="hidden" name="action" value="login" />
 
         <div class="login-header text-center">
-            <a href="dashboard-1.html" class="logo">
-                <?php View::image('logo-odeon.png','','big img-responsive'); ?>
+            <a href="dashboard-1.html" class="logo" style="font-size: 18px;">
+                <?php //View::image('logo-odeon.png','','big img-responsive'); ?>
+                Year End Camp Fellowship Registration
             </a>
             <br>
             <p>Please Sign in to Access Your Account</p>
