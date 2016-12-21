@@ -188,6 +188,16 @@ View::header();
 			            <th>Number of Attendees</th>
 			            <th>Amount</th>
 			         </tr>
+		         	<?php 
+		         		$totalHCab = $totals->Day1CountCab + $totals->Day2CountCab + $totals->Day3CountCab;
+			         	$totalHTent = $totals->Day1CountTent + $totals->Day2CountTent + $totals->Day3CountTent;
+			         	$totalHTentOwn = $totals->Day1CountTentOwn + $totals->Day2CountTentOwn + $totals->Day3CountTentOwn;
+			         	$totalHWI = $totals->Day1CountWI + $totals->Day2CountWI + $totals->Day3CountWI;
+			         	$totalHInf = $totals->HeadCountInf;
+
+			         	$totalHead = $totalHCab + $totalHTent + $totalHTentOwn + $totalHWI + $totalHInf;
+			         	$totalHeadAmt = $totals->HeadCountPackage * $products[3]->Price + $totalHCab * $products[0]->Price + $totalHTent * $products[1]->Price + $totalHTentOwn * $products[4]->Price + $totalHWI * $products[5]->Price;
+		         	?>
 			         <tr>
 			            <td><label>Full Package</label></td>
 			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->HeadCountPackage) ? $totals->HeadCountPackage : "0" ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
@@ -195,39 +205,30 @@ View::header();
 			         </tr>
 			         <tr>
 			            <td><label>Cabin (Lodging only)</label></td>
-			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->HeadCountCab) ? $totals->HeadCountCab : "0" ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
-			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->HeadCountCab) ? $totals->HeadCountCab * $products[0]->Price : "0"; ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
+			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totalHCab) ? $totalHCab : "0" ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
+			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totalHCab) ? $totalHCab * $products[0]->Price : "0"; ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
 			         </tr>
 			         <tr>
 			            <td><label>Tent (Lodging only)</label></td>
-			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->HeadCountTent) ? $totals->HeadCountTent : "0" ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
-			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->HeadCountTent) ? $totals->HeadCountTent * $products[1]->Price : "0"; ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
+			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totalHTent) ? $totalHTent : "0" ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
+			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totalHTent) ? $totalHTent * $products[1]->Price : "0"; ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
 			         </tr>
 			         <tr>
 			            <td><label>Personal Tent (Lodging only)</label></td>
-			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->HeadCountTentOwn) ? $totals->HeadCountTentOwn : "0" ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
-			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->HeadCountTentOwn) ? $totals->HeadCountTentOwn * $products[4]->Price : "0"; ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
+			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totalHTentOwn) ? $totalHTentOwn : "0" ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
+			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totalHTentOwn) ? $totalHTentOwn * $products[4]->Price : "0"; ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
 			         </tr>
 			         <tr>
 			            <td><label>Walk-in (Entrance)</label></td>
-			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->HeadCountWI) ? $totals->HeadCountWI : "0" ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
-			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->HeadCountWI) ? $totals->HeadCountWI * $products[5]->Price : "0"; ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
+			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totalHWI) ? $totalHWI : "0" ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
+			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totalHWI) ? $totalHWI * $products[5]->Price : "0"; ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
 			         </tr>
 			         <tr>
 			            <td><label>Infants</label></td>
-			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->HeadCountInf) ? $totals->HeadCountInf : "0"; ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
+			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totalHInf) ? $totalHInf : "0"; ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
 			            <td>0</td>
 			         </tr>
 			         <tr>
-			         	<?php 
-			         	$totalHead = $totals->HeadCountPackage + $totals->HeadCountCab + $totals->HeadCountTent + $totals->HeadCountTentOwn + $totals->HeadCountWI + $totals->HeadCountInf;
-			         	$totalH1 = $totals->HeadCountPackage * $products[3]->Price;
-			         	$totalH2 = $totals->HeadCountCab * $products[0]->Price;
-			         	$totalH3 = $totals->HeadCountTent * $products[1]->Price;
-			         	$totalH4 = $totals->HeadCountTentOwn * $products[4]->Price;
-			         	$totalH5 = $totals->HeadCountWI * $products[5]->Price;
-			         	$totalHeadAmt = $totalH1 + $totalH2 + $totalH3 + $totalH4 + $totalH5;
-			         	?>
 			            <td>Total</td>
 			            <td>
 			               <h3 class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totalHead) ? $totalHead : "0"; ?>" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
@@ -251,33 +252,33 @@ View::header();
 			         </tr>
 			         <tr>
 			            <td><label>Full Package</label></td>
-			            <td><?php echo isset($totals->HeadCountPackage) ? $totals->HeadCountPackage : "0" ?></td>
-			            <td><?php echo isset($totals->HeadCountPackage) ? $totals->HeadCountPackage : "0" ?></td>
-			            <td><?php echo isset($totals->HeadCountPackage) ? $totals->HeadCountPackage : "0" ?></td>
+			            <td><?php echo isset($totals->HeadCountPackage) ? $totals->HeadCountPackage : "0"; ?></td>
+			            <td><?php echo isset($totals->HeadCountPackage) ? $totals->HeadCountPackage : "0"; ?></td>
+			            <td><?php echo isset($totals->HeadCountPackage) ? $totals->HeadCountPackage : "0"; ?></td>
 			         </tr>
 			         <tr>
 			            <td><label>Cabin (Lodging only)</label></td>
-			            <td><?php echo isset($totals->Day1CountCab) ? $totals->Day1CountCab : "0" ?></td>
-			            <td><?php echo isset($totals->Day2CountCab) ? $totals->Day2CountCab : "0" ?></td>
-			            <td><?php echo isset($totals->Day3CountCab) ? $totals->Day3CountCab : "0" ?></td>
+			            <td><?php echo isset($totals->Day1CountCab) ? $totals->Day1CountCab : "0"; ?></td>
+			            <td><?php echo isset($totals->Day2CountCab) ? $totals->Day2CountCab : "0"; ?></td>
+			            <td><?php echo isset($totals->Day3CountCab) ? $totals->Day3CountCab : "0"; ?></td>
 			         </tr>
 			         <tr>
 			            <td><label>Tent (Lodging only)</label></td>
-			            <td><?php echo isset($totals->Day1CountTent) ? $totals->Day1CountTent : "0" ?></td>
-			            <td><?php echo isset($totals->Day2CountTent) ? $totals->Day2CountTent : "0" ?></td>
-			            <td><?php echo isset($totals->Day3CountTent) ? $totals->Day3CountTent : "0" ?></td>
+			            <td><?php echo isset($totals->Day1CountTent) ? $totals->Day1CountTent : "0"; ?></td>
+			            <td><?php echo isset($totals->Day2CountTent) ? $totals->Day2CountTent : "0"; ?></td>
+			            <td><?php echo isset($totals->Day3CountTent) ? $totals->Day3CountTent : "0"; ?></td>
 			         </tr>
 			         <tr>
 			            <td><label>Personal Tent (Lodging only)</label></td>
-			            <td><?php echo isset($totals->Day1CountTentOwn) ? $totals->Day1CountTentOwn : "0" ?></td>
-			            <td><?php echo isset($totals->Day2CountTentOwn) ? $totals->Day2CountTentOwn : "0" ?></td>
-			            <td><?php echo isset($totals->Day3CountTentOwn) ? $totals->Day3CountTentOwn : "0" ?></td>
+			            <td><?php echo isset($totals->Day1CountTentOwn) ? $totals->Day1CountTentOwn : "0"; ?></td>
+			            <td><?php echo isset($totals->Day2CountTentOwn) ? $totals->Day2CountTentOwn : "0"; ?></td>
+			            <td><?php echo isset($totals->Day3CountTentOwn) ? $totals->Day3CountTentOwn : "0"; ?></td>
 			         </tr>
 			         <tr>
 			            <td><label>Walk-in (Entrance)</label></td>
-			            <td><?php echo isset($totals->Day1CountWI) ? $totals->Day1CountWI : "0" ?></td>
-			            <td><?php echo isset($totals->Day2CountWI) ? $totals->Day2CountWI : "0" ?></td>
-			            <td><?php echo isset($totals->Day3CountWI) ? $totals->Day3CountWI : "0" ?></td>
+			            <td><?php echo isset($totals->Day1CountWI) ? $totals->Day1CountWI : "0"; ?></td>
+			            <td><?php echo isset($totals->Day2CountWI) ? $totals->Day2CountWI : "0"; ?></td>
+			            <td><?php echo isset($totals->Day3CountWI) ? $totals->Day3CountWI : "0"; ?></td>
 			         </tr>
 			      </tbody>
 			   </table>
