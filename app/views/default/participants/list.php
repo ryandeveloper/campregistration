@@ -29,7 +29,7 @@ View::header();
                 
                 <div class="panel-body">
 
-                    <table id="participants" class="table table-striped table-bordered dt-responsive display nowrap" cellspacing="0" width="100%">
+                    <table id="participants" class="table table-striped table-bordered dt-responsive display nowrap" cellspacing="0" width="100%" style="min-width: 1200px;">
                         <thead>
                             <tr>
                                 <th width="50" class="no-sorting">Status</th> 
