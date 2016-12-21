@@ -45,12 +45,12 @@
             Profile
           </a>
         </li>
-        <li>
+        <!-- <li>
           <a href="<?php echo View::url('users/edit/'.$userinfo->UserID); ?>">
             <i class="fa-wrench"></i>
             Edit Profile
           </a>
-        </li>
+        </li> -->
         <li class="">
           <a href="<?php View::url('users/logout', true) ?>">
             <i class="fa-lock"></i>

@@ -190,7 +190,7 @@ class Users_model extends Model
                                 $data = array('Password' => $this->encrypt($this->post['NewPasswordConfirm']));
                                 $this->db->update("users", $data, $where);                            
                                 $this->setSession('error', false);
-                                $this->setSession('message', 'Login sucessful!');                   
+                                $this->setSession('message', 'Changed sucessful!');                   
                             } else {
                                 $this->setSession('error', 'Invalid password!');
                             }

@@ -39,7 +39,7 @@ View::header('users');
             </button>
         </div>
         
-        <div class="login-footer text-center">
+        <!-- <div class="login-footer text-center">
             <div class="col-xs-6">
                 <a href="<?php echo View::url('users/register'); ?>" class="to_register"> Create Account </a>
             </div>
@@ -48,7 +48,7 @@ View::header('users');
             </div>
             <div class="clearfix"></div>
    
-        </div>
+        </div> -->
         
     </form>
     
