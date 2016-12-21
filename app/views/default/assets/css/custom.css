@@ -81,6 +81,10 @@ a { }
     font-size: 18px;
 }
 
+#participants {
+    min-width: 1200px !important;
+}
+
 /**==== Dashboard CSS ====**/
 
 .dashboard-table th, .dashboard-table thead th {
