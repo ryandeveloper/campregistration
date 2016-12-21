@@ -7,6 +7,7 @@ class Main extends Controller
         
         // Protected yes
         $auth = $this->load->model('auth', true);
+        $this->load->model('products',false,true);
         if(!$auth->isLoggedIn() && $this->segment[0] != 'assets') {
             View::redirect('users/login');
         }        
@@ -15,7 +16,10 @@ class Main extends Controller
     public function index()
     {   
         // Table
-        $this->model->indexAssets();  
+        $this->model->indexAssets();
+        $totals = $this->model->getTotals();
+        $stats = $this->model->getChurchTotalCounts();
+        $products = $this->products_model->getProducts();
         View::page('dashboard', get_defined_vars());
     }
         

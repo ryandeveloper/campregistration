@@ -33,18 +33,18 @@ View::header();
                         <thead>
                             <tr>
                                 <th width="50" class="no-sorting">Status</th> 
-                                <th class="no-sorting" width="50px">Gender</th>
+                                <th width="50" class="no-sorting">Gender</th>
                                 <th>Name</th>
-                                <th>Age</th>
+                                <th width="30">Age</th>
                                 <th>Type</th>
                                 <th>Church</th>
                                 <th>Cabin</th>
                                 <th>Tent</th>
-                                <th>Due</th>
-                                <th>Paid</th>
-                                <th>Balance</th>
-                                <th>Encoder</th>
-                                <th width="150" class="text-center">Action</th>
+                                <th width="50">Due</th>
+                                <th width="50">Paid</th>
+                                <th width="50">Balance</th>
+                                <th width="80" class="text-center">Encoder</th>
+                                <th width="100" class="text-center">Action</th>
                             </tr>
                         </thead>
 
@@ -64,15 +64,15 @@ View::header();
                                         </td>
                                         <td><?php if($participant->Gender == "Brother"){echo "Bro";}elseif($participant->Gender == "Sister"){echo "Sis";}elseif ($participant->Gender == "Pastor") { echo "Ptr";} ?></td>
                                         <td><?php echo ucwords($participant->FirstName); ?> <?php echo ucwords($participant->LastName); ?></td>
-                                        <td><?php echo $participant->Age; ?></td>
+                                        <td class="text-center"><?php echo $participant->Age; ?></td>
                                         <td><?php echo ucwords($participant->statsName); ?></td>
                                         <td><?php echo ucwords($participant->churchName); ?></td>
                                         <td><?php echo ucwords($participant->cabinName); ?></td>
                                         <td><?php echo ucwords($participant->tentName); ?></td>
-                                        <td><?php echo $participant->TotalAmount; ?></td>
-                                        <td><?php echo $participant->PaidAmount; ?></td>
-                                        <td><?php echo $participant->Balance; ?></td>
-                                        <td><?php echo ucwords($participant->encoderFirstName); ?></td>
+                                        <td class="text-center"><?php echo $participant->TotalAmount; ?></td>
+                                        <td class="text-center"><?php echo $participant->PaidAmount; ?></td>
+                                        <td class="text-center"><?php echo $participant->Balance; ?></td>
+                                        <td class="text-center"><?php echo ucwords($participant->encoderFirstName); ?></td>
                                         <td style="text-align:center;">
                                             <a href="<?php echo View::url('participants/edit/'); ?><?php echo $participant->PPID; ?>" title="Edit" class="btn btn-warning btn-sm"><span class="fa fa-pencil-square-o"></span></a>
                                             <?php if($userinfo->Level == 1) { ?>
@@ -89,7 +89,7 @@ View::header();
                         </tbody>
                     </table>
 
-                    <div class="table-responsive" data-pattern="priority-columns" data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true">
+                    <div class="table-responsive dashboard-table" data-pattern="priority-columns" data-focus-btn-icon="fa-asterisk" data-sticky-table-header="true" data-add-display-all-btn="true" data-add-focus-btn="true">
                         <table cellspacing="0" class="table table-small-font table-bordered table-striped">
                             <thead>
                                 <tr>

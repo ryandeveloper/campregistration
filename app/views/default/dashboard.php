@@ -7,9 +7,7 @@ View::header();
 
 <!-- Main Container -->
 <div class="main_container">
-<pre>
-<?php print_r($userinfo); ?>
-</pre>
+
   <div class="panel panel-default">
   	<div class="panel-heading">
         <h3 class="panel-title"><?php echo View::$title; ?> <br><small class="text-muted"><strong>LEGEND:</strong> GTP = PARTICULARS | TATP = TOTAL AMOUNT TO PAY | TAP = TOTAL AMOUNT PAID</small></h3><br>
@@ -22,6 +20,7 @@ View::header();
 
     		<div class="contentBlock">
 		   	<h4>Financial Report</h4>
+		   		<!-- GTP 1 -->
 			   <table class="table table-small-font table-bordered table-striped dashboard-table">
 			      <tbody>
 			         <tr>
@@ -31,31 +30,32 @@ View::header();
 			         <tr>
 			            <td><label>Total Amount to Pay (TATP)</label></td>
 			            <td>
-			               <h3 class="center" data-count=".num" data-from="0" data-to="511645" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
+			               <h3 class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->TotalAmountToPay) ? $totals->TotalAmountToPay : "0" ?>" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
 			            </td>
 			         </tr>
 			         <tr>
 			            <td><label>Total Amount Paid (TAP)</label></td>
 			            <td>
-			               <h3 class="center"data-count=".num" data-from="0" data-to="195755" data-suffix="" data-duration="0.9"><span class="num"></span></h3>
+			               <h3 class="center"data-count=".num" data-from="0" data-to="<?php echo isset($totals->TotalPaidAmount) ? $totals->TotalPaidAmount : "0" ?>" data-suffix="" data-duration="0.9"><span class="num"></span></h3>
 			            </td>
 			         </tr>
 			         <tr>
 			            <td><label>Total Amount in Excess of TAP</label></td>
 			            <td>
-			               <h3 class="center"data-count=".num" data-from="0" data-to="25" data-suffix="" data-duration="1"><span class="num"></span></h3>
+			               <h3 class="center"data-count=".num" data-from="0" data-to="<?php echo isset($totals->TotalAmountExcess) ? $totals->TotalAmountExcess : "0" ?>" data-suffix="" data-duration="1"><span class="num"></span></h3>
 			            </td>
 			         </tr>
 			         <tr>
 			            <td><label>Total Amount Unpaid</label></td>
 			            <td>
-			               <h3 class="center"data-count=".num" data-from="0" data-to="315890" data-suffix="" data-duration="1.1"><span class="num"></span></h3>
+			               <h3 class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->TotalUnpaidAmt) ? $totals->TotalUnpaidAmt : "0" ?>" data-suffix="" data-duration="1.1"><span class="num"></span></h3>
 			            </td>
 			         </tr>
 			      </tbody>
 			   </table>
 
 			   <h4>Cash Flow</h4>
+			   <!-- GTP 2 -->
 			   <table class="table table-small-font table-bordered table-striped dashboard-table">
 			      <tbody>
 			         <tr>
@@ -64,25 +64,31 @@ View::header();
 			         </tr>
 			         <tr>
 			            <td><label>Total Collections</label></td>
-			            <td>560,806.00</td>
+			            <td data-count=".num" data-from="0" data-to="<?php echo isset($totals->TotalCollection) ? $totals->TotalCollection : "0" ?>" data-suffix="" data-duration="1.1"><span class="num"></span></td>
 			         </tr>
 			         <tr>
 			            <td><label>Total Disbursements</label></td>
-			            <td>548,165.00</td>
+			            <td data-count=".num" data-from="0" data-to="<?php echo isset($totals->TotalWithdraw) ? $totals->TotalWithdraw : "0" ?>" data-suffix="" data-duration="1.1"><span class="num"></span></td>
 			         </tr>
 			         <tr>
 			            <td>Total Available Cash</td>
 			            <td>
-			               <h3 class="center" data-count=".num" data-from="0" data-to="12641" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
+			            	<?php 
+			            	$totalCol = isset($totals->TotalCollection) ? $totals->TotalCollection : "0";
+			            	$totalWithdraw = isset($totals->TotalWithdraw) ? $totals->TotalWithdraw : "0";
+			            	$totalCash = $totalCol - $totalWithdraw;
+			            	?>
+			               <h3 class="center" data-count=".num" data-from="0" data-to="<?php echo $totalCash; ?>" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
 			            </td>
 			         </tr>
 			         <tr>
-			         	<td><a class="btn btn-info btn-sm" href="#">View all history</a></td>
+			         	<td><a class="btn btn-info btn-sm" href="<?php echo View::url('finances'); ?>">View all history</a></td>
 			         	<td></td>
 			         </tr>
 			      </tbody>
 			   </table>
 			   
+			   <!-- GTP 3 -->
 			   <table class="table table-small-font table-bordered table-striped dashboard-table">
 			      <tbody>
 			         <tr>
@@ -94,36 +100,37 @@ View::header();
 			         </tr>
 			         <tr>
 			            <td><label>Full Package</label></td>
-			            <td>165000</td>
-			            <td>3300</td>
-			            <td>0</td>
-			            <td>161700</td>
+			            <td data-count=".num" data-from="0" data-to="<?php echo isset($totals->TotalAmtPackage) ? $totals->TotalAmtPackage : "0" ?>" data-suffix="" data-duration="1.1"><span class="num"></span></td>
+			            <td data-count=".num" data-from="0" data-to="<?php echo isset($totals->TotalPackagePaid) ? $totals->TotalPackagePaid : "0" ?>" data-suffix="" data-duration="1.1"><span class="num"></span></td>
+			            <td data-count=".num" data-from="0" data-to="<?php echo isset($totals->TotalPackageExcess) ? $totals->TotalPackageExcess : "0" ?>" data-suffix="" data-duration="1.1"><span class="num"></span></td>
+			            <td data-count=".num" data-from="0" data-to="<?php echo isset($totals->TotalPackageBal) ? $totals->TotalPackageBal : "0" ?>" data-suffix="" data-duration="1.1"><span class="num"></span></td>
 			         </tr>
 			         <tr>
 			            <td><label>Cabin</label></td>
-			            <td>252650</td>
-			            <td>101210</td>
-			            <td>0</td>
-			            <td>151440</td>
+			            <td data-count=".num" data-from="0" data-to="<?php echo isset($totals->TotalCabAmt) ? $totals->TotalCabAmt : "0" ?>" data-suffix="" data-duration="1.1"><span class="num"></span></td>
+			            <td data-count=".num" data-from="0" data-to="<?php echo isset($totals->TotalCabPaid) ? $totals->TotalCabPaid : "0" ?>" data-suffix="" data-duration="1.1"><span class="num"></span></td>
+			            <td data-count=".num" data-from="0" data-to="<?php echo isset($totals->TotalCabExcess) ? $totals->TotalCabExcess : "0" ?>" data-suffix="" data-duration="1.1"><span class="num"></span></td>
+			            <td data-count=".num" data-from="0" data-to="<?php echo isset($totals->TotalCabBal) ? $totals->TotalCabBal : "0" ?>" data-suffix="" data-duration="1.1"><span class="num"></span></td>
 			         </tr>
 			         <tr>
 			            <td><label>Tent</label></td>
-			            <td>41620</td>
-			            <td>39370</td>
-			            <td>0</td>
-			            <td>2250</td>
+			            <td data-count=".num" data-from="0" data-to="<?php echo isset($totals->TotalTentAmt) ? $totals->TotalTentAmt : "0" ?>" data-suffix="" data-duration="1.1"><span class="num"></span></td>
+			            <td data-count=".num" data-from="0" data-to="<?php echo isset($totals->TotalTentPaid) ? $totals->TotalTentPaid : "0" ?>" data-suffix="" data-duration="1.1"><span class="num"></span></td>
+			            <td data-count=".num" data-from="0" data-to="<?php echo isset($totals->TotalTentExcess) ? $totals->TotalTentExcess : "0" ?>" data-suffix="" data-duration="1.1"><span class="num"></span></td>
+			            <td data-count=".num" data-from="0" data-to="<?php echo isset($totals->TotalTentBal) ? $totals->TotalTentBal : "0" ?>" data-suffix="" data-duration="1.1"><span class="num"></span></td>
 			         </tr>
 			         <tr>
 			            <td><label>Walk-in</label></td>
-			            <td>52375</td>
-			            <td>51875</td>
-			            <td>25</td>
-			            <td>500</td>
+			            <td data-count=".num" data-from="0" data-to="<?php echo isset($totals->TotalWIAmt) ? $totals->TotalWIAmt : "0" ?>" data-suffix="" data-duration="1.1"><span class="num"></span></td>
+			            <td data-count=".num" data-from="0" data-to="<?php echo isset($totals->TotalWIPaid) ? $totals->TotalWIPaid : "0" ?>" data-suffix="" data-duration="1.1"><span class="num"></span></td>
+			            <td data-count=".num" data-from="0" data-to="<?php echo isset($totals->TotalWIExcess) ? $totals->TotalWIExcess : "0" ?>" data-suffix="" data-duration="1.1"><span class="num"></span></td>
+			            <td data-count=".num" data-from="0" data-to="<?php echo isset($totals->TotalWIBal) ? $totals->TotalWIBal : "0" ?>" data-suffix="" data-duration="1.1"><span class="num"></span></td>
 			         </tr>
 			      </tbody>
 			   </table>
 
 			   <h4>Prices</h4>
+			   <!-- GTP 4 -->
 			   <table class="table table-small-font table-bordered table-striped dashboard-table">
 			      <tbody>
 			         <tr>
@@ -133,33 +140,33 @@ View::header();
 			         </tr>
 			         <tr>
 			            <td><label>Full Package</label></td>
-			            <td>550</td>
-			            <td>1650</td>
+			            <td><?php echo isset($products[3]->Price) ? $products[3]->Price / 3 : '0'; ?></td>
+			            <td><?php echo isset($products[3]->Price) ? $products[3]->Price : '0'; ?></td>
 			         </tr>
 			         <tr>
 			            <td><label>Cabin (Lodging only)</label></td>
-			            <td>180</td>
-			            <td>540</td>
+			            <td><?php echo isset($products[0]->Price) ? $products[0]->Price : '0'; ?></td>
+			            <td><?php echo isset($products[0]->Price) ? $products[0]->Price * 3 : '0'; ?></td>
 			         </tr>
 			         <tr>
 			            <td><label>Tent (Lodging only)</label></td>
-			            <td>100</td>
-			            <td>300</td>
+			            <td><?php echo isset($products[1]->Price) ? $products[1]->Price : '0'; ?></td>
+			            <td><?php echo isset($products[1]->Price) ? $products[1]->Price * 3 : '0'; ?></td>
 			         </tr>
 			         <tr>
 			            <td><label>Pesonal Tent (Lodging only)</label></td>
-			            <td>85</td>
-			            <td>255</td>
+			            <td><?php echo isset($products[4]->Price) ? $products[4]->Price : '0'; ?></td>
+			            <td><?php echo isset($products[4]->Price) ? $products[4]->Price * 3 : '0'; ?></td>
 			         </tr>
 			         <tr>
 			            <td><label>Walk-in (Entrance)</label></td>
-			            <td>25</td>
-			            <td>100 (4 Days)</td>
+			            <td><?php echo isset($products[5]->Price) ? $products[5]->Price : '0'; ?></td>
+			            <td><?php echo isset($products[5]->Price) ? $products[5]->Price * 3 : '0'; ?> (3 Days)</td>
 			         </tr>
 			         <tr>
 			            <td><label>Meal</label></td>
-			            <td>50/Meal</td>
-			            <td>450 (9 Meals)</td>
+			            <td><?php echo isset($products[2]->Price) ? $products[2]->Price : '0'; ?> / Meal</td>
+			            <td><?php echo isset($products[2]->Price) ? $products[2]->Price * 9 : '0'; ?> (9 Meals)</td>
 			         </tr>
 			      </tbody>
 			   </table>
@@ -173,6 +180,7 @@ View::header();
 
         	<div class="contentBlock">
 			   <h4>Attendance / Amt</h4>
+			   <!-- GTP 5 -->
 			   <table class="table table-small-font table-bordered table-striped dashboard-table">
 			      <tbody>
 			         <tr>
@@ -182,47 +190,57 @@ View::header();
 			         </tr>
 			         <tr>
 			            <td><label>Full Package</label></td>
-			            <td>100</td>
-			            <td>165,000.00</td>
+			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->HeadCountPackage) ? $totals->HeadCountPackage : "0" ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
+			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->HeadCountPackage) ? $totals->HeadCountPackage * $products[3]->Price : "0"; ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
 			         </tr>
 			         <tr>
 			            <td><label>Cabin (Lodging only)</label></td>
-			            <td>276</td>
-			            <td>138,780.00</td>
+			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->HeadCountCab) ? $totals->HeadCountCab : "0" ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
+			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->HeadCountCab) ? $totals->HeadCountCab * $products[0]->Price : "0"; ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
 			         </tr>
 			         <tr>
 			            <td><label>Tent (Lodging only)</label></td>
-			            <td>50</td>
-			            <td>12,900.00</td>
+			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->HeadCountTent) ? $totals->HeadCountTent : "0" ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
+			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->HeadCountTent) ? $totals->HeadCountTent * $products[1]->Price : "0"; ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
 			         </tr>
 			         <tr>
 			            <td><label>Personal Tent (Lodging only)</label></td>
-			            <td>21</td>
-			            <td>5,270.00</td>
+			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->HeadCountTentOwn) ? $totals->HeadCountTentOwn : "0" ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
+			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->HeadCountTentOwn) ? $totals->HeadCountTentOwn * $products[4]->Price : "0"; ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
 			         </tr>
 			         <tr>
 			            <td><label>Walk-in (Entrance)</label></td>
-			            <td>295</td>
-			            <td>23,125.00</td>
+			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->HeadCountWI) ? $totals->HeadCountWI : "0" ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
+			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->HeadCountWI) ? $totals->HeadCountWI * $products[5]->Price : "0"; ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
 			         </tr>
 			         <tr>
 			            <td><label>Infants</label></td>
-			            <td>27</td>
+			            <td class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->HeadCountInf) ? $totals->HeadCountInf : "0"; ?>" data-suffix="" data-duration="0.5"><span class="num"></span></td>
 			            <td>0</td>
 			         </tr>
 			         <tr>
+			         	<?php 
+			         	$totalHead = $totals->HeadCountPackage + $totals->HeadCountCab + $totals->HeadCountTent + $totals->HeadCountTentOwn + $totals->HeadCountWI + $totals->HeadCountInf;
+			         	$totalH1 = $totals->HeadCountPackage * $products[3]->Price;
+			         	$totalH2 = $totals->HeadCountCab * $products[0]->Price;
+			         	$totalH3 = $totals->HeadCountTent * $products[1]->Price;
+			         	$totalH4 = $totals->HeadCountTentOwn * $products[4]->Price;
+			         	$totalH5 = $totals->HeadCountWI * $products[5]->Price;
+			         	$totalHeadAmt = $totalH1 + $totalH2 + $totalH3 + $totalH4 + $totalH5;
+			         	?>
 			            <td>Total</td>
 			            <td>
-			               <h3 class="center" data-count=".num" data-from="0" data-to="769" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
+			               <h3 class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totalHead) ? $totalHead : "0"; ?>" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
 			            </td>
 			            <td>
-			            	<h3 class="center" data-count=".num" data-from="0" data-to="345075" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
+			            	<h3 class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totalHeadAmt) ? $totalHeadAmt : "0"; ?>" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
 			            </td>
 			         </tr>
 			      </tbody>
 			   </table>
 
 			   <h4>Jabez</h4>
+			   <!-- GTP 6 -->
 			   <table class="table table-small-font table-bordered table-striped dashboard-table">
 			      <tbody>
 			         <tr>
@@ -233,38 +251,51 @@ View::header();
 			         </tr>
 			         <tr>
 			            <td><label>Full Package</label></td>
-			            <td>100</td>
-			            <td>100</td>
-			            <td>100</td>
+			            <td><?php echo isset($totals->HeadCountPackage) ? $totals->HeadCountPackage : "0" ?></td>
+			            <td><?php echo isset($totals->HeadCountPackage) ? $totals->HeadCountPackage : "0" ?></td>
+			            <td><?php echo isset($totals->HeadCountPackage) ? $totals->HeadCountPackage : "0" ?></td>
 			         </tr>
 			         <tr>
 			            <td><label>Cabin (Lodging only)</label></td>
-			            <td>248</td>
-			            <td>250</td>
-			            <td>273</td>
+			            <td><?php echo isset($totals->Day1CountCab) ? $totals->Day1CountCab : "0" ?></td>
+			            <td><?php echo isset($totals->Day2CountCab) ? $totals->Day2CountCab : "0" ?></td>
+			            <td><?php echo isset($totals->Day3CountCab) ? $totals->Day3CountCab : "0" ?></td>
 			         </tr>
 			         <tr>
 			            <td><label>Tent (Lodging only)</label></td>
-			            <td>39</td>
-			            <td>49</td>
-			            <td>41</td>
+			            <td><?php echo isset($totals->Day1CountTent) ? $totals->Day1CountTent : "0" ?></td>
+			            <td><?php echo isset($totals->Day2CountTent) ? $totals->Day2CountTent : "0" ?></td>
+			            <td><?php echo isset($totals->Day3CountTent) ? $totals->Day3CountTent : "0" ?></td>
 			         </tr>
 			         <tr>
 			            <td><label>Personal Tent (Lodging only)</label></td>
-			            <td>21</td>
-			            <td>21</td>
-			            <td>20</td>
+			            <td><?php echo isset($totals->Day1CountTentOwn) ? $totals->Day1CountTentOwn : "0" ?></td>
+			            <td><?php echo isset($totals->Day2CountTentOwn) ? $totals->Day2CountTentOwn : "0" ?></td>
+			            <td><?php echo isset($totals->Day3CountTentOwn) ? $totals->Day3CountTentOwn : "0" ?></td>
 			         </tr>
 			         <tr>
 			            <td><label>Walk-in (Entrance)</label></td>
-			            <td>201</td>
-			            <td>215</td>
-			            <td>258</td>
+			            <td><?php echo isset($totals->Day1CountWI) ? $totals->Day1CountWI : "0" ?></td>
+			            <td><?php echo isset($totals->Day2CountWI) ? $totals->Day2CountWI : "0" ?></td>
+			            <td><?php echo isset($totals->Day3CountWI) ? $totals->Day3CountWI : "0" ?></td>
 			         </tr>
 			      </tbody>
 			   </table>
 
 			   <h4>Meals</h4>
+			   <?php 
+		         	$TotalAmtMeal1 = isset($totals->CountMeal1) ? number_format($totals->CountMeal1 * $products[2]->Price) : "0";
+		         	$TotalAmtMeal2 = isset($totals->CountMeal2) ? number_format($totals->CountMeal2 * $products[2]->Price) : "0";
+		         	$TotalAmtMeal3 = isset($totals->CountMeal3) ? number_format($totals->CountMeal3 * $products[2]->Price) : "0";
+		         	$TotalAmtMeal4 = isset($totals->CountMeal4) ? number_format($totals->CountMeal4 * $products[2]->Price) : "0";
+		         	$TotalAmtMeal5 = isset($totals->CountMeal5) ? number_format($totals->CountMeal5 * $products[2]->Price) : "0";
+		         	$TotalAmtMeal6 = isset($totals->CountMeal6) ? number_format($totals->CountMeal6 * $products[2]->Price) : "0";
+		         	$TotalAmtMeal7 = isset($totals->CountMeal7) ? number_format($totals->CountMeal7 * $products[2]->Price) : "0";
+		         	$TotalAmtMeal8 = isset($totals->CountMeal8) ? number_format($totals->CountMeal8 * $products[2]->Price) : "0";
+		         	$TotalAmtMeal9 = isset($totals->CountMeal9) ? number_format($totals->CountMeal9 * $products[2]->Price) : "0";
+
+		         	$TotalAmtMeals = $TotalAmtMeal1 + $TotalAmtMeal2 + $TotalAmtMeal3 + $TotalAmtMeal4 + $TotalAmtMeal5 + $TotalAmtMeal6 + $TotalAmtMeal7 + $TotalAmtMeal8 + $TotalAmtMeal9;
+	         	?>
 			   <table class="table table-small-font table-bordered table-striped dashboard-table">
 	      			<tbody>
 			         <tr>
@@ -274,82 +305,83 @@ View::header();
 			            <th>Amount</th>
 			         </tr>
 			         <tr>
+			            <td><label>Dec 22</label></td>
+			            <td>Dinner</td>
+			            <td>
+			               <h3 class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->CountMeal1) ? $totals->CountMeal1 : "0"; ?>" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
+			            </td>
+			            <td><?php echo $TotalAmtMeal1; ?></td>
+			         </tr>
+			         <tr>
+			            <td><label>Dec 23</label></td>
+			            <td>Breakfast</td>
+			            <td>
+			               <h3 class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->CountMeal2) ? $totals->CountMeal2 : "0"; ?>" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
+			            </td>
+			            <td><?php echo $TotalAmtMeal2; ?></td>
+			         </tr>
+			         <tr>
+			            <td><label>Dec 23</label></td>
+			            <td>Lunch</td>
+			            <td>
+			               <h3 class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->CountMeal3) ? $totals->CountMeal3 : "0"; ?>" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
+			            </td>
+			            <td><?php echo $TotalAmtMeal3; ?></td>
+			         </tr>
+			         <tr>
+			            <td><label>Dec 23</label></td>
+			            <td>Dinner</td>
+			            <td>
+			               <h3 class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->CountMeal4) ? $totals->CountMeal4 : "0"; ?>" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
+			            </td>
+			            <td><?php echo $TotalAmtMeal4; ?></td>
+			         </tr>
+			         <tr>
+			            <td><label>Dec 24</label></td>
+			            <td>Breakfast</td>
+			            <td>
+			               <h3 class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->CountMeal5) ? $totals->CountMeal5 : "0"; ?>" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
+			            </td>
+			            <td><?php echo $TotalAmtMeal5; ?></td>
+			         </tr>
+			         <tr>
+			            <td><label>Dec 24</label></td>
+			            <td>Lunch</td>
+			            <td>
+			               <h3 class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->CountMeal6) ? $totals->CountMeal6 : "0"; ?>" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
+			            </td>
+			            <td><?php echo $TotalAmtMeal6; ?></td>
+			         </tr>
+			         <tr>
+			            <td><label>Dec 24</label></td>
+			            <td>Dinner</td>
+			            <td>
+			               <h3 class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->CountMeal7) ? $totals->CountMeal7 : "0"; ?>" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
+			            </td>
+			            <td><?php echo $TotalAmtMeal7; ?></td>
+			         </tr>
+			         <tr>
 			            <td><label>Dec 25</label></td>
-			            <td>Dinner</td>
-			            <td>
-			               <h3 class="center" data-count=".num" data-from="0" data-to="390" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
-			            </td>
-			            <td>19,500.00</td>
-			         </tr>
-			         <tr>
-			            <td><label>Dec 26</label></td>
 			            <td>Breakfast</td>
 			            <td>
-			               <h3 class="center" data-count=".num" data-from="0" data-to="312" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
+			               <h3 class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->CountMeal8) ? $totals->CountMeal8 : "0"; ?>" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
 			            </td>
-			            <td>15,600.00</td>
+			            <td><?php echo $TotalAmtMeal8; ?></td>
 			         </tr>
 			         <tr>
-			            <td><label>Dec 26</label></td>
+			            <td><label>Dec 25</label></td>
 			            <td>Lunch</td>
 			            <td>
-			               <h3 class="center" data-count=".num" data-from="0" data-to="397" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
+			               <h3 class="center" data-count=".num" data-from="0" data-to="<?php echo isset($totals->CountMeal9) ? $totals->CountMeal9 : "0"; ?>" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
 			            </td>
-			            <td>19,850.00</td>
+			            <td><?php echo $TotalAmtMeal9; ?></td>
 			         </tr>
 			         <tr>
-			            <td><label>Dec 26</label></td>
-			            <td>Dinner</td>
-			            <td>
-			               <h3 class="center" data-count=".num" data-from="0" data-to="392" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
-			            </td>
-			            <td>19,600.00</td>
-			         </tr>
-			         <tr>
-			            <td><label>Dec 27</label></td>
-			            <td>Breakfast</td>
-			            <td>
-			               <h3 class="center" data-count=".num" data-from="0" data-to="326" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
-			            </td>
-			            <td>16,300.00</td>
-			         </tr>
-			         <tr>
-			            <td><label>Dec 27</label></td>
-			            <td>Lunch</td>
-			            <td>
-			               <h3 class="center" data-count=".num" data-from="0" data-to="407" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
-			            </td>
-			            <td>20,350.00</td>
-			         </tr>
-			         <tr>
-			            <td><label>Dec 27</label></td>
-			            <td>Dinner</td>
-			            <td>
-			               <h3 class="center" data-count=".num" data-from="0" data-to="403" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
-			            </td>
-			            <td>20,150.00</td>
-			         </tr>
-			         <tr>
-			            <td><label>Dec 28</label></td>
-			            <td>Breakfast</td>
-			            <td>
-			               <h3 class="center" data-count=".num" data-from="0" data-to="334" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
-			            </td>
-			            <td>16,700.00</td>
-			         </tr>
-			         <tr>
-			            <td><label>Dec 28</label></td>
-			            <td>Lunch</td>
-			            <td>
-			               <h3 class="center" data-count=".num" data-from="0" data-to="408" data-suffix="" data-duration="0.8"><span class="num"></span></h3>
-			            </td>
-			            <td>20,400.00</td>
-			         </tr>
-			         <tr>
+
 			            <td><label>Total</label></td>
 			            <td></td>
 			            <td></td>
-			            <td><h3 class="center" data-count=".num" data-from="0" data-to="168450" data-suffix=".00" data-duration="0.8"><span class="num"></span></h3></td>
+			            <td><h3 class="center" data-count=".num" data-from="0" data-to="<?php echo $TotalAmtMeals; ?>" data-suffix="" data-duration="0.5$stats"><span class="num"></span></h3></td>
 			         </tr>
 			      </tbody>
 			   </table>
@@ -374,283 +406,30 @@ View::header();
 			            <th>Balance</th>
 			         </thead>
 			      <tbody>
-			         
-			         <tr>
-			            <td>Anahawan</td>
-			            <td>5</td>
-			            <td>0</td>
-			            <td>5</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>4950</td>
-			            <td>0</td>
-			            <td>4950</td>
-			         </tr>
-			         <tr>
-			            <td>Antipolo</td>
-			            <td>106</td>
-			            <td>0</td>
-			            <td>59</td>
-			            <td>0</td>
-			            <td>39</td>
-			            <td>8</td>
-			            <td>53880</td>
-			            <td>46530</td>
-			            <td>7350</td>
-			         </tr>
-			         <tr>
-			            <td>Banisilan</td>
-			            <td>92</td>
-			            <td>86</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>6</td>
-			            <td>141900</td>
-			            <td>0</td>
-			            <td>141900</td>
-			         </tr>
-			         <tr>
-			            <td>Binan</td>
-			            <td>9</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>9</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>2250</td>
-			            <td>0</td>
-			            <td>2250</td>
-			         </tr>
-			         <tr>
-			            <td>Bontoc</td>
-			            <td>6</td>
-			            <td>6</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>9900</td>
-			            <td>0</td>
-			            <td>9900</td>
-			         </tr>
-			         <tr>
-			            <td>Bulihan</td>
-			            <td>126</td>
-			            <td>0</td>
-			            <td>1</td>
-			            <td>42</td>
-			            <td>83</td>
-			            <td>0</td>
-			            <td>50015</td>
-			            <td>50015</td>
-			            <td>0</td>
-			         </tr>
-			         <tr>
-			            <td>Cabadbaran</td>
-			            <td>43</td>
-			            <td>0</td>
-			            <td>40</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>3</td>
-			            <td>39600</td>
-			            <td>990</td>
-			            <td>38610</td>
-			         </tr>
-			         <tr>
-			            <td>Cagayan Valley</td>
-			            <td>30</td>
-			            <td>0</td>
-			            <td>29</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>1</td>
-			            <td>28710</td>
-			            <td>0</td>
-			            <td>28710</td>
-			         </tr>
-			         <tr>
-			            <td>Calbayog</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			         </tr>
-			         <tr>
-			            <td>Camiguin</td>
-			            <td>18</td>
-			            <td>0</td>
-			            <td>15</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>3</td>
-			            <td>14850</td>
-			            <td>0</td>
-			            <td>14850</td>
-			         </tr>
-			         <tr>
-			            <td>Candelaria</td>
-			            <td>50</td>
-			            <td>0</td>
-			            <td>29</td>
-			            <td>0</td>
-			            <td>21</td>
-			            <td>0</td>
-			            <td>23945</td>
-			            <td>23945</td>
-			            <td>0</td>
-			         </tr>
-			         <tr>
-			            <td>Carmona</td>
-			            <td>23</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>23</td>
-			            <td>0</td>
-			            <td>800</td>
-			            <td>800</td>
-			            <td>0</td>
-			         </tr>
-			         <tr>
-			            <td>Conalum</td>
-			            <td>9</td>
-			            <td>0</td>
-			            <td>8</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>1</td>
-			            <td>7920</td>
-			            <td>0</td>
-			            <td>7920</td>
-			         </tr>
-			         <tr>
-			            <td>Dasmarinas</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			         </tr>
-			         <tr>
-			            <td>Del Gallego</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			         </tr>
-			         <tr>
-			            <td>Lipa</td>
-			            <td>36</td>
-			            <td>1</td>
-			            <td>35</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>34420</td>
-			            <td>34420</td>
-			            <td>0</td>
-			         </tr>
-			         <tr>
-			            <td>Lucena</td>
-			            <td>8</td>
-			            <td>6</td>
-			            <td>2</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>11880</td>
-			            <td>0</td>
-			            <td>11880</td>
-			         </tr>
-			         <tr>
-			            <td>Masbate</td>
-			            <td>20</td>
-			            <td>0</td>
-			            <td>17</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>3</td>
-			            <td>16830</td>
-			            <td>0</td>
-			            <td>16830</td>
-			         </tr>
-			         <tr>
-			            <td>Nabua</td>
-			            <td>17</td>
-			            <td>0</td>
-			            <td>14</td>
-			            <td>0</td>
-			            <td>2</td>
-			            <td>1</td>
-			            <td>12920</td>
-			            <td>0</td>
-			            <td>12920</td>
-			         </tr>
-			         <tr>
-			            <td>San Pedro</td>
-			            <td>110</td>
-			            <td>1</td>
-			            <td>4</td>
-			            <td>20</td>
-			            <td>85</td>
-			            <td>0</td>
-			            <td>35830</td>
-			            <td>35830</td>
-			            <td>0</td>
-			         </tr>
-			         <tr>
-			            <td>Tagkawayan</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			         </tr>
-			         <tr>
-			            <td>Tambongan</td>
-			            <td>19</td>
-			            <td>0</td>
-			            <td>18</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>1</td>
-			            <td>17820</td>
-			            <td>0</td>
-			            <td>17820</td>
-			         </tr>
-			         <tr>
-			            <td>Trece Martires</td>
-			            <td>42</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>0</td>
-			            <td>42</td>
-			            <td>0</td>
-			            <td>3225</td>
-			            <td>3225</td>
-			            <td>0</td>
-			         </tr>
+		         	<?php 
+                    $cntr = 0;
+                    if(isset($stats)) {
+                        foreach($stats as $stat) { $cntr++;
+                        ?>
+			         	<tr>
+				            <td><?php echo isset($stat->Name) ? ucwords($stat->Name) : "None"; ?></td>
+				            <td><?php echo isset($stat->ChurchCount) ? ucwords($stat->ChurchCount) : "None"; ?></td>
+				            <td><?php echo isset($stat->ChurchPackCount) ? ucwords($stat->ChurchPackCount) : "None"; ?></td>
+				            <td><?php echo isset($stat->ChurchCabCount) ? ucwords($stat->ChurchCabCount) : "None"; ?></td>
+				            <td><?php echo isset($stat->ChurchTentCount) ? ucwords($stat->ChurchTentCount) : "None"; ?></td>
+				            <td><?php echo isset($stat->ChurchWICount) ? ucwords($stat->ChurchWICount) : "None"; ?></td>
+				            <td><?php echo isset($stat->ChurchInfCount) ? ucwords($stat->ChurchInfCount) : "None"; ?></td>
+				            <td><?php echo isset($stat->ChurchTotalDue) ? number_format($stat->ChurchTotalDue) : "0"; ?></td>
+				            <td><?php echo isset($stat->ChurchTotalPaid) ? number_format($stat->ChurchTotalPaid) : "0"; ?></td>
+				            <td><?php echo isset($stat->ChurchTotalBal) ? number_format($stat->ChurchTotalBal) : "0"; ?></td>
+			         	</tr>
+			         	<?php }
+                        	} else { ?>
+                        <tr>
+                        	<td>NO DATA</td>
+                        </tr>
+                    <?php }; ?>
+
 			      </tbody>
 			   </table>
 			</div>
