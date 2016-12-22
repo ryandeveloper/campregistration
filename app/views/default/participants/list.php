@@ -1,6 +1,6 @@
 <?php 
 View::$title = 'Participants';
-View::$bodyclass = 'page-body';
+View::$bodyclass = 'page-body participant-page';
 View::header(); 
 ?>
 <?php $userinfo = View::userInfo(); ?>
@@ -29,13 +29,11 @@ View::header();
                 
                 <div class="panel-body">
 
-                    <table id="participants" class="table table-striped table-bordered dt-responsive display nowrap" cellspacing="0" width="100%" style="min-width: 1200px;">
+                    <table id="participants" class="table table-striped table-bordered dt-responsive display nowrap" cellspacing="0" width="100%" style="min-width: 900px;">
                         <thead>
                             <tr>
                                 <th width="50" class="no-sorting">Status</th> 
-                                <th width="50" class="no-sorting">Gender</th>
                                 <th>Name</th>
-                                <th width="30">Age</th>
                                 <th>Type</th>
                                 <th>Church</th>
                                 <th>Cabin</th>
@@ -62,9 +60,7 @@ View::header();
                                             <span class="fa fa-close status-No" style="color: red;"></span>
                                         <?php } ?>
                                         </td>
-                                        <td><?php if($participant->Gender == "Brother"){echo "Bro";}elseif($participant->Gender == "Sister"){echo "Sis";}elseif ($participant->Gender == "Pastor") { echo "Ptr";} ?></td>
-                                        <td><?php echo ucwords($participant->FirstName); ?> <?php echo ucwords($participant->LastName); ?></td>
-                                        <td class="text-center"><?php echo $participant->Age; ?></td>
+                                        <td><small style="font-size:10px;"><?php if($participant->Gender == "Brother"){echo "Bro";}elseif($participant->Gender == "Sister"){echo "Sis";}elseif ($participant->Gender == "Pastor") { echo "Ptr";} ?></small>. <?php echo ucwords($participant->FirstName); ?> <?php echo ucwords($participant->LastName); ?> <span style="FONT-SIZE:10px;">(<?php echo $participant->Age; ?>)</span></td>
                                         <td><?php echo ucwords($participant->statsName); ?></td>
                                         <td><?php echo ucwords($participant->churchName); ?></td>
                                         <td><?php echo ucwords($participant->cabinName); ?></td>
