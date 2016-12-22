@@ -113,8 +113,11 @@ class Finances_model extends Model
         // Imported scripts on this page // REFER ON VENDORS SCRIPTS
         View::$footerscripts[] = "vendor/datatables/js/jquery.dataTables.min.js";
         View::$footerscripts[] = "vendor/datatables/dataTables.bootstrap.js";
-        View::$footerscripts[] = "vendor/datatables/yadcf/jquery.dataTables.yadcf.js";
         View::$footerscripts[] = "vendor/datatables/tabletools/dataTables.tableTools.min.js";
+        View::$footerscripts[] = "vendor/datatables.net-responsive-bs/js/responsive.bootstrap.js";
+        View::$footerscripts[] = "vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js";
+        View::$footerscripts[] = "vendor/yadcf-master/jquery.dataTables.yadcf.js";
+        View::$footerscripts[] = "vendor/jquery-validate/jquery.validate.min.js";
 
         // Custom JS
         View::$footerscripts[] = 'assets/js/custom.js';
@@ -123,7 +126,8 @@ class Finances_model extends Model
         // Styles
         View::$styles[] = "assets/css/custom.css";
         View::$styles[] = "vendor/datatables/dataTables.bootstrap.css";
-        View::$styles[] = "vendor/datatables/yadcf/jquery.dataTables.yadcf.css";
+        View::$styles[] = "vendor/datatables.net-responsive-bs/css/responsive.bootstrap.min.css";
+        View::$styles[] = "vendor/yadcf-master/jquery.dataTables.yadcf.css";
         View::$styles[] = 'assets/css/fileinput.css';
     }
 }

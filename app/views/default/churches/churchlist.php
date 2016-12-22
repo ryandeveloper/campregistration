@@ -1,6 +1,6 @@
 <?php 
 View::$title = 'Participants';
-View::$bodyclass = 'page-body';
+View::$bodyclass = 'page-body participant-page';
 View::header(); 
 ?>
 <?php $userinfo = View::userInfo(); ?>
@@ -20,22 +20,20 @@ View::header();
                 </div>
                 
                 <div class="panel-body">
-                    <table id="churchlist" class="table table-striped table-bordered dt-responsive display nowrap" cellspacing="0" width="100%">
+                    <table id="churchlist" class="table table-striped table-bordered dt-responsive display nowrap" cellspacing="0" width="100%" style="min-width: 900px;">
                         <thead>
                             <tr>
                                 <th width="50" class="no-sorting">Status</th> 
-                                <th class="no-sorting" width="50px">Gender</th>
                                 <th>Name</th>
-                                <th>Age</th>
                                 <th>Type</th>
                                 <th>Church</th>
                                 <th>Cabin</th>
                                 <th>Tent</th>
-                                <th>Due</th>
-                                <th>Paid</th>
-                                <th>Balance</th>
-                                <th>Encoder</th>
-                                <th width="150" class="text-center">Action</th>
+                                <th width="50">Due</th>
+                                <th width="50">Paid</th>
+                                <th width="50">Balance</th>
+                                <th width="80" class="text-center">Encoder</th>
+                                <th width="100" class="text-center">Action</th>
                             </tr>
                         </thead>
 
@@ -45,7 +43,7 @@ View::header();
                             if(isset($participants)) {
                                 foreach($participants as $participant) { $cntr++;
                                 ?>
-                                    <tr class="<?php echo ($cntr % 2) == 0 ? 'even' : 'odd'; ?> pointer">
+                                    <tr class="<?php echo ($cntr % 2) == 0 ? 'even' : 'odd'; ?> pointer" rel="<?php echo $participant->PPID; ?>">
                                         <td class="text-center">
                                         <?php if($participant->Cleard == "1"){ ?>
                                             <span class="fa fa-check status-Yes" style="color:#8dc63f;"></span>
@@ -53,17 +51,15 @@ View::header();
                                             <span class="fa fa-close status-No" style="color: red;"></span>
                                         <?php } ?>
                                         </td>
-                                        <td><?php if($participant->Gender == "Brother"){echo "Bro";}elseif($participant->Gender == "Sister"){echo "Sis";}elseif ($participant->Gender == "Pastor") { echo "Ptr";} ?></td>
-                                        <td><?php echo ucwords($participant->FirstName); ?> <?php echo ucwords($participant->LastName); ?></td>
-                                        <td><?php echo $participant->Age; ?></td>
+                                        <td><small style="font-size:10px;"><?php if($participant->Gender == "Brother"){echo "Bro";}elseif($participant->Gender == "Sister"){echo "Sis";}elseif ($participant->Gender == "Pastor") { echo "Ptr";} ?></small>. <?php echo ucwords($participant->FirstName); ?> <?php echo ucwords($participant->LastName); ?> <span style="FONT-SIZE:10px;">(<?php echo $participant->Age; ?>)</span></td>
                                         <td><?php echo ucwords($participant->statsName); ?></td>
                                         <td><?php echo ucwords($participant->churchName); ?></td>
                                         <td><?php echo ucwords($participant->cabinName); ?></td>
                                         <td><?php echo ucwords($participant->tentName); ?></td>
-                                        <td><?php echo $participant->TotalAmount; ?></td>
-                                        <td><?php echo $participant->PaidAmount; ?></td>
-                                        <td><?php echo $participant->Balance; ?></td>
-                                        <td><?php echo ucwords($participant->encoderFirstName); ?></td>
+                                        <td class="text-center"><?php echo $participant->TotalAmount; ?></td>
+                                        <td class="text-center"><?php echo $participant->PaidAmount; ?></td>
+                                        <td class="text-center"><?php echo $participant->Balance; ?></td>
+                                        <td class="text-center"><?php echo ucwords($participant->encoderFirstName); ?></td>
                                         <td style="text-align:center;">
                                             <a href="<?php echo View::url('participants/edit/'); ?><?php echo $participant->PPID; ?>" title="Edit" class="btn btn-warning btn-sm"><span class="fa fa-pencil-square-o"></span></a>
                                             <?php if($userinfo->Level == 1) { ?>

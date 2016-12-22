@@ -21,14 +21,14 @@ View::header();
                 </div>
                 
                 <div class="panel-body">
-                    <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <table id="finances" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th width="120" class="no-sorting">Transaction Type</th>
                                 <th class="no-sorting">Description</th>
                                 <th class="no-sorting">Amount</th>
                                 <th class="no-sorting">Date</th>
-                                <th width="200" class="text-center">Action</th>
+                                <th width="100" class="text-center">Action</th>
                             </tr>
                         </thead>
 

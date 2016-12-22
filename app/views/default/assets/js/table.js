@@ -35,18 +35,34 @@ $(document).ready(function($) {
 
     yadcf.init(churchlist, [
         {column_number : 0, data:["Yes", "No"], filter_type: 'select', filter_default_label: "-"},
-        {column_number : 1, filter_type: 'select', filter_default_label: "-"},
-        {column_number : 2, filter_type: "text", filter_default_label: "Name"},
-        {column_number : 3, filter_type: 'text', filter_default_label: "Age"},
+        {column_number : 1, filter_type: "text", filter_default_label: "Name"},
+        {column_number : 2, filter_default_label: "All"},
+        {column_number : 3, filter_default_label: "All"},
         {column_number : 4, filter_default_label: "All"},
-        {column_number : 5, filter_default_label: "All"},
-        {column_number : 6, filter_default_label: "All"},
-        {column_number : 7, filter_default_label: "-"},
+        {column_number : 5, filter_default_label: "-"},
+        {column_number : 6, filter_type: 'text', filter_default_label: "P"},
+        {column_number : 7, filter_type: 'text', filter_default_label: "P"},
         {column_number : 8, filter_type: 'text', filter_default_label: "P"},
-        {column_number : 9, filter_type: 'text', filter_default_label: "P"},
-        {column_number : 10, filter_type: 'text', filter_default_label: "P"},
-        {column_number : 11, filter_type: 'select', filter_default_label: "All"},
-        {column_number : 12, filter_type: 'none'}
+        {column_number : 9, filter_type: 'select', filter_default_label: "All"},
+        {column_number : 10, filter_type: 'none'}
+    ]);
+});
+
+// Finances List Table
+$(document).ready(function($) {
+    var finances = $("#finances").DataTable({
+        "lengthMenu": [ [25, 50, 75, 100, -1], [25, 50, 75, 100, "All"] ],
+        "pageLength": 25,
+        "ordering": false
+        
+    });
+
+    yadcf.init(finances, [
+        {column_number : 0, filter_type: 'select', filter_default_label: "-"},
+        {column_number : 1, filter_type: "text", filter_default_label: "Description"},
+        {column_number : 2, filter_type: 'text', filter_default_label: "Amount"},
+        {column_number : 3, filter_type: 'select', filter_default_label: "Date"},
+        {column_number : 4, filter_type: 'none'}
     ]);
 });
 

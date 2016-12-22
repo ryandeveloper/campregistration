@@ -4,7 +4,9 @@ View::$bodyclass = 'page-body';
 View::header(); 
 ?>
 <?php $userinfo = View::userInfo(); ?>
-
+<style type="text/css">
+	h3 { font-size: 18px; }
+</style>
 <!-- Main Container -->
 <div class="main_container">
 
@@ -185,7 +187,7 @@ View::header();
 			      <tbody>
 			         <tr>
 			            <th>GTP</th>
-			            <th>Number of Attendees</th>
+			            <th>No. of Attendees</th>
 			            <th>Amount</th>
 			         </tr>
 		         	<?php 
@@ -302,7 +304,7 @@ View::header();
 			         <tr>
 			            <th>Date</th>
 			            <th>GTP</th>
-			            <th>Number of Meals</th>
+			            <th>No. of Meals</th>
 			            <th>Amount</th>
 			         </tr>
 			         <tr>
