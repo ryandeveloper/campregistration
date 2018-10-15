@@ -2,7 +2,7 @@
 /**
  * PHP 4, 5
  *
- * MyPHPFrame(Beta) : Rapid Development Framework (http://cutearts.org)
+ * MyPHPFrame(Beta) : Rapidd Development Framework (http://cutearts.org)
  * Copyright (c) MyPHPFrame Solutions (http://cutearts.org)
  *
  * Licensed under The MIT License
